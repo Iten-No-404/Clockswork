@@ -4,6 +4,7 @@
 
 CREATE TABLE Review(
     ReviewID INTEGER,
+    -- Not sure if "Description" is a keyword
     Description VARCHAR(1000) NOT NULL,
     ReviewDate DATE NOT NULL,
     Stars INTEGER DEFAULT 3,
@@ -16,7 +17,7 @@ CREATE TABLE Review(
     -- Storing images directly in the DB isn't very good
     -- A better alternative is to store the images on disk and have a reference to the image in the DB
     -- https://stackoverflow.com/a/6472268
-    AddtionalFiles LONGBLOB,
+    AddtionalFilesPath VARCHAR(256),
     PRIMARY KEY(TicketID)
     -- Same here for deletion and update
 ); CREATE TABLE Reviewed(
