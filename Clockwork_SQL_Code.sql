@@ -1,0 +1,154 @@
+--This is Clockwork's SQL Database
+--Notes: long strings are stored as text instead of VARCHAR (including image paths)
+--	     booleans are stored as VARCHAR(1)
+--		 User and Application were changed to Users and Applications respectively since the former seemed to be reserved words
+--		 
+CREATE TABLE  Users  (
+	 U_ID  INT NOT NULL ,
+	 FName  varchar(30) NOT NULL,
+	 LName  varchar(30) NOT NULL,
+	 Username  varchar(30) NOT NULL,
+	 Password  varchar(30) NOT NULL,
+	 Email  varchar(50) NOT NULL,
+	 Address  varchar(50),
+	 Bdate  DATE NOT NULL,
+	 Gender  VARCHAR(1) NOT NULL, --boolean
+	 Developer  VARCHAR(1) NOT NULL DEFAULT '0', --boolean
+	 Phone_Number  INT,
+	 Balance  FLOAT NOT NULL DEFAULT '0',
+	 Billing_Info  TEXT NOT NULL DEFAULT 'No information available.', --long strings are stored as text instead of VARCHAR
+	 Ban_End  FLOAT NOT NULL DEFAULT '0',
+	 Profile_Picture  TEXT, --(image path)long strings are stored as text instead of VARCHAR
+	PRIMARY KEY ( U_ID )
+);
+
+CREATE TABLE Applications (
+App_ID INT NOT NULL,
+PRIMARY KEY (App_ID)
+--Don't forget the Published_By relationship
+);
+
+CREATE TABLE Employee (
+Employee_ID INT NOT NULL,
+PRIMARY KEY (Employee_ID)
+);
+
+CREATE TABLE  Categories  (
+	 Category_ID  INT NOT NULL,
+	 Category_Name  VARCHAR(30) NOT NULL UNIQUE,
+	PRIMARY KEY ( Category_ID )
+);
+
+CREATE TABLE Groups(
+ GROUP_ID int not null,
+ GroupName varchar(30)not null,
+ Date_Created date,
+ Group_picture text,
+ Group_Description Text,
+ U_ID int ,
+
+   PRIMARY KEY(GROUP_ID),
+   FOREIGN KEY(U_ID)  REFERENCES Users  on update cascade on delete cascade --Owned_By Relationship
+
+);
+
+CREATE TABLE Post(
+TEXTpost	text ,
+Date_Written date,
+Post_id integer not null,
+picture text,
+U_ID int,
+group_id int,
+PRIMARY KEY (Post_id),
+FOREIGN KEY(U_ID)  REFERENCES Users  on update cascade on delete cascade, --Posted Relationship
+FOREIGN KEY(group_id)  REFERENCES Groups on update cascade on delete cascade --Posted_At Relationship
+
+);
+
+CREATE TABLE Review(
+    ReviewID INTEGER,
+    -- Not sure if "Description" is a keyword so changed it to Review_Description just in case
+    Review_Description TEXT NOT NULL,
+    ReviewDate DATE NOT NULL,
+    Stars INTEGER DEFAULT 3,
+    PRIMARY KEY(ReviewID)
+    -- No foreign keys here, no need to specify deletion and update stuff
+);
+
+CREATE TABLE SupportTicket(
+    TicketID INTEGER NOT NULL,
+    ReportDescription TEXT NOT NULL,
+    Closed VARCHAR(1),
+	U_ID INT,
+    -- Storing images directly in the DB isn't very good
+    -- A better alternative is to store the images on disk and have a reference to the image in the DB
+    -- https://stackoverflow.com/a/6472268
+    AddtionalFilesPath TEXT,
+    PRIMARY KEY(TicketID),
+	FOREIGN KEY (U_ID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE --Submitted_By Relationship
+
+);
+
+--------------------------------------------------------Relations as Tables (Either N:M or N-ary relationships)--------------------------------------
+
+CREATE TABLE Member_In(
+U_ID INT NOT NULL,
+Group_ID INT NOT NULL,
+PRIMARY KEY(U_ID, Group_ID),
+FOREIGN KEY(U_ID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(Group_ID) REFERENCES Groups(Group_ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--CREATE TABLE Categorized(
+
+--);
+
+--CREATE TABLE Purchased_By(
+
+--);
+
+CREATE TABLE Reviewed(
+    UserID INTEGER,
+    ApplicationID INTEGER,
+    ReviewID INTEGER NOT NULL,
+    -- Assuming A user can review a game only once
+    PRIMARY KEY(
+        UserID,
+        ApplicationID,
+        ReviewID
+    ),
+    -- When a user gets deleted, all their reviews should be too
+    FOREIGN KEY(UserID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- When an application gets deleted, all its reviews should be deleted too
+    FOREIGN KEY(ApplicationID) REFERENCES Applications(App_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- Not too sure about this one
+    FOREIGN KEY(ReviewID) REFERENCES Review(ReviewID) ON DELETE CASCADE ON UPDATE CASCADE
+); 
+
+CREATE TABLE ReviewedBy(
+    EmployeeID INTEGER,
+    TicketID INTEGER NOT NULL,
+    PRIMARY KEY(EmployeeID, TicketID),
+    -- If an employee gets deleted, should the row be deleted
+    -- Can't have null here since EmployeeID is used in the primary key
+    FOREIGN KEY(EmployeeID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(TicketID) REFERENCES SupportTicket(TicketID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+create table Up_Down_Voted_Review(
+U_ID int,
+Review_id int,
+Up_Down VARCHAR(1), -- no date type bool in my sql
+PRIMARY KEY(U_ID,Review_id),
+FOREIGN KEY (U_ID)  REFERENCES Users ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(Review_id) REFERENCES Review ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+create table Up_Down_Voted_Post(
+U_ID int,
+Post_id int,
+Up_Down VARCHAR(1), -- no date type bool in my sql
+PRIMARY KEY(U_ID,Post_id),
+FOREIGN KEY (U_ID)  REFERENCES Users ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(Post_id) REFERENCES Post ON DELETE CASCADE ON UPDATE CASCADE
+);
