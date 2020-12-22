@@ -24,13 +24,47 @@ CREATE TABLE  Users  (
 
 CREATE TABLE Applications (
 App_ID INT NOT NULL,
-PRIMARY KEY (App_ID)
---Don't forget the Published_By relationship
+    Application_Name VARCHAR(100) NOT NULL,
+    NumOfUsers INTEGER NOT NULL,
+    Price DECIMAL NOT NULL,
+    Sale DECIMAL,
+    -- Reviews is a derived attribute, not sure if to write it and make a trigger/macro that calculates
+    -- Its value on any change, or just get it via queries as needed
+    -- I'll go with the second approach for now (not making it)
+    -- Not sure if age rating is always needed or not. Assuming it is for now
+    AgeRating INTEGER NOT NULL,
+    System_Requirements TEXT NOT NULL,
+    Rating DECIMAL,
+    -- Somewhere to store the picture link or path
+    Application_Picture TEXT,
+    AppDescription TEXT,
+    -- Somewhere to store the video link or path
+    AppTrailer TEXT,
+    Region VARCHAR(100),
+    Hide VARCHAR(1), --boolean
+    Release_Date DATE NOT NULL,
+	U_ID INT NOT NULL,
+PRIMARY KEY (App_ID),
+--Assuming that if a user is deleted, all the apps he published are also deleted
+FOREIGN KEY (U_ID) REFERENCES Users(U_ID) on update cascade on delete cascade -- Published_By relationship
 );
 
 CREATE TABLE Employee (
-Employee_ID INT NOT NULL,
-PRIMARY KEY (Employee_ID)
+    Employee_ID INTEGER,
+    Gender VARCHAR(1) NOT NULL,
+    Bdate DATE,
+    -- Salary could be integer
+    Salary DECIMAL,
+    -- Did this because "Address" is proably a keyword
+    Employee_Address VARCHAR(100),
+    Department VARCHAR(100) NOT NULL,
+    Phone INTEGER,
+    Email VARCHAR(100) NOT NULL,
+    -- MySQL (which we are using.. I think) doesn't support composite attributes
+    -- So, I'll just use do Fname and Lname as two separate attributes, either this or a new table
+    Fname VARCHAR(100) NOT NULL,
+    Lname VARCHAR(100) NOT NULL,
+    PRIMARY KEY(Employee_ID)
 );
 
 CREATE TABLE  Categories  (
@@ -99,13 +133,34 @@ FOREIGN KEY(U_ID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(Group_ID) REFERENCES Groups(Group_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
---CREATE TABLE Categorized(
+CREATE TABLE Categorized(
+    App_ID INTEGER,
+    Category_ID INTEGER,
+    PRIMARY KEY(
+        App_ID,
+        Category_ID
+     ),
+     -- When an application is deleted, this whole tuple with that application should be deleted
+     FOREIGN KEY (App_ID) REFERENCES Applications(App_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+     -- When deleting a category, the category from here should just be removed, not deleting the whole tuple
+     FOREIGN KEY(Category_ID) REFERENCES Categories(Category_ID) ON DELETE SET NULL ON UPDATE CASCADE
+);
 
---);
-
---CREATE TABLE Purchased_By(
-
---);
+CREATE TABLE Purchased_By(
+    UserID INTEGER,
+    ApplicationID INTEGER,
+    PRIMARY KEY(
+        UserID,
+        ApplicationID
+    ),
+    Purchase_Date DATE NOT NULL,
+    -- If I delete the user, I no longer need to keep a record of their purchases
+    FOREIGN KEY(UserID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    -- This part is a little bit confusing, if I delete an application, I shouldn't just remove it from the people's libraries
+    -- (who purchased it) so, do I just leave it as is or just force remove it by deleting this tuple as well?
+    -- going with leaving it as is 
+    FOREIGN KEY(ApplicationID) REFERENCES Applications(App_ID) ON DELETE NO ACTION ON UPDATE CASCADE
+);
 
 CREATE TABLE Reviewed(
     UserID INTEGER,
