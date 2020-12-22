@@ -1,0 +1,48 @@
+
+.card
+{
+    height: 100%;
+    width: 85%;
+}
+.btn
+{
+
+ border-radius:0px 10px 0px 10px ;
+  width: 80px;
+  height: 30px;
+   font-size: 3mm;
+}
+.head
+{
+    display: flex;
+}
+.ourbody
+{
+    display: flex;
+}
+.btn1
+{
+    position: relative;
+    left: 75%;
+}
+h5,h6{
+    position: relative;
+    right: 10%;;
+}
+.appname
+{
+    display: flex;
+    padding: 2px 2px;
+}
+.bg {
+    /* The image used */
+    background-image: url(../IMAGES/admin-new.png);
+  
+    /* Half height */
+    height: 50%;
+   width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

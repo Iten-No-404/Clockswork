@@ -1,0 +1,51 @@
+*{
+    margin:0%;
+    padding: 0%;
+    box-sizing: border-box;
+
+
+}
+body
+{
+    background-image: url(../IMAGES/pexels-dimitry-anikin-5037913.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-position: center -1vh;
+   
+}
+.form
+{
+    
+    border-radius: 10px;
+    border-color:white;
+    border-style: solid;
+    position: absolute;
+    left:50%;
+    top:50%;
+    /* z-index: -510;  */
+    padding:15px 15px;
+    transform: translate(-50%,-50%); 
+}
+input{
+    padding: 5px 5px;
+    outline: none;
+  border: solid;
+    border-radius: 10px;
+     display:block;
+border-color: white;
+   
+}
+label
+{
+    display:block;
+}
+a{
+    color:white;
+}
+/* #submit
+{
+      display:block;
+    position: relative;
+    left:20%;
+} */
