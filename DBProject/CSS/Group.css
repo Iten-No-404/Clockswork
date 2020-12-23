@@ -17,3 +17,12 @@
   height: 2px;
   background-color:dodgerblue;
 }
+ul
+{
+   width:80%;
+    display: flex;
+  
+  
+   justify-content:space-between;
+    
+}
