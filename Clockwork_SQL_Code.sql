@@ -1,8 +1,7 @@
---This is Clockwork's SQL Database
---Notes: long strings are stored as text instead of VARCHAR (including image paths)
+-- This is Clockwork's SQL Database
+-- Notes: long strings are stored as text instead of VARCHAR (including image paths)
 --	     booleans are stored as VARCHAR(1)
---		 User and Application were changed to Users and Applications respectively since the former seemed to be reserved words
---		 
+--		 User and Application were changed to Users and Applications respectively since the former seemed to be reserved words		 
 CREATE TABLE  Users  (
 	 U_ID  INT NOT NULL ,
 	 FName  varchar(30) NOT NULL,
@@ -12,13 +11,13 @@ CREATE TABLE  Users  (
 	 Email  varchar(50) NOT NULL,
 	 Address  varchar(50),
 	 Bdate  DATE NOT NULL,
-	 Gender  VARCHAR(1) NOT NULL, --boolean
-	 Developer  VARCHAR(1) NOT NULL DEFAULT '0', --boolean
+	 Gender  VARCHAR(1) NOT NULL, -- boolean
+	 Developer  VARCHAR(1) NOT NULL DEFAULT '0', -- boolean
 	 Phone_Number  INT,
 	 Balance  FLOAT NOT NULL DEFAULT '0',
-	 Billing_Info  TEXT NOT NULL DEFAULT 'No information available.', --long strings are stored as text instead of VARCHAR
+	 Billing_Info  TEXT NOT NULL DEFAULT 'No information available.', -- long strings are stored as text instead of VARCHAR
 	 Ban_End  FLOAT NOT NULL DEFAULT '0',
-	 Profile_Picture  TEXT, --(image path)long strings are stored as text instead of VARCHAR
+	 Profile_Picture  TEXT, -- (image path)long strings are stored as text instead of VARCHAR
 	PRIMARY KEY ( U_ID )
 );
 
@@ -41,11 +40,11 @@ App_ID INT NOT NULL,
     -- Somewhere to store the video link or path
     AppTrailer TEXT,
     Region VARCHAR(100),
-    Hide VARCHAR(1), --boolean
+    Hide VARCHAR(1), -- boolean
     Release_Date DATE NOT NULL,
 	U_ID INT NOT NULL,
 PRIMARY KEY (App_ID),
---Assuming that if a user is deleted, all the apps he published are also deleted
+-- Assuming that if a user is deleted, all the apps he published are also deleted
 FOREIGN KEY (U_ID) REFERENCES Users(U_ID) on update cascade on delete cascade -- Published_By relationship
 );
 
@@ -82,7 +81,8 @@ CREATE TABLE Groups(
  U_ID int ,
 
    PRIMARY KEY(GROUP_ID),
-   FOREIGN KEY(U_ID)  REFERENCES Users  on update cascade on delete cascade --Owned_By Relationship
+   -- Owned_By Relationship
+   FOREIGN KEY(U_ID)  REFERENCES Users(U_ID)  on update cascade on delete cascade 
 
 );
 
@@ -94,8 +94,8 @@ picture text,
 U_ID int,
 group_id int,
 PRIMARY KEY (Post_id),
-FOREIGN KEY(U_ID)  REFERENCES Users  on update cascade on delete cascade, --Posted Relationship
-FOREIGN KEY(group_id)  REFERENCES Groups on update cascade on delete cascade --Posted_At Relationship
+FOREIGN KEY(U_ID)  REFERENCES Users(U_ID)  on update cascade on delete cascade, -- Posted Relationship
+FOREIGN KEY(group_id)  REFERENCES Groups(GROUP_ID) on update cascade on delete cascade -- Posted_At Relationship
 
 );
 
@@ -119,11 +119,12 @@ CREATE TABLE SupportTicket(
     -- https://stackoverflow.com/a/6472268
     AddtionalFilesPath TEXT,
     PRIMARY KEY(TicketID),
-	FOREIGN KEY (U_ID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE --Submitted_By Relationship
+	FOREIGN KEY (U_ID) REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE -- Submitted_By Relationship
 
 );
 
---------------------------------------------------------Relations as Tables (Either N:M or N-ary relationships)--------------------------------------
+-- MYSQL is very specific about how comments are made, sorry.
+-- Relations as Tables (Either N:M or N-ary relationships) ----------------------------------------------------
 
 CREATE TABLE Member_In(
 U_ID INT NOT NULL,
@@ -143,7 +144,7 @@ CREATE TABLE Categorized(
      -- When an application is deleted, this whole tuple with that application should be deleted
      FOREIGN KEY (App_ID) REFERENCES Applications(App_ID) ON DELETE CASCADE ON UPDATE CASCADE,
      -- When deleting a category, the category from here should just be removed, not deleting the whole tuple
-     FOREIGN KEY(Category_ID) REFERENCES Categories(Category_ID) ON DELETE SET NULL ON UPDATE CASCADE
+     FOREIGN KEY(Category_ID) REFERENCES Categories(Category_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Purchased_By(
@@ -195,8 +196,8 @@ U_ID int,
 Review_id int,
 Up_Down VARCHAR(1), -- no date type bool in my sql
 PRIMARY KEY(U_ID,Review_id),
-FOREIGN KEY (U_ID)  REFERENCES Users ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(Review_id) REFERENCES Review ON DELETE CASCADE ON UPDATE CASCADE
+FOREIGN KEY (U_ID)  REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(Review_id) REFERENCES Review(ReviewID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 create table Up_Down_Voted_Post(
@@ -204,6 +205,6 @@ U_ID int,
 Post_id int,
 Up_Down VARCHAR(1), -- no date type bool in my sql
 PRIMARY KEY(U_ID,Post_id),
-FOREIGN KEY (U_ID)  REFERENCES Users ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(Post_id) REFERENCES Post ON DELETE CASCADE ON UPDATE CASCADE
+FOREIGN KEY (U_ID)  REFERENCES Users(U_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(Post_id) REFERENCES Post(Post_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
