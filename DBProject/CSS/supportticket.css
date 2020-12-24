@@ -18,3 +18,11 @@ textarea
   border: solid;
 border-color: #007bff;
 }
+.line
+{
+  position: relative;
+  left:10%;
+    background-color: #d8d8d8;
+    height:  1px;
+    width: 80%;
+}
