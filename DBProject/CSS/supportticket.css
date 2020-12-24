@@ -1,0 +1,20 @@
+ul
+{
+   width:80%;
+    display: flex;
+  
+  
+   justify-content:space-between;
+    
+} 
+#my-input
+{
+    margin:0% 3%;
+}
+textarea
+{
+  border-radius: 10px;
+  outline: none;
+  border: solid;
+border-color: #007bff;
+}
