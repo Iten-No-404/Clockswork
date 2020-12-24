@@ -1,7 +1,7 @@
 $(document).ready(function () {
    
     $("#name").on("focusout",function () {
-        if($(this).val().length==0)
+        if($(this).val().length==0 &&   $("#h_name").empty())
         {
             $(this).css("border-color","red");
            $("#h_name").append("This is empty");
@@ -15,7 +15,7 @@ $(document).ready(function () {
     );
     $("#email").on("focusout",function () {
         
-        if($(this).val().length==0)
+        if($(this).val().length==0 &&      $("#h_email").empty())
         {
            $("#h_email").append("This is empty");
            $(this).css("border-color","red");
@@ -27,7 +27,7 @@ $(document).ready(function () {
     })
     $("#number").on("focusout",function () {
         
-        if($(this).val().length==0)
+        if($(this).val().length==0 &&  $("#h_number").empty())
         {
             $(this).css("border-color","red");
            $("#h_number").append("This is empty");
@@ -39,7 +39,7 @@ $(document).ready(function () {
     })
     $("#pass1").on("focusout",function () {
         
-        if($(this).val().length==0)
+        if($(this).val().length==0  && $("#h_pass1").empty())
         {
             $(this).css("border-color","red");
            $("#h_pass1").append("This is empty");
@@ -51,7 +51,7 @@ $(document).ready(function () {
     })
     $("#pass2").on("focusout",function () {
         
-        if($(this).val().length==0)
+        if($(this).val().length==0 &&  $("#h_pass2").empty())
         {
             $(this).css("border-color","red");
            $("#h_pass2").append("This is empty");
