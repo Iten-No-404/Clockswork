@@ -1,0 +1,50 @@
+.categories{
+    border-width: 2em;
+    border-color:  #007bff;
+    border-style: groove;
+    background-color:#2c92ff;
+    color: black;
+    text-decoration:black;
+    font-family: serif;
+margin: auto;
+float: left;
+}
+
+.appslist{
+    float:inline-end;
+    margin: auto;
+    margin-left: 15em;
+
+}
+.subtitle{
+    text-align: center;
+    font-weight: bolder;
+    font-family:serif;
+}
+
+a.catlinks:link
+{
+   color:black;
+   text-decoration: none;
+}
+a.catlinks:visited
+{
+   color:black;
+   text-decoration: none;
+}
+a.catlinks:hover
+{
+   color:springgreen;
+   text-decoration: none;
+}
+a.catlinks:active
+{
+   color:black;
+   text-decoration: none;
+}
+
+.applet{
+    border-bottom-width: thin;
+    border-bottom-color: #007bff;
+    border-bottom-style: dashed;
+}
