@@ -9,3 +9,12 @@
     margin-left: 10%;
     margin-right: 10%;
 }
+ul
+{
+   width:80%;
+    display: flex;
+  
+  
+   justify-content:space-between;
+    
+}
