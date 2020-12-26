@@ -1,3 +1,4 @@
+<? php include('../PHP/signup.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,8 +59,12 @@
     </nav>
 </header>
 <body>
-        
+        <?php if(isset($_SESSION['sucess'])) : ?>
         <div class="container-fluid mt-3" style="height: 10%; width: 100%;">
+            <?php 
+                echo $_SESSION['success'];
+                unset($_SESSION['success']);
+                ?>
                 <div class="head">
                     <h4> Best Entertainment apps</h4>
                     <button class="btn btn-primary btn1" type="button">See More</button>

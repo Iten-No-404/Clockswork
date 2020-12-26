@@ -3,15 +3,15 @@
 --	     booleans are stored as VARCHAR(1)
 --		 User and Application were changed to Users and Applications respectively since the former seemed to be reserved words		 
 CREATE TABLE  Users  (
-	 U_ID  INT NOT NULL ,
-	 FName  varchar(30) NOT NULL,
-	 LName  varchar(30) NOT NULL,
+	 U_ID  INT NOT NULL AUTO_INCREMENT,
+	 FName  varchar(30) ,
+	 LName  varchar(30) ,
 	 Username  varchar(30) NOT NULL,
 	 Password  varchar(30) NOT NULL,
 	 Email  varchar(50) NOT NULL,
 	 Address  varchar(50),
-	 Bdate  DATE NOT NULL,
-	 Gender  VARCHAR(1) NOT NULL, -- boolean
+	 Bdate  DATE ,
+	 Gender  VARCHAR(1) , -- boolean
 	 Developer  VARCHAR(1) NOT NULL DEFAULT '0', -- boolean
 	 Phone_Number  INT,
 	 Balance  FLOAT NOT NULL DEFAULT '0',
@@ -24,15 +24,15 @@ CREATE TABLE  Users  (
 CREATE TABLE Applications (
 App_ID INT NOT NULL,
     Application_Name VARCHAR(100) NOT NULL,
-    NumOfUsers INTEGER NOT NULL,
-    Price DECIMAL NOT NULL,
+    NumOfUsers INTEGER NOT NULL DEFAULT 0,
+    Price DECIMAL NOT NULL DEFAULT 9999,
     Sale DECIMAL,
     -- Reviews is a derived attribute, not sure if to write it and make a trigger/macro that calculates
     -- Its value on any change, or just get it via queries as needed
     -- I'll go with the second approach for now (not making it)
     -- Not sure if age rating is always needed or not. Assuming it is for now
-    AgeRating INTEGER NOT NULL,
-    System_Requirements TEXT NOT NULL,
+    AgeRating INTEGER NOT NULL DEFAULT 18,
+    System_Requirements TEXT ,
     Rating DECIMAL,
     -- Somewhere to store the picture link or path
     Application_Picture TEXT,
@@ -41,7 +41,7 @@ App_ID INT NOT NULL,
     AppTrailer TEXT,
     Region VARCHAR(100),
     Hide VARCHAR(1), -- boolean
-    Release_Date DATE NOT NULL,
+    Release_Date DATE ,
 	U_ID INT NOT NULL,
 PRIMARY KEY (App_ID),
 -- Assuming that if a user is deleted, all the apps he published are also deleted
