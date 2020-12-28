@@ -7,7 +7,7 @@ CREATE TABLE  Users  (
 	 FName  varchar(30) ,
 	 LName  varchar(30) ,
 	 Username  varchar(30) NOT NULL,
-	 Password  varchar(30) NOT NULL,
+	 Password  varchar(256) NOT NULL,
 	 Email  varchar(50) NOT NULL,
 	 Address  varchar(50),
 	 Bdate  DATE ,

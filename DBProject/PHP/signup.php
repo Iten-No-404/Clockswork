@@ -2,6 +2,10 @@
 // TODO: Display an alert for a few second before sending the user back to the signup screen if
 // a field is empty/ passwords don't match / username or email already in use/
 require 'connection.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (isset($_POST['submit'])) {
     // Based on: https://www.youtube.com/watch?v=qjwc8ScTHnY&ab_channel=edureka%21
 
@@ -10,18 +14,18 @@ if (isset($_POST['submit'])) {
     $userName = mysqli_real_escape_string($dbConnection, $_POST['name']);
     $email = mysqli_real_escape_string($dbConnection, $_POST['email']);
     $phoneNumber = mysqli_real_escape_string($dbConnection, $_POST['number']);
-    $password1 = mysqli_real_escape_string($dbConnection, $_POST['pass1']);
-    $password2 = mysqli_real_escape_string($dbConnection, $_POST['pass2']);
+    $password1 = $_POST['pass1'];  // Shouldn't escape passwords when signing up OR logging in
+    $password2 = $_POST['pass2'];
 
     // Validation
     $errors = 0;
     if (empty($userName) || empty($email) || empty($password1) || empty($password2)) {
-        echo "<script>alert('A required field is empty')</script>";
+        AlertJS("A required field is empty");
         $errors++;
     }
 
     if ($password1 != $password2) {
-        echo "<script>alert('Passwords do not match')</script>";
+        AlertJS("Passwords do not match");
         $errors++;
     }
 
@@ -30,7 +34,8 @@ if (isset($_POST['submit'])) {
     $userCheckResult = $dbConnection->query($checkUser);
 
     if ($userCheckResult->num_rows != 0) {
-        echo "<script>alert('Username or Email already in use!')</script>";
+        AlertJS("Username or Email already in use!");
+        RedirectJS("../HTML/login.html");
         $errors++;
     }
 
@@ -38,14 +43,13 @@ if (isset($_POST['submit'])) {
     if ($errors == 0) {
         // PHP uses bcrypt for hashing?
         // Encrypting passwords so that DB access does not risk user data
-        $passwordHash = password_hash($password1, PASSWORD_BCRYPT);
+        $passwordHash = password_hash($password1, PASSWORD_DEFAULT);
 
         $regUserQuery = "INSERT INTO users (Username, Email, Phone_Number, Password) VALUES ('$userName', '$email', '$phoneNumber', '$passwordHash')";
         mysqli_query($dbConnection, $regUserQuery);
         $_SESSION['username'] = $userName;
-        $_SESSION['success'] = "You are now registered!";
+        $_SESSION['loggedin'] = true;
 
-        header("Location:../HTML/Home.html");
+        RedirectJS("../HTML/Home.html");
     }
 }
-?>
