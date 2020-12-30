@@ -1,7 +1,7 @@
 -- This is Clockwork's SQL Database
 -- Notes: long strings are stored as text instead of VARCHAR (including image paths)
---	     booleans are stored as VARCHAR(1)
---		 User and Application were changed to Users and Applications respectively since the former seemed to be reserved words		 
+-- booleans are stored as VARCHAR(1)
+-- User and Application were changed to Users and Applications respectively since the former seemed to be reserved words		 
 CREATE TABLE  Users  (
 	 U_ID  INT NOT NULL AUTO_INCREMENT,
 	 FName  varchar(30) ,
@@ -36,6 +36,8 @@ App_ID INT NOT NULL,
     Rating DECIMAL,
     -- Somewhere to store the picture link or path
     Application_Picture TEXT,
+    -- Somewhere to store the link for the application itself
+    Application_Link TEXT,
     AppDescription TEXT,
     -- Somewhere to store the video link or path
     AppTrailer TEXT,
