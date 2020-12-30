@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $_SESSION['username'] = null;
 $_SESSION['loggedin'] = false;
+$_SESSION['userid'] = 0;
 AlertJS("You have been logged out");
 RedirectJS("../HTML/login.html");
 

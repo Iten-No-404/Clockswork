@@ -20,5 +20,15 @@ class review{
           $Stars=$dbConnection->query("SELECT Stars FROM  review WHERE ReviewID='$id'");
           return $Stars;
      }  
+     public function getUpvotes()
+     {
+          $Upvotes=$dbConnection->query("SELECT COUNT(U_ID) FROM  up_down_voted_review WHERE Review_id='$id' AND Up_Down ='1'");
+          return $Upvotes;
+     }
+     public function getDownvotes()
+     {
+          $Downvotes=$dbConnection->query("SELECT COUNT(U_ID) FROM  up_down_voted_review WHERE Review_id='$id' AND Up_Down ='0'");
+          return $Downvotes;
+     }
 }
 ?>

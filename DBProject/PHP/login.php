@@ -16,8 +16,12 @@ if (isset($_POST['submit'])) {
     $hashStored =  $fetchedResult['Password'];
     
     if (password_verify($pass1, $hashStored)) {
+        $regUserIDQuery = "SELECT U_ID FROM users WHERE Username = '$userName' LIMIT 1";
+        $IDqueryResult = mysqli_query($dbConnection, $regUserIDQuery);
+        $fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         $_SESSION['username'] = $fetchedResult['Username'];
         $_SESSION['loggedin'] = true;
+        $_SESSION['userid'] = $fetchedresultID['U_ID'];
         RedirectJS('../HTML/Home.HTML');  
     } else {
         AlertJS('Incorrect password!');

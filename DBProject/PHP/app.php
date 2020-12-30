@@ -28,7 +28,7 @@ class app
       }
       public function getAgeRating()
       {
-          $AgeRating=$dbConnection->query("SELECT AgeRating FROMapplications WHERE App_ID='$id'");
+          $AgeRating=$dbConnection->query("SELECT AgeRating FROM applications WHERE App_ID='$id'");
           return $AgeRating;
 
       }
@@ -46,6 +46,11 @@ class app
       {
         $Application_Picture=$dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
         return $Application_Picture;
+      }
+      public function getApplication_Link()
+      {
+        $Application_Link=$dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
+        return $Application_Link;
       }
      public function getAppDescription	()
       {
@@ -72,6 +77,11 @@ class app
           $U_ID=$dbConnection->query("SELECT FROM   U_ID applications WHERE App_ID='$id'");
           return $U_ID;
       }
+      public function getReview_Count()
+      {
+          $Review_Count	=$dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");
+          return $Review_Count;
+      }	
       
 }
 ?>
