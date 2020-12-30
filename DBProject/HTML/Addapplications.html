@@ -68,11 +68,13 @@
      
      <div class="container mt-3">
         <div class="row">
-            <form  class ="mypost"action="" method="post" enctype="multipart/form-data">
+            <form  class ="mypost"action="php/insertapp.php" method="post" enctype="multipart/form-data">
                 <textarea name="AppDescription" ></textarea>
                 <br>
-                <label for="">Name</label>
-                <input type="text" name="name">
+                <label>	App_ID</label>
+                <input type="number" name="App_ID" id="">
+                <label for="">Application_Name</label>
+                <input type="text" name="Application_Name">
                   <br>
                   <label for="">Price</label>
                   <input type="text" name="Price">
