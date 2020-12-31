@@ -20,6 +20,10 @@ if (isset($_POST['publish'])) {
     // The index/key for the _POST array should be whatever we specified in the input tag under the "name" attribute
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
     $apppic = mysqli_real_escape_string($dbConnection, $_POST['application_picture']);
+    if($apppic == "")
+    {
+        $apppic = "../IMAGES/app-picture.png";
+    }
     $applink = mysqli_real_escape_string($dbConnection, $_POST['application-link']);
     $pricechoice = $_POST['price'];  //either 0(free) or 1(priced)
     $appprice = 0;//Assume it's free at first
@@ -32,8 +36,12 @@ if (isset($_POST['publish'])) {
     $appdescr = mysqli_real_escape_string($dbConnection, $_POST['app-description']);
     $appreq = mysqli_real_escape_string($dbConnection, $_POST['system-requirements']);    
     $apptrailer = mysqli_real_escape_string($dbConnection, $_POST['app-trailer']); 
+    if($apptrailer =="")
+    {
+        $apptrailer =NULL;
+    }
     $timezone = date_default_timezone_get();
-    $appdate = date('m/d/Y', time());
+    $appdate = date('Y-m-d', time());
     //$devID = $_SESSION['userid'];
     // Validation
     $errors = 0;
@@ -55,7 +63,7 @@ if (isset($_POST['publish'])) {
     if ($errors == 0) {
         $obj=new APP();
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,5);
+        $insertq = $obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,1);
         mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
