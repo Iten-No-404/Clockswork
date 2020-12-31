@@ -37,9 +37,9 @@ class app
             while($row = $result->fetch_assoc()) {
                 echo $row["NumOfUsers"];
             }
-        }
+           }
      
-      }
+       }
   public function getPrice($id)
       {
           $result=$this->dbConnection->query("SELECT Price FROM  applications WHERE App_ID='$id'");
@@ -172,7 +172,7 @@ class app
      
       }
     public function getReview_Count($id)
-      {
+      {///may be different
           $result	=$this->dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");
           if ($result->num_rows > 0) {
             // output data of each row

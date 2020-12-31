@@ -78,7 +78,7 @@ require '../PHP/app.php'
                    $obj=new App();
                    $id=0;
                
-                  $b= $obj->getname($id );
+                  $obj->getname($id );
                   
               
                         
