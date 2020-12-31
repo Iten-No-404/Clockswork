@@ -84,9 +84,22 @@ require '../PHP/app.php'
                    $id=5;
                
                   $obj->getname($id );  ?></h1>
-                    <h6>Activision Publishing, Inc. Action</h6>
-                    <p>Contains Ads·Offers in-app purchases
-                        <br> This app is compatible with all of your devices.
+                    <h6><?php
+                     $obj=new App();
+                     $id=5;
+                      $obj->getNumOfUsers($id);
+
+                    ?> Nums of users
+                    </h6>
+                    <p>
+                        <?php
+                            $obj=new App();
+                            $id=5;
+                        
+                           $obj->getPrice($id);
+                        ?>
+                        $
+                        <br>
                     </p>
                      
                     <?php
@@ -95,7 +108,12 @@ require '../PHP/app.php'
                          $obj->getRating($id);
                      ?>
                     <br><br>
-                    <button class="btn btn-primary" type="button">install</button>
+                    <button class="btn btn-primary" type="button"><?php 
+                       $obj=new App();
+                       $id=5;
+                    $obj-> getApplication_Link($id);
+                    ?>
+                    </button>
 
                 </div>
             </div>
@@ -144,6 +162,22 @@ require '../PHP/app.php'
                <?php
                $obj-> getRelease_Date($id);
               ?>
+                  
+
+
+            </p>
+        </div>
+        <div class="line"> </div>
+        <div class="container mt-3">
+            <h1>System_Requirements</h1>
+            <p>
+              <?php
+                $obj=new App();
+                $id=5;
+            
+               $obj->  getSystem_Requirements($id);?>
+               <br>
+              
                   
 
 

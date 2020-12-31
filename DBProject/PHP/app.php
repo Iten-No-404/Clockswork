@@ -121,9 +121,10 @@ class app
         $result=$this->dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
         if ($result->num_rows > 0) {
             // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo $row["Application_Link"];
-            }
+            while($row = $result->fetch_assoc()) {?>
+              <a href="<?php echo $row["Application_Link"];?>">Install</a>
+               
+          <?php  }
         }
      
       }
