@@ -70,20 +70,16 @@ require '../PHP/app.php'
         <div class="container my-5">
             <div class="row">
                 <div class="col col-lg-4 mt-3">
-                    <img class="img-fluid" src="../IMAGES/call.jpg" alt="">
-
+                   
+                    <img class="img-fluid" src="" alt="">
+                                                                
                 </div>
                 <div class="col col-lg-8 mt-3">
                     <h1>  <?php 
                    $obj=new App();
-                   $id=3;
+                   $id=4;
                
-                  $obj->getname($id );
-                  
-              
-                        
-                       
-                                     ?></h1>
+                  $obj->getname($id );  ?></h1>
                     <h6>Activision Publishing, Inc. Action</h6>
                     <p>Contains Ads·Offers in-app purchases
                         <br> This app is compatible with all of your devices.
@@ -136,9 +132,12 @@ require '../PHP/app.php'
             <p>
               <?php
                 $obj=new App();
-                $id=3;
+                $id=4;
             
-               $obj-> getAppDescription($id);
+               $obj-> getAppDescription($id);?>
+               <br>
+               <?php
+               $obj-> getRelease_Date($id);
               ?>
                   
 
