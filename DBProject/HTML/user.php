@@ -71,7 +71,14 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                <img class="img rounded-circle" sty src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+                <?php
+                     if (session_status() == PHP_SESSION_NONE)
+                    {
+                       session_start();
+                    }
+               ?>
+                <img class="img-fluid rounded-circle" sty src="<?php 
+                echo $_SESSION['Profile_Picture']; ?>" alt="">
             
             </div>
 
@@ -87,7 +94,17 @@
                </label>
            </div>
            <div class="col-lg-9">
-               Radwa Ahmed
+               <?php
+               //TODO Check if another person is viewing someone else's profile
+               if (isset( $_SESSION['FName']))
+               {
+               echo "$_SESSION[FName]";
+               }
+               if (isset( $_SESSION['LName']))
+               {
+                echo "$_SESSION[LName]";
+               }
+               ?>
            </div>
             
         </div>
@@ -101,9 +118,12 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                
-                    March,21,2000
-               
+                <?php
+            if (isset($_SESSION['Bdate']))
+            {
+                echo "$_SESSION[Bdate]";
+            }
+               ?>
             </div>
 
         </div>
@@ -117,7 +137,19 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Female
+                <?php
+            if (isset($_SESSION['Gender']))
+            {
+                if ($_SESSION['Gender'] == 'M')
+                {
+                    echo "Male";
+                }
+                else
+                {
+                    echo "Female";
+                }
+            }
+                ?>
             </div>
 
         </div>
@@ -148,7 +180,9 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                radwa.kaml00@eng-st.cu.edu.eg
+                <?php
+                echo "$_SESSION[email]";
+                ?>
             </div>
 
         </div>
@@ -162,7 +196,9 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                radwa.kaml00
+                <?php
+                echo "$_SESSION[username]";
+                ?>
             </div>
 
         </div>
@@ -176,7 +212,12 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Wady Hof,Cairo
+                <?php
+                if (isset($_SESSION['Address']))
+                {
+                    echo "$_SESSION[Address]";
+                }
+                ?>
             </div>
 
         </div>
@@ -190,7 +231,12 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                00
+                <?php
+                if (isset( $_SESSION['Balance']))
+                {
+                   echo "$_SESSION[Balance]";
+                }
+                ?>
             </div>
 
         </div>
@@ -204,7 +250,19 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Developer
+                <?php
+                if (isset($_SESSION['Developer']))
+                {
+                    if ( $_SESSION['Developer'] == '0')
+                    {
+                        echo "User";
+                    }
+                    else
+                    {
+                        echo "Developer";
+                    }
+                }
+                ?>
             </div>
 
         </div>
