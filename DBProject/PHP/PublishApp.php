@@ -50,7 +50,7 @@ if (isset($_POST['publish'])) {
         $errors++;
     }
 
-    Checks if the app name or app download link have already been used
+    //Checks if the app name or app download link have already been used
     $checkApp = "SELECT * FROM applications WHERE Application_Name = '$appname' OR Application_Link = '$applink' LIMIT 1";
     $appCheckResult = $dbConnection->query($checkApp);
 
@@ -62,8 +62,8 @@ if (isset($_POST['publish'])) {
     // If there are no errors, can register
     if ($errors == 0) {
         $obj=new APP();
-        //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,1);
+        //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,$applink,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
+        $insertq = $obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,$applink,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,1);
         mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
