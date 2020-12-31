@@ -1,11 +1,15 @@
 <?php
-require 'connection.php';
+require_once 'connection.php';
 class app
 {
-   public $id;
-   public function __construct($idpassed) {
-       $id=$idpassed;
-      }
+//    public $id;
+//    //empty constructor
+//    public function __construct() {
+
+//    }
+//    public function __construct($idpassed) {
+//        $id=$idpassed;
+//       }
       public function getname( )
       {
          $name=$dbConnection->query("SELECT Application_Name FROM  applications WHERE App_ID='$id'");
@@ -82,10 +86,16 @@ class app
           $Review_Count	=$dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");
           return $Review_Count;
       }	
-      public  function InsertApp($App_ID,$Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
-      {
-        $dbConnection->query("INSERT INTO applications (App_ID,Application_Name,NumOfUsers,Price,Sale,AgeRating,System_Requirements,,Application_Picture,AppDescription,AppTrailer,Region,Hide,Release_Date,U_ID)VALUES ('$App_ID','$Application_Name','$NumOfUsers','$Price','$Sale','$AgeRating','$System_Requirements','$Rating','$Application_Picture','$AppDescription','$AppTrailer','$Region','$Hide','$Release_Date','$U_ID')  ");
+    //   public  function InsertApp($App_ID,$Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
+    //   {
+    //     $dbConnection->query("INSERT INTO applications (App_ID,Application_Name,NumOfUsers,Price,Sale,AgeRating,System_Requirements,,Application_Picture,AppDescription,AppTrailer,Region,Hide,Release_Date,U_ID)VALUES ('$App_ID','$Application_Name','$NumOfUsers','$Price','$Sale','$AgeRating','$System_Requirements','$Rating','$Application_Picture','$AppDescription','$AppTrailer','$Region','$Hide','$Release_Date','$U_ID')  ");
         
+    //   }
+      //Modified Version
+      public  function InsertApp($Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
+      {
+        $insertquery = "INSERT INTO applications (Application_Name,NumOfUsers,Price,Sale,AgeRating,System_Requirements,Rating,Application_Picture,AppDescription,AppTrailer,Region,Hide,Release_Date,U_ID) VALUES ('$Application_Name','$NumOfUsers','$Price','$Sale','$AgeRating','$System_Requirements','$Rating','$Application_Picture','$AppDescription','$AppTrailer','$Region','$Hide','$Release_Date','$U_ID') ";
+        mysqli_query($dbConnection, $insertquery);
       }
       
 }
