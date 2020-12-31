@@ -44,7 +44,15 @@ a.catlinks:active
 }
 
 .applet{
+
     border-bottom-width: thin;
     border-bottom-color: #007bff;
     border-bottom-style: dashed;
+}
+.line
+{
+  
+    background-color: #d8d8d8;
+    height:  1px;
+    width: 100%;
 }

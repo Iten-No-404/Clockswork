@@ -2,6 +2,7 @@
 
 require '../PHP/app.php'
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +74,7 @@ require '../PHP/app.php'
                    
                 <?php 
                    $obj=new App();
-                   $id=5;
+                   $id=$_GET['id'];
                
                   $obj-> getApplication_Picture($id);  ?>
                                                                 
@@ -81,12 +82,12 @@ require '../PHP/app.php'
                 <div class="col col-lg-8 mt-3">
                     <h1>  <?php 
                    $obj=new App();
-                   $id=5;
+                   $id=$_GET['id'];
                
                   $obj->getname($id );  ?></h1>
                     <h6><?php
                      $obj=new App();
-                     $id=5;
+                     $id=$_GET['id'];
                       $obj->getNumOfUsers($id);
 
                     ?> Nums of users
@@ -94,7 +95,7 @@ require '../PHP/app.php'
                     <p>
                         <?php
                             $obj=new App();
-                            $id=5;
+                            $id=$_GET['id'];
                         
                            $obj->getPrice($id);
                         ?>
@@ -104,13 +105,13 @@ require '../PHP/app.php'
                      
                     <?php
                             $obj=new App();
-                            $id=5;
+                            $id=$_GET['id'];
                          $obj->getRating($id);
                      ?>
                     <br><br>
                     <button class="btn btn-primary" type="button"><?php 
                        $obj=new App();
-                       $id=5;
+                       $id=$_GET['id'];
                     $obj-> getApplication_Link($id);
                     ?>
                     </button>
@@ -155,7 +156,7 @@ require '../PHP/app.php'
             <p>
               <?php
                 $obj=new App();
-                $id=5;
+                $id=$_GET['id'];
             
                $obj-> getAppDescription($id);?>
                <br>
@@ -173,7 +174,7 @@ require '../PHP/app.php'
             <p>
               <?php
                 $obj=new App();
-                $id=5;
+                $id=$_GET['id'];
             
                $obj->  getSystem_Requirements($id);?>
                <br>
