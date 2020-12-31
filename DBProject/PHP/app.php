@@ -97,11 +97,13 @@ class app
      public function getApplication_Picture($id)
       {
         $result=$this->dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
+        
         if ($result->num_rows > 0) {
             // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo $row["Application_Picture"];
-            }
+            while($row = $result->fetch_assoc()) {?>
+                <img class="img-fluid" src="<?php   echo $row["Application_Picture"];?>" alt="">
+              
+           <?php }
         }
      
       }

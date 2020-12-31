@@ -71,13 +71,17 @@ require '../PHP/app.php'
             <div class="row">
                 <div class="col col-lg-4 mt-3">
                    
-                    <img class="img-fluid" src="" alt="">
+                <?php 
+                   $obj=new App();
+                   $id=5;
+               
+                  $obj-> getApplication_Picture($id);  ?>
                                                                 
                 </div>
                 <div class="col col-lg-8 mt-3">
                     <h1>  <?php 
                    $obj=new App();
-                   $id=4;
+                   $id=5;
                
                   $obj->getname($id );  ?></h1>
                     <h6>Activision Publishing, Inc. Action</h6>
@@ -126,13 +130,13 @@ require '../PHP/app.php'
                 </a>
             </div>
         </div>
-
+         <a href=""></a>
         <div class="container mt-3">
             <h1>Description</h1>
             <p>
               <?php
                 $obj=new App();
-                $id=4;
+                $id=5;
             
                $obj-> getAppDescription($id);?>
                <br>
