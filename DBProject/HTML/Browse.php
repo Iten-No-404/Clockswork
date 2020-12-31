@@ -43,7 +43,7 @@ require '../PHP/app.php'
         <div id="my-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../HTML/Browse.html">Browse</a>
+                    <a class="nav-link" href="../HTML/Browse.php">Browse</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/Groups_List.html">Groups</a>
@@ -56,6 +56,9 @@ require '../PHP/app.php'
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../PHP/logout.php">Log out</a>
                 </li>
 
             </ul>
