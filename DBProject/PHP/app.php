@@ -1,90 +1,186 @@
 <?php
-//require 'connection.php';
+
+
+
 class app
-{
-//    public $id;
-//    //empty constructor
-//    public function __construct() {
+ {
 
-//    }
-//    public function __construct($idpassed) {
-//        $id=$idpassed;
-//       }
-      public function getname( )
-      {
-         $name=$dbConnection->query("SELECT Application_Name FROM  applications WHERE App_ID='$id'");
-         return $name;
-      }
-      public function getNumOfUsers()
-      {
-          $NumOfUsers=$dbConnection->query("SELECT NumOfUsers  FROM   applications WHERE App_ID='$id'");
-          return $NumOfUsers;
-      }
-      public function getPrice()
-      {
-          $Price=$dbConnection->query("SELECT Price FROM  applications WHERE App_ID='$id'");
-          return $Price;
-      }
-      public function getSale()
-      {
-          $Sale=$dbConnection->query("SELECT Sale FROM   applications WHERE App_ID='$id'");
-          return $Sale;
-      }
-      public function getAgeRating()
-      {
-          $AgeRating=$dbConnection->query("SELECT AgeRating FROM applications WHERE App_ID='$id'");
-          return $AgeRating;
+   
+   public $dbConnection ;
+   public function __construct() {
+    $dpserver="localhost";
+    $dpusername="root";
+    $password="";
+    $dpname="clockwork";
+    $this->dbConnection=mysqli_connect($dpserver,$dpusername,$password,$dpname);
+  
+   }
 
-      }
-      public function getSystem_Requirements()
+     public function getname($id )
       {
-          $System_Requirements=$dbConnection->query("SELECT System_Requirements FROM  applications WHERE App_ID='$id'");
-          return $System_Requirements;
+ 
+        $result= $this->dbConnection->query("SELECT DISTINCT Application_Name FROM  applications WHERE App_ID='$id'");
+         if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Application_Name"];
+            }
+        }
+     
+     
       }
-      public function getRating()
-      {
-          $Rating=$dbConnection->query("SELECT Rating FROM  applications App_ID='$id'");
-          return $Rating;
+      public  function getNumOfUsers($id)
+       {
+           $result=$this->dbConnection->query("SELECT NumOfUsers  FROM   applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["NumOfUsers"];
+            }
+        }
+     
       }
-      public function getApplication_Picture()
+  public function getPrice($id)
       {
-        $Application_Picture=$dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
-        return $Application_Picture;
+          $result=$this->dbConnection->query("SELECT Price FROM  applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Price"];
+            }
+        }
       }
-      public function getApplication_Link()
+    public function getSale($id)
       {
-        $Application_Link=$dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
-        return $Application_Link;
+          $result=$this->dbConnection->query("SELECT Sale FROM   applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Sale"];
+            }
+        }
+     
       }
-     public function getAppDescription	()
+     public function getAgeRating($id)
       {
-        $AppDescription	=$dbConnection->query("SELECT AppDescription FROM   applications WHERE App_ID='$id'");
-        return $AppDescription;
+          $result=$this->dbConnection->query("SELECT AgeRating FROM applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["AgeRating"];
+            }
+        }
+     
       }
-      public function getAppTrailer()
+     public  function getSystem_Requirements($id)
       {
-          $AppTrailer=$dbConnection->query("SELECT AppTrailer FROM  applications WHERE App_ID='$id'");
-          return $AppTrailer;
+          $result=$this->dbConnection->query("SELECT System_Requirements FROM  applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["System_Requirements"];
+            }
+        }
+     
+      }
+     public function getRating($id)
+      {
+          $result=$this->dbConnection->query("SELECT Rating FROM  applications App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Rating"];
+            }
+        }
+     
+      }
+     public function getApplication_Picture($id)
+      {
+        $result=$this->dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Application_Picture"];
+            }
+        }
+     
+      }
+     public function getApplication_Link($id)
+      {
+        $result=$this->dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Application_Link"];
+            }
+        }
+     
+      }
+    public function getAppDescription($id)
+      {
+        $result=$this->dbConnection->query("SELECT AppDescription FROM   applications WHERE App_ID='$id'");
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["AppDescription"];
+            }
+        }
+     
+      }
+    public function getAppTrailer($id)
+      {
+          $result=$this->dbConnection->query("SELECT AppTrailer FROM  applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["AppTrailer"];
+            }
+        }
+     
       } 
-      public function getHide()
+    public function getHide($id)
       {
-          $Hide=$dbConnection->query("SELECT Hide FROM  applications WHERE App_ID='$id'");
-          return $Hide;
+          $result=$this->dbConnection->query("SELECT Hide FROM  applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Hide"];
+            }
+        }
+     
       }
-      public function getRelease_Date()
+   public function getRelease_Date($id)
       {
-          $Release_Date	=$dbConnection->query("SELECT Release_Date FROM  applications WHERE App_ID='$id'");
-          return $Release_Date;
+          $result	=$this->dbConnection->query("SELECT Release_Date FROM  applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Release_Date"];
+            }
+        }
+     
       }	
-      public function getU_ID()
+    public function getU_ID($id)
       {
-          $U_ID=$dbConnection->query("SELECT FROM   U_ID applications WHERE App_ID='$id'");
-          return $U_ID;
+          $result=$this->dbConnection->query("SELECT FROM   U_ID applications WHERE App_ID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["U_ID"];
+            }
+        }
+     
       }
-      public function getReview_Count()
+    public function getReview_Count($id)
       {
-          $Review_Count	=$dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");
-          return $Review_Count;
+          $result	=$this->dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo $row["Review_Count"];
+            }
+        }
+     
       }	
     //   public  function InsertApp($App_ID,$Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
     //   {
@@ -92,12 +188,13 @@ class app
         
     //   }
       //Modified Version
-      public  function InsertApp($Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
+     public  function InsertApp($Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
       {
         $insertquery = "INSERT INTO applications (Application_Name,NumOfUsers,Price,Sale,AgeRating,System_Requirements,Rating,Application_Picture,AppDescription,AppTrailer,Region,Hide,Release_Date,U_ID) VALUES ('$Application_Name','$NumOfUsers','$Price','$Sale','$AgeRating','$System_Requirements','$Rating','$Application_Picture','$AppDescription','$AppTrailer','$Region','$Hide','$Release_Date','$U_ID') ";
         return $insertquery;
+        
         //mysqli_query($dbConnection, $insertquery);
       }
       
-}
+    }
 ?>

@@ -1,3 +1,8 @@
+<?php
+
+require '../PHP/app.php'
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,8 +74,16 @@
 
                 </div>
                 <div class="col col-lg-8 mt-3">
-                    <h1>
-                        Call of Duty®: Mobile</h1>
+                    <h1>  <?php 
+                   $obj=new App();
+                   $id=0;
+               
+                  $b= $obj->getname($id );
+                  
+              
+                        
+                       
+                                     ?></h1>
                     <h6>Activision Publishing, Inc. Action</h6>
                     <p>Contains Ads·Offers in-app purchases
                         <br> This app is compatible with all of your devices.
