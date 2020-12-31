@@ -42,14 +42,14 @@ if (isset($_POST['publish'])) {
         $errors++;
     }
 
-    // Checks if the app name or app download link have already been used
-    // $checkApp = "SELECT * FROM applications WHERE Application_Name = '$appname' OR Application_Link = '$applink' LIMIT 1";
-    // $appCheckResult = $dbConnection->query($checkApp);
+    Checks if the app name or app download link have already been used
+    $checkApp = "SELECT * FROM applications WHERE Application_Name = '$appname' OR Application_Link = '$applink' LIMIT 1";
+    $appCheckResult = $dbConnection->query($checkApp);
 
-    // if ($appCheckResult->num_rows != 0) {
-    //     AlertJS("Appname or Application link already in use!");
-    //     $errors++;
-    // }
+    if ($appCheckResult->num_rows != 0) {
+        AlertJS("Appname or Application link already in use!");
+        $errors++;
+    }
 
     // If there are no errors, can register
     if ($errors == 0) {
