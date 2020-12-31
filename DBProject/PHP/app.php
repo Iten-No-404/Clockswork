@@ -85,11 +85,20 @@ class app
       }
      public function getRating($id)
       {
-          $result=$this->dbConnection->query("SELECT Rating FROM  applications App_ID='$id'");
+          $result=$this->dbConnection->query("SELECT Rating FROM  applications WHERE App_ID='$id'");
+      
           if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo $row["Rating"];
+             $x= $row["Rating"];
+                while($x>0)
+                {
+                   echo' <i class="fa fa-star" aria-hidden="true"></i>';
+               
+              
+            
+            
+                    $x--;}
             }
         }
      

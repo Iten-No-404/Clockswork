@@ -88,11 +88,12 @@ require '../PHP/app.php'
                     <p>Contains Ads·Offers in-app purchases
                         <br> This app is compatible with all of your devices.
                     </p>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                     
+                    <?php
+                            $obj=new App();
+                            $id=5;
+                         $obj->getRating($id);
+                     ?>
                     <br><br>
                     <button class="btn btn-primary" type="button">install</button>
 
@@ -164,7 +165,7 @@ require '../PHP/app.php'
                     <a href="../HTML/user.html">
                     <h6>Radwa Ahmed</h6>
                     </a>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                    
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
