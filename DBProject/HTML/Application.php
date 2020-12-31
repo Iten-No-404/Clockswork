@@ -76,7 +76,7 @@ require '../PHP/app.php'
                 <div class="col col-lg-8 mt-3">
                     <h1>  <?php 
                    $obj=new App();
-                   $id=0;
+                   $id=3;
                
                   $obj->getname($id );
                   
@@ -133,36 +133,14 @@ require '../PHP/app.php'
 
         <div class="container mt-3">
             <h1>Description</h1>
-            <p>Official CALL OF DUTY® designed exclusively for mobile phones. Play iconic multiplayer maps and modes
-                anytime, anywhere. 100 player Battle Royale battleground? Fast 5v5 team deathmatch? Sniper vs sniper
-                battle? Activision’s free-to-play CALL OF DUTY®: MOBILE has it all.
-
-                FREE TO PLAY ON MOBILE
-
-                Console quality HD gaming on your phone with customizable controls, voice and text chat, and thrilling
-                3D graphics and sound. Experience the thrill of the world’s most beloved shooter game, now on your phone
-                for easy on-the-go fun.
-
-                BELOVED GAME MODES AND MAPS
-
-                Play iconic multiplayer maps from Call of Duty®: Black Ops and Call of Duty®: Modern Warfare®, available
-                for the first time for free. Or squad up with friends in a brand new 100-person battle royale survival
-                map. Join the fun with millions of players from all around world!
-
-                CUSTOMIZE YOUR UNIQUE LOADOUT
-
-                As you play CALL OF DUTY®: MOBILE you will unlock and earn dozens of famous characters, weapons,
-                outfits, scorestreaks and pieces of gear that can be used to customize your loadouts. Bring these
-                loadouts into battle in Battle Royale and thrilling PvP multiplayers modes like Team Deathmatch,
-                Frontline, Free For All, Search and Destroy, Domination, Hardpoint and many more.
-
-                COMPETITIVE AND SOCIAL PLAY
-
-                Use skill and strategy to battle to the top in competitive Ranked Mode or to win the most Clan prizes as
-                you play with friends. Compete and fight against millions of friends and foes in this thrilling free to
-                play multiplayer shooter.
-
-                CHOICE AND COMPLEXITY
+            <p>
+              <?php
+                $obj=new App();
+                $id=3;
+            
+               $obj-> getAppDescription($id);
+              ?>
+                  
 
 
             </p>
