@@ -2,6 +2,7 @@
 // TODO: Display an alert for a few second before sending the user back to the signup screen if
 // a field is empty/ passwords don't match / username or email already in use/
 require 'connection.php';
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -29,6 +30,9 @@ if (isset($_POST['submit'])) {
         $errors++;
     }
 
+   
+
+
     // Checks if the username or email have already been used
     $checkUser = "SELECT * FROM users WHERE Username = '$userName' OR Email = '$email' LIMIT 1";
     $userCheckResult = $dbConnection->query($checkUser);
@@ -38,6 +42,7 @@ if (isset($_POST['submit'])) {
         RedirectJS("../HTML/login.html");
         $errors++;
     }
+
 
     // If there are no errors, can register
     if ($errors == 0) {
