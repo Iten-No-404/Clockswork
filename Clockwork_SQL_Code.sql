@@ -51,7 +51,7 @@ FOREIGN KEY (U_ID) REFERENCES Users(U_ID) on update cascade on delete cascade --
 );
 
 CREATE TABLE Employee (
-    Employee_ID INTEGER,
+    Employee_ID INTEGER  AUTO_INCREMENT,
     Gender VARCHAR(1) NOT NULL,
     Bdate DATE,
     -- Salary could be integer
@@ -69,13 +69,13 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE  Categories  (
-	 Category_ID  INT NOT NULL,
+	 Category_ID  INT NOT NULL  AUTO_INCREMENT,
 	 Category_Name  VARCHAR(30) NOT NULL UNIQUE,
 	PRIMARY KEY ( Category_ID )
 );
 
 CREATE TABLE Groups(
- GROUP_ID int not null,
+ GROUP_ID int not null  AUTO_INCREMENT,
  GroupName varchar(30)not null,
  Date_Created date,
  Group_picture text,
@@ -91,7 +91,7 @@ CREATE TABLE Groups(
 CREATE TABLE Post(
 TEXTpost	text ,
 Date_Written date,
-Post_id integer not null,
+Post_id integer not null  AUTO_INCREMENT,
 picture text,
 U_ID int,
 group_id int,
@@ -102,7 +102,7 @@ FOREIGN KEY(group_id)  REFERENCES Groups(GROUP_ID) on update cascade on delete c
 );
 
 CREATE TABLE Review(
-    ReviewID INTEGER,
+    ReviewID INTEGER  AUTO_INCREMENT,
     -- Not sure if "Description" is a keyword so changed it to Review_Description just in case
     Review_Description TEXT NOT NULL,
     ReviewDate DATE NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE Review(
 );
 
 CREATE TABLE SupportTicket(
-    TicketID INTEGER NOT NULL,
+    TicketID INTEGER NOT NULL  AUTO_INCREMENT,
     ReportDescription TEXT NOT NULL,
     Closed VARCHAR(1),
 	U_ID INT,
