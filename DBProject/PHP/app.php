@@ -1,5 +1,5 @@
 <?php
-require_once 'connection.php';
+//require 'connection.php';
 class app
 {
 //    public $id;
@@ -95,7 +95,8 @@ class app
       public  function InsertApp($Application_Name,$NumOfUsers,$Price,$Sale,$AgeRating,$System_Requirements,$Rating,$Application_Picture,$AppDescription,$AppTrailer,$Region,$Hide,$Release_Date,$U_ID	)
       {
         $insertquery = "INSERT INTO applications (Application_Name,NumOfUsers,Price,Sale,AgeRating,System_Requirements,Rating,Application_Picture,AppDescription,AppTrailer,Region,Hide,Release_Date,U_ID) VALUES ('$Application_Name','$NumOfUsers','$Price','$Sale','$AgeRating','$System_Requirements','$Rating','$Application_Picture','$AppDescription','$AppTrailer','$Region','$Hide','$Release_Date','$U_ID') ";
-        mysqli_query($dbConnection, $insertquery);
+        return $insertquery;
+        //mysqli_query($dbConnection, $insertquery);
       }
       
 }
