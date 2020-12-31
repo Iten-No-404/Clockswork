@@ -136,7 +136,7 @@ require '../PHP/app.php'
                             while($row = $result->fetch_assoc()) {
                                 $var=$row["App_ID"];?>
                                 <div class="col-lg-1">
-                                    <a href="../HTML/App.html">
+                                    <a href="../HTML/Application.php ?id=<?php echo $row['App_ID'];?>">
                                        <?php   $obj->getApplication_Picturecircle($var)?>
                                     </a>
                                 </div>
@@ -145,7 +145,7 @@ require '../PHP/app.php'
                                       <?php  $obj-> getRating($var);
                                           ?>
                                     </div>
-                                    <a class="catlinks" href="../HTML/App.html">
+                                    <a class="catlinks"  href="../HTML/Application.php ?id=<?php echo $row['App_ID'];?>">
                                         <h5><?php  $obj-> getname($var )?></h5>
                                     </a>
                                     <div>
