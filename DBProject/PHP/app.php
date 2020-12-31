@@ -29,6 +29,12 @@ class app
      
      
       }
+      
+     public function getallids( )
+     {
+        $result= $this->dbConnection->query("SELECT App_ID FROM  applications" );
+        return $result;
+     }
       public  function getNumOfUsers($id)
        {
            $result=$this->dbConnection->query("SELECT NumOfUsers  FROM   applications WHERE App_ID='$id'");
@@ -114,6 +120,19 @@ class app
             // output data of each row
             while($row = $result->fetch_assoc()) {?>
                 <img class="img-fluid" src="<?php   echo $row["Application_Picture"];?>" alt="">
+              
+           <?php }
+        }
+     
+      }
+      public function getApplication_Picturecircle($id)
+      {
+        $result=$this->dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
+        
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {?>
+                <img class="img-fluid rounded-circle" src="<?php   echo $row["Application_Picture"];?>" alt="">
               
            <?php }
         }
