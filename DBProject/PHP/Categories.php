@@ -1,19 +1,25 @@
 <?php
 require 'connection.php';
 class categories{
-    public $id;
-    public function __construct($idpassed) {
-        $id=$idpassed;
-       }
-     public function getCategoryName()
+    
+     public $dbConnection ;
+     public function __construct() {
+      $dpserver="localhost";
+      $dpusername="root";
+      $password="";
+      $dpname="try";
+      $this->dbConnection=mysqli_connect($dpserver,$dpusername,$password,$dpname);
+    
+     }
+     public function getCategoryName($id)
      {
-          $CategoryName=$dbConnection->query("SELECT Category_Name FROM  categories WHERE Category_ID='$id'");
-          return $CategoryName;
+          $CategoryName=$this->dbConnection->query("SELECT Category_Name FROM  categories WHERE Category_ID='$id'");
+        
      }  
-     public function getAppCount()
+     public function getAppCount($id)
      {
-          $AppCount=$dbConnection->query("SELECT COUNT(App_ID) FROM categorized WHERE Category_ID='$id'");
-          return $AppCount;
+          $AppCount=$this->dbConnection->query("SELECT COUNT(App_ID) FROM categorized WHERE Category_ID='$id'");
+         
      }  
 }
 ?>
