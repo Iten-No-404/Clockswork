@@ -65,13 +65,13 @@
     <h1>Publish an Application</h1>
     <H2 style="text-align: center;">Become a Developer!!</H2>
     <div style="text-align: center; margin-left: 5%; margin-right: 5%;">
-        <form action="../PHP/PublishApp.php" method="POST">
+        <form action="../PHP/PublishApp.php" method="POST" enctype="multipart/form-data">
             <div class="container mt-3 cont1">
                 <label>Name:</label>
                 <input type="text" placeholder="MyApplication" id="application_name" name="application_name">
                 <h6 id="app-name"></h6>
                 <label>Image:</label>
-                <input type="file" id="application_picture" name="application_picture">
+                <input type="file" id="apppicture" name="apppicture">
                 <h6></h6>
                 <label>App Download Link:</label>
                 <input type="url" id="application-link" name="application-link">

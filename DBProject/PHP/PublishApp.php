@@ -19,10 +19,20 @@ if (isset($_POST['publish'])) {
     // Fetching data from the HTML form
     // The index/key for the _POST array should be whatever we specified in the input tag under the "name" attribute
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
-    $apppic = mysqli_real_escape_string($dbConnection, $_POST['application_picture']);
+    $apppic = $_FILES['apppicture']['name'];
     if($apppic == "")
     {
         $apppic = "../IMAGES/app-picture.png";
+    }
+    else
+    {
+        $targetDir = "../IMAGES/";
+    $fileName = $_FILES['apppicture']['name'];
+    $tmpfileloc = $_FILES['apppicture']['tmp_name'];
+    $fileExt = explode('.',$fileName);
+    $fileRealExt = strtolower(end($fileExt));
+    $apppic = $targetDir.$appname.".".$fileRealExt;
+    move_uploaded_file($tmpfileloc,$apppic);
     }
     $applink = mysqli_real_escape_string($dbConnection, $_POST['application-link']);
     $pricechoice = $_POST['price'];  //either 0(free) or 1(priced)

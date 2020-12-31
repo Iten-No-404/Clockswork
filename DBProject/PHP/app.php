@@ -11,7 +11,7 @@ class app
     $dpserver="localhost";
     $dpusername="root";
     $password="";
-    $dpname="try";
+    $dpname="clockwork";
     $this->dbConnection=mysqli_connect($dpserver,$dpusername,$password,$dpname);
   
    }
