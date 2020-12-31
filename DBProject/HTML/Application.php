@@ -98,7 +98,7 @@ require '../PHP/app.php'
                         
                            $obj->getPrice($id);
                         ?>
-                        $
+                        
                         <br>
                     </p>
                      
