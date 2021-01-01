@@ -16,7 +16,7 @@ if(isset($_POST['submit']))
  
  $obj-> insertreview($Review_Description,$ReviewDate,$Stars);
  $ReviewID=(int)$obj->getids();
- var_dump($UserID);
+
 
   $obj->reviwed($UserID,$ApplicationID,$ReviewID);
 }

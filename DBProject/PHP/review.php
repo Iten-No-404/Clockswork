@@ -18,8 +18,20 @@ class review{
      } 
      public function getids()
      {
-        $result= $this->dbConnection->query("SELECT COUNT(ReviewID) FROM  review");
-        return $result->num_rows-1;
+        $result= $this->dbConnection->query("SELECT ReviewID FROM  review");
+       $x=-1;
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                if($row["ReviewID"]>$x)
+                { $x=$row["ReviewID"];
+
+                }
+
+            }
+        }
+      return $x;
+      
      }
      public function insertreview($Review_Description,$ReviewDate,$Stars)
      {
