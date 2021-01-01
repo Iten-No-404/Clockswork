@@ -4,9 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$_SESSION['username'] = null;
-$_SESSION['loggedin'] = false;
-$_SESSION['userid'] = 0;
+$_SESSION['U_ID'] = null;
 AlertJS("You have been logged out");
 RedirectJS("../HTML/login.html");
 

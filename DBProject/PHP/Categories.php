@@ -2,15 +2,8 @@
 require 'connection.php';
 class categories{
     
-     public $dbConnection ;
-     public function __construct() {
-      $dpserver="localhost";
-      $dpusername="root";
-      $password="";
-      $dpname="try";
-      $this->dbConnection=mysqli_connect($dpserver,$dpusername,$password,$dpname);
-    
-     }
+     public $dbConnection = DBConnection::getInst()->getConnection();    
+     
      public function getCategoryName($id)
      {
           $CategoryName=$this->dbConnection->query("SELECT Category_Name FROM  categories WHERE Category_ID='$id'");
@@ -22,4 +15,3 @@ class categories{
          
      }  
 }
-?>

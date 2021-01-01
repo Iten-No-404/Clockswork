@@ -55,6 +55,9 @@ require '../PHP/app.php'
                     <a class="nav-link" href="../HTML/supportticket.html">Support</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="../HTML/user.php">Profile</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.html">About</a>
                 </li>
                 <li class="nav-item">

@@ -10,6 +10,8 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST['submit'])) {
     // Based on: https://www.youtube.com/watch?v=qjwc8ScTHnY&ab_channel=edureka%21
 
+    $dbConnection = DBConnection::getInst()->getConnection();
+
     // Fetching data from the HTML form
     // The index/key for the _POST array should be whatever we specified in the input tag under the "name" attribute
     $userName = mysqli_real_escape_string($dbConnection, $_POST['name']);
@@ -30,7 +32,7 @@ if (isset($_POST['submit'])) {
         $errors++;
     }
 
-   
+
 
 
     // Checks if the username or email have already been used

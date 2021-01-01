@@ -20,35 +20,30 @@ if (isset($_POST['publish'])) {
     // The index/key for the _POST array should be whatever we specified in the input tag under the "name" attribute
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
     $apppic = $_FILES['apppicture']['name'];
-    if($apppic == "")
-    {
+    if ($apppic == "") {
         $apppic = "../IMAGES/app-picture.png";
-    }
-    else
-    {
+    } else {
         $targetDir = "../IMAGES/";
-    $fileName = $_FILES['apppicture']['name'];
-    $tmpfileloc = $_FILES['apppicture']['tmp_name'];
-    $fileExt = explode('.',$fileName);
-    $fileRealExt = strtolower(end($fileExt));
-    $apppic = $targetDir.$appname.".".$fileRealExt;
-    move_uploaded_file($tmpfileloc,$apppic);
+        $fileName = $_FILES['apppicture']['name'];
+        $tmpfileloc = $_FILES['apppicture']['tmp_name'];
+        $fileExt = explode('.', $fileName);
+        $fileRealExt = strtolower(end($fileExt));
+        $apppic = $targetDir . $appname . "." . $fileRealExt;
+        move_uploaded_file($tmpfileloc, $apppic);
     }
     $applink = mysqli_real_escape_string($dbConnection, $_POST['application-link']);
     $pricechoice = $_POST['price'];  //either 0(free) or 1(priced)
-    $appprice = 0;//Assume it's free at first
-    if($pricechoice =="1")
-    {
+    $appprice = 0; //Assume it's free at first
+    if ($pricechoice == "1") {
         $appprice = $_POST['app-price'];
     }
     $agerating = $_POST['age-rating'];
     $appregion = mysqli_real_escape_string($dbConnection, $_POST['region']);
     $appdescr = mysqli_real_escape_string($dbConnection, $_POST['app-description']);
-    $appreq = mysqli_real_escape_string($dbConnection, $_POST['system-requirements']);    
-    $apptrailer = mysqli_real_escape_string($dbConnection, $_POST['app-trailer']); 
-    if($apptrailer =="")
-    {
-        $apptrailer =NULL;
+    $appreq = mysqli_real_escape_string($dbConnection, $_POST['system-requirements']);
+    $apptrailer = mysqli_real_escape_string($dbConnection, $_POST['app-trailer']);
+    if ($apptrailer == "") {
+        $apptrailer = NULL;
     }
     $timezone = date_default_timezone_get();
     $appdate = date('Y-m-d', time());
@@ -71,9 +66,9 @@ if (isset($_POST['publish'])) {
 
     // If there are no errors, can register
     if ($errors == 0) {
-        $obj=new APP();
+        $obj = new APP();
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$applink,$appdescr,$apptrailer,$appregion,'1',$appdate,1);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, 0, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, 1);
         mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
