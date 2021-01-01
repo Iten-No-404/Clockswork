@@ -1,3 +1,16 @@
+<?php
+include_once '../PHP/functions.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$fileName = basename($_SERVER['PHP_SELF']);
+
+// THIS WILL BREAK IF FILENAMES ARE CHANGED
+if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signup.php") {
+    AlertJS("Please log in!");
+    RedirectJS("../HTML/login.php");
+}?>
+
 <header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
