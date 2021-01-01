@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 
     if ($queryResult->num_rows == 0) {
         AlertJS("Cannot find a user with the specified email!");
-        RedirectJS("../HTML/signup.HTML");
+        RedirectJS("../HTML/signup.php");
         exit();
     }
 
@@ -25,9 +25,9 @@ if (isset($_POST['submit'])) {
     if (password_verify($pass1, $hashStored)) {
         $_SESSION['U_ID'] = $fetchedResult['U_ID'];
 
-        RedirectJS('../HTML/Home.HTML');
+        RedirectJS('../HTML/Home.php');
     } else {
         AlertJS('Incorrect password!');
-        RedirectJS('../HTML/login.HTML');
+        RedirectJS('../HTML/login.php');
     }
 }

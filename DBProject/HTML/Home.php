@@ -13,66 +13,27 @@
     <link rel="stylesheet" href="../CSS/Home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Document</title>
 </head>
-<header>
+<?php include_once '../PHP/header.php' ?>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
-        <a class="navbar-brand" href="../HTML/Home.html">Clockwork</a>
-        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="my-nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../HTML/Browse.php">Browse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/Groups_List.html">Groups</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/PublishApp.html">Publish </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/supportticket.html">Support</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/user.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/About.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../PHP/logout.php">Log out</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-    </nav>
-</header>
 
 <body>
-    
+
     <div class="container-fluid mt-3" style="height: 10%; width: 100%;">
-        
+
         <div class="head">
-            
+
             <h4> Best Entertainment apps </h4>
             <button class="btn btn-primary btn1" type="button">See More</button>
         </div>
@@ -388,29 +349,7 @@
             </div>
         </div>
 
-        <div class="container mt-5 mb-3">
-            <footer id="footer">
-
-                <a href="#" class="fab fa-facebook"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-google"></a>
-
-
-
-
-
-            </footer>
-            <div class="copy">
-                <small>
-                    <p class="ourcopy">&copy;Copyright Clock Works. All Rights Reserved</p>
-                </small>
-                <small>
-                    <p class="ourcopy"> Developed with <i class="fas fa-heart" style="color:red;"></i> by Clocksmiths
-                        Team
-                    </p>
-                </small>
-            </div>
-
+        <?php include_once "../PHP/footer.php" ?>
 </body>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>

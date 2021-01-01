@@ -3,7 +3,7 @@
 require 'connection.php';
 class user
 {
-    public static $dbConnection;
+    public $dbConnection;
     public $U_ID;
     public $FName;
     public $LName;
@@ -23,8 +23,8 @@ class user
     // Creates a new object and initializes its data
     public function __construct($U_ID)
     {
-        $dbConnection = DBConnection::getInst()->getConnection();
-        $result = $dbConnection->query("SELECT * FROM  users WHERE U_ID='$U_ID'");
+        $this ->dbConnection = DBConnection::getInst()->getConnection();
+        $result = $this->dbConnection->query("SELECT * FROM  users WHERE U_ID='$U_ID'");
         $row = $result->fetch_assoc();
         $this->$U_ID = $row['U_ID'];
         $this->FName = $row['FName'];
@@ -201,7 +201,7 @@ class user
     //Doesn't actually insert a user, just creates a query and returns it
     public  function InsertUser(
         $U_ID,
-        $Fname,
+        $FName,
         $LName,
         $Username,
         $Password,
@@ -216,10 +216,25 @@ class user
         $Ban_End,
         $Profile_Picture
     ) {
-        $insertquery = "INSERT INTO applications
-         (U_ID, Fname, LName, Username, Password,Email, Address,Bdate,Gender, 
+        $insertQuery = "INSERT INTO users
+         (U_ID, FName, LName, Username, Password,Email, Address,Bdate,Gender, 
         Developer,Phone_Number, Balance,Billing_Info, Ban_End, Profile_Picture)
-         VALUES ('$U_ID','$Fname','$LName','$Username','$Password','$Email','$Address','$Bdate','$Gender','$Developer','$Phone_Number','$Balance','$Billing_Info','$Ban_End','$Profile_Picture') ";
-        return $insertquery;
+         VALUES ('$U_ID','$FName','$LName','$Username','$Password','$Email','$Address','$Bdate','$Gender','$Developer','$Phone_Number','$Balance','$Billing_Info','$Ban_End','$Profile_Picture') ";
+        return $insertQuery;
+    }
+    public function UpdateUserInfo(
+        $U_ID,
+        $FName,
+        $LName,
+        $Username,
+        $Password,
+        $Email,
+        $Address,
+        $Bdate,
+        $Gender,
+        $Profile_Picture
+    ) {
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture' WHERE U_ID = $U_ID";
+         $this->dbConnection->query($updateQuery);
     }
 }
