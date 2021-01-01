@@ -3,6 +3,8 @@
 require '../PHP/app.php';
 require '../PHP/review.php';
 require '../PHP/user.php';
+session_start();
+
 
 ?>
 <!DOCTYPE html>
@@ -200,7 +202,7 @@ require '../PHP/user.php';
             </div>
         </div>
         <div>
-          <form action="php/addreview.php" method="post">
+          <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
                 <textarea name="Review_Description" id="" cols="40" rows="5">
                     
                 </textarea>
@@ -214,7 +216,7 @@ require '../PHP/user.php';
                             <option value="5">5</option>
                     </select> 
                 <br>
-                <button class="btn btn-primary" type="button" name="submit">Review</button>
+                <button class="btn btn-primary" type="submit" name="submit">Review</button>
           </form>
         </div>
        <br>

@@ -1,4 +1,4 @@
-<?php include('signup.php') ?>
+<?php include_once 'signup.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +52,7 @@
                     <br>
                     <button class="btn btn-primary" type="submit" id="submit" name="submit">Sign Up</button>
 
-                    <button class="btn btn-success"> <a href="../HTML/login.html">Log In</a></button>
+                    <button class="btn btn-success"> <a href="../HTML/login.php">Log In</a></button>
 
                 </div>
 

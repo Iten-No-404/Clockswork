@@ -1,14 +1,10 @@
 <?php
-
+include_once('connection.php');
 class review{
      public $dbConnection ;
      public function __construct() {
-      $dpserver="localhost";
-      $dpusername="root";
-      $password="";
-      $dpname="clockwork";
-      $this->dbConnection=mysqli_connect($dpserver,$dpusername,$password,$dpname);
-    
+     
+        $this->dbConnection  = DBConnection::getInst()->getConnection();
      }
      public function getReview_Description($id)
      {
@@ -27,6 +23,7 @@ class review{
      }
      public function insertreview($Review_Description,$ReviewDate,$Stars)
      {
+        
         $this->dbConnection->query("INSERT INTO review (Review_Description,ReviewDate,Stars) VALUES ('$Review_Description','$ReviewDate','$Stars')");
      }
      public function getReviewDate($id)
@@ -77,7 +74,8 @@ class review{
      }
      public function reviwed($UserID,$ApplicationID,$ReviewID)
      {
-         $result= $this->dbConnection->query("INSERT INTO  reviewed (UserID,ApplicationID,ReviewID)VALUES( '$UserID','$ApplicationID','$ReviewID'");
+       
+          $this->dbConnection->query("INSERT INTO reviewed (UserID,ApplicationID,ReviewID) VALUES($UserID,$ApplicationID,$ReviewID)");
      }
      public function getuseridsandreviewids($ApplicationID)
      {
