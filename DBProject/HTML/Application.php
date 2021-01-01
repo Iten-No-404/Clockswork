@@ -28,6 +28,14 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 <?php include_once '../PHP/header.php' ?>
 
@@ -168,30 +176,32 @@ session_start();
                    if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {?>
-                           <div class="col-lg-1">
-                    <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
-                      <?php  $user=new user($row[" UserID"]);
-                            $user->getProfilePicture($row[" UserID"]);
-                                ?>
-                    </a>
+                              <div class="col-lg-1">
+                                  <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
+                                        <?php 
+                                           $user=new user($row['UserID']);
+                                                $user->getProfilePicture($row['UserID']);
+                                                    ?>
+                                  </a>
 
-                </div>
-                <div class="col-lg-11">
-                    <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
-                        <h6><?php   $user=new user($row[" UserID"]);
-                         $user->getUserName($row[" UserID"]); 
-                         $user->getFName($row[" UserID"]);
-                         ?></h6>
-                    </a>
+                               </div>
+                             <div class="col-lg-11">
+                              <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
+                                <h6><?php   $user=new user($row['UserID']);
+                                      $user->getUserName($row['UserID']);
+                                      
+                                
+                                      ?></h6>
+                                 </a>
 
-                    <?php
-                      $review-> getStars($row["ReviewID"]);
-                               ?>
-                    <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?></p>
-                    <?php    $review->getReviewDate($row["ReviewID"]);   ?>
+                                <?php
+                                      $review-> getStars($row["ReviewID"]);
+                                    ?>
+                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?></p>
+                            <?php    $review->getReviewDate($row["ReviewID"]);   ?>
 
-                </div>
-                <div class="line"></div>
+                        </div>
+                        <div class="line"></div>
               
 
 

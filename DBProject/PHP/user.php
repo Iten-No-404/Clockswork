@@ -185,10 +185,17 @@ class user
         // If the query returns a result
         if ($result->num_rows > 0) {
             // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                echo ' <img class="img-fluid rounded-circle" src="<?php echo $row["Profile_Picture"]; ?>" alt="">';
-            }
+            while ($row = $result->fetch_assoc()) {?>
+              <?php if ($row['Profile_Picture'])?>
+                            <img class="img-fluid rounded-circle" src="<?php echo $row['Profile_Picture'];?>" alt="">
+              <?php if(!$row['Profile_Picture']) 
+               {?>
+                <img class="img-fluid rounded-circle" src="../IMAGES/DEFAULT_USER.jpg" alt="">
+             <?php }
+                ?>
+           <?php }
         }
+    
     }
 
     // Probably won't get much use for now
@@ -238,3 +245,4 @@ class user
          $this->dbConnection->query($updateQuery);
     }
 }
+?>
