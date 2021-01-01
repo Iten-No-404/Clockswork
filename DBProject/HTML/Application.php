@@ -1,7 +1,8 @@
 <?php
 
-require '../PHP/app.php'
-
+require '../PHP/app.php';
+require '../PHP/review.php';
+require '../PHP/user.php';
 
 ?>
 <!DOCTYPE html>
@@ -39,7 +40,9 @@ require '../PHP/app.php'
                     $obj = new App();
                     $id = $_GET['id'];
 
-                    $obj->getApplication_Picture($id);  ?>
+                    $obj->getApplication_Picture($id); 
+
+                     ?>
 
                 </div>
                 <div class="col col-lg-8 mt-3">
@@ -61,6 +64,9 @@ require '../PHP/app.php'
                         $id = $_GET['id'];
 
                         $obj->getPrice($id);
+                        echo "<br>";
+                        $obj-> getAgeRating($id);
+                     
                         ?>
 
                         <br>
@@ -152,43 +158,45 @@ require '../PHP/app.php'
         <div class="container">
             <h1>Reviews</h1>
             <div class="row mt-2">
-
-                <div class="col-lg-1">
-                    <a href="../HTML/user.html">
-                        <img class="img-fluid rounded-circle" src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+              <?php
+                    $review=new review();
+                   
+                    $id = $_GET['id'];
+                   $result= $review->getuseridsandreviewids($id);    
+                   if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {?>
+                           <div class="col-lg-1">
+                    <a href="../HTML/user.php">
+                      <?php  $user=new user($row[" UserID"]);
+                            $user->getProfilePicture($row[" UserID"]);
+                                ?>
                     </a>
 
                 </div>
                 <div class="col-lg-11">
-                    <a href="../HTML/user.html">
-                        <h6>Radwa Ahmed</h6>
+                    <a href="../HTML/user.php">
+                        <h6><?php   $user=new user($row[" UserID"]);
+                         $user->getUserName($row[" UserID"]); ?></h6>
                     </a>
 
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <p>I love the game, I have been playing for months now. But the direction it is taking could make me to stop playing. Since the start of season 12, performance has been disregarded and it has become more about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it intend...</p>
+                    <?php
+                      $review-> getStars($row["ReviewID"]);
+                               ?>
+                    <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?></p>
+                    <?php    $review->getReviewDate($row["ReviewID"]);   ?>
 
                 </div>
-
-                <div class="col-lg-1">
-                    <a href="../HTML/user.html">
-                        <img class="img-fluid rounded-circle" src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
-                    </a>
+                <div class="line"></div>
+              
 
 
-                </div>
-                <div class="col-lg-11">
-                    <a href="../HTML/user.html">
-                        <h6>Radwa Ahmed</h6>
-                    </a>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <p>I love the game, I have been playing for months now. But the direction it is taking could make me to stop playing. Since the start of season 12, performance has been disregarded and it has become more about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it intend...</p>
-                       
-                </div>
+                   <?php }
+                  }
+                         
+                         
+                         ?>
+              
             </div>
         </div>
         <div>
