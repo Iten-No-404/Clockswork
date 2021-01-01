@@ -186,7 +186,7 @@ class user
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                echo $row["Profile_Picture"];
+                echo ' <img class="img-fluid rounded-circle" src="<?php echo $row["Profile_Picture"]; ?>" alt="">';
             }
         }
     }

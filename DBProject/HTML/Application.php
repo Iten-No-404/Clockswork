@@ -191,21 +191,25 @@ require '../PHP/app.php'
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <div>
           <form action="php/addreview.php" method="post">
-            <textarea name="Review_Description" id="" cols="40" rows="5">
-                
-            </textarea>
-           <label for="">Stars</label> <input type="text" name="Stars" >
-            <br>
-            <button class="btn btn-primary" type="button" name="submit">Review</button>
+                <textarea name="Review_Description" id="" cols="40" rows="5">
+                    
+                </textarea>
+                <br>
+                <label for="">Stars</label>
+                <select id="" name="Stars">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                    </select> 
+                <br>
+                <button class="btn btn-primary" type="button" name="submit">Review</button>
           </form>
         </div>
        <br>
-=======
-
->>>>>>> 91b4d0978deb3fc00173d22ce76873eb65c277a4
     </div>
     <?php include_once "../PHP/footer.php" ?>
 </body>
