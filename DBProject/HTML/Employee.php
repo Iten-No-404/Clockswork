@@ -1,8 +1,5 @@
-<?php include('../PHP/user.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- TODO: Check if the user is logged in. If not, alert and redirect to login page -->
 
 <head>
     <meta charset="UTF-8">
@@ -24,37 +21,14 @@
     <link rel="stylesheet" href="../CSS/user.css">
     <title>Document</title>
 </head>
-
 <?php include_once '../PHP/header.php' ?>
+
 
 <body>
     <h1>Personal info</h1>
     <div class="container mt-3 cont1">
-        <div class="row">
-            <div class="col-lg-9">
-                <button class="btn btn-success" id="move"> <a href="../HTML/EditUserInfo.php">Edit Info</a></button>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-3">
-                <label for="">
-                    <h6>Profile Picture</h6>
-                </label>
-            </div>
-            <div class="col-lg-9">
-                <?php
-                if (session_status() == PHP_SESSION_NONE) {
-                    session_start();
-                }
-                $currUser = new user($_SESSION['U_ID']);
-                ?>
-                <img class="img-fluid rounded-circle" sty src="<?php echo $currUser->Profile_Picture ?>" alt="">
-            </div>
-        </div>
 
-        <div class="line">
-        </div>
 
         <div class="row">
             <div class="col-lg-3">
@@ -63,21 +37,13 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                //TODO: Check if another person is viewing someone else's profile
-                if (isset($currUser->FName)) {
-                    echo $currUser->FName;
-                }
-                if (isset($currUser->LName)) {
-                    echo " " . $currUser->LName;
-                }
-                ?>
+                Radwa Ahmed
             </div>
-        </div>
 
+        </div>
         <div class="line">
-        </div>
 
+        </div>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -86,16 +52,14 @@
             </div>
             <div class="col-lg-9">
 
-                <?php if (isset($currUser->Bdate)) {
-                    echo $currUser->Bdate;
-                } ?>
+                March,21,2000
 
             </div>
-        </div>
 
+        </div>
         <div class="line">
-        </div>
 
+        </div>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -103,39 +67,16 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                if (isset($currUser->Gender)) {
-                    if ($currUser->Gender == "M") {
-                        echo "Male";
-                    } else {
-                        echo "Female";
-                    }
-                }
-                ?>
+                Female
             </div>
-        </div>
 
+        </div>
         <div class="line">
 
         </div>
-        <!-- Disabled for now as it serves no purpose -->
-        <!-- <div class="row">
-            <div class="col-lg-3">
-                <label for="">
-                    <h6> Password</h6>
-                </label>
-            </div>
-            <div class="col-lg-9">
-                <i class="fas fa-circle"></i>
-                <i class="fas fa-circle"></i>
-                <i class="fas fa-circle"></i>
-                <i class="fas fa-circle"></i>
-            </div>
 
-        </div> -->
-        <div class="line">
 
-        </div>
+
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -143,28 +84,11 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                echo $currUser->Email;
-                ?>
+                radwa.kaml00@eng-st.cu.edu.eg
             </div>
 
         </div>
-        <div class="line">
 
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label for="">
-                    <h6> UserName</h6>
-                </label>
-            </div>
-            <div class="col-lg-9">
-                <?php
-                echo $currUser->Username;
-                ?>
-            </div>
-
-        </div>
         <div class="line">
 
         </div>
@@ -175,11 +99,7 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                if (isset($currUser->Address)) {
-                    echo $currUser->Address;
-                }
-                ?>
+                Wady Hof,Cairo
             </div>
 
         </div>
@@ -189,15 +109,11 @@
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
-                    <h6>Wallet</h6>
+                    <h6>Salary</h6>
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                if (isset($currUser->Balance)) {
-                    echo "$currUser->Balance";
-                }
-                ?>
+                18000$
             </div>
 
         </div>
@@ -207,19 +123,11 @@
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
-                    <h6>Type of User</h6>
+                    <h6>Department</h6>
                 </label>
             </div>
             <div class="col-lg-9">
-                <?php
-                if (isset($currUser->Developer)) {
-                    if ($currUser->Developer == '0') {
-                        echo "User";
-                    } else {
-                        echo "Developer";
-                    }
-                }
-                ?>
+                Developer
             </div>
 
         </div>
@@ -227,6 +135,8 @@
 
     </div>
     <?php include_once "../PHP/footer.php" ?>
+
+
 </body>
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>

@@ -14,112 +14,69 @@ require '../PHP/app.php'
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
-     <link rel="stylesheet" type="text/css" href="css/demo.css"> 
-     <link rel="stylesheet" type="text/css" href="css/demo.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="http://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-     <link rel="stylesheet" type="text/css" href="css/demo.css"> 
-     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
-<header>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
-        <a class="navbar-brand" href="../HTML/Home.html">Clockwork</a>
-        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="my-nav" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="../HTML/Browse.php">Browse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/Groups_List.html">Groups</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/PublishApp.html">Publish </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/supportticket.html">Support</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/user.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/About.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../PHP/logout.php">Log out</a>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-    </nav>
-</header>
+<?php include_once '../PHP/header.php' ?>
 
 <body>
-    
+
     <div class="container blockapp my-3">
         <div class="container my-5">
             <div class="row">
                 <div class="col col-lg-4 mt-3">
-                   
-                <?php 
-                   $obj=new App();
-                   $id=$_GET['id'];
-               
-                  $obj-> getApplication_Picture($id);  ?>
-                                                                
+
+                    <?php
+                    $obj = new App();
+                    $id = $_GET['id'];
+
+                    $obj->getApplication_Picture($id);  ?>
+
                 </div>
                 <div class="col col-lg-8 mt-3">
-                    <h1>  <?php 
-                   $obj=new App();
-                   $id=$_GET['id'];
-               
-                  $obj->getname($id );  ?></h1>
-                    <h6><?php
-                     $obj=new App();
-                     $id=$_GET['id'];
-                      $obj->getNumOfUsers($id);
+                    <h1> <?php
+                            $obj = new App();
+                            $id = $_GET['id'];
 
-                    ?> Nums of users
+                            $obj->getname($id);  ?></h1>
+                    <h6><?php
+                        $obj = new App();
+                        $id = $_GET['id'];
+                        $obj->getNumOfUsers($id);
+
+                        ?> Nums of users
                     </h6>
                     <p>
                         <?php
-                            $obj=new App();
-                            $id=$_GET['id'];
-                        
-                           $obj->getPrice($id);
+                        $obj = new App();
+                        $id = $_GET['id'];
+
+                        $obj->getPrice($id);
                         ?>
-                        
+
                         <br>
                     </p>
-                     
+
                     <?php
-                            $obj=new App();
-                            $id=$_GET['id'];
-                         $obj->getRating($id);
-                     ?>
-                    <br><br>
-                    <button class="btn btn-primary" type="button"><?php 
-                       $obj=new App();
-                       $id=$_GET['id'];
-                    $obj-> getApplication_Link($id);
+                    $obj = new App();
+                    $id = $_GET['id'];
+                    $obj->getRating($id);
                     ?>
+                    <br><br>
+                    <button class="btn btn-primary" type="button"><?php
+                                                                    $obj = new App();
+                                                                    $id = $_GET['id'];
+                                                                    $obj->getApplication_Link($id);
+                                                                    ?>
                     </button>
 
                 </div>
@@ -156,20 +113,20 @@ require '../PHP/app.php'
                 </a>
             </div>
         </div>
-         <a href=""></a>
+        <a href=""></a>
         <div class="container mt-3">
             <h1>Description</h1>
             <p>
-              <?php
-                $obj=new App();
-                $id=$_GET['id'];
-            
-               $obj-> getAppDescription($id);?>
-               <br>
-               <?php
-               $obj-> getRelease_Date($id);
-              ?>
-                  
+                <?php
+                $obj = new App();
+                $id = $_GET['id'];
+
+                $obj->getAppDescription($id); ?>
+                <br>
+                <?php
+                $obj->getRelease_Date($id);
+                ?>
+
 
 
             </p>
@@ -178,53 +135,53 @@ require '../PHP/app.php'
         <div class="container mt-3">
             <h1>System_Requirements</h1>
             <p>
-              <?php
-                $obj=new App();
-                $id=$_GET['id'];
-            
-               $obj->  getSystem_Requirements($id);?>
-               <br>
-              
-                  
+                <?php
+                $obj = new App();
+                $id = $_GET['id'];
+
+                $obj->getSystem_Requirements($id); ?>
+                <br>
+
+
 
 
             </p>
         </div>
         <div class="line"> </div>
-      
+
         <div class="container">
             <h1>Reviews</h1>
             <div class="row mt-2">
-                
+
                 <div class="col-lg-1">
                     <a href="../HTML/user.html">
                         <img class="img-fluid rounded-circle" src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
-                    </a>                    
+                    </a>
 
                 </div>
                 <div class="col-lg-11">
                     <a href="../HTML/user.html">
-                    <h6>Radwa Ahmed</h6>
+                        <h6>Radwa Ahmed</h6>
                     </a>
-                    
+
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <p>I love the game, I have been playing for months now. But the direction it is taking could make me to stop playing. Since the start of season 12, performance has been disregarded and it has become more about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it intend...</p>
 
                 </div>
-                
+
                 <div class="col-lg-1">
                     <a href="../HTML/user.html">
-                    <img class="img-fluid rounded-circle" src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
-                </a>
-                    
+                        <img class="img-fluid rounded-circle" src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+                    </a>
+
 
                 </div>
                 <div class="col-lg-11">
                     <a href="../HTML/user.html">
                         <h6>Radwa Ahmed</h6>
-                        </a>
+                    </a>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -234,6 +191,7 @@ require '../PHP/app.php'
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div>
           <form action="php/addreview.php" method="post">
             <textarea name="Review_Description" id="" cols="40" rows="5">
@@ -245,19 +203,11 @@ require '../PHP/app.php'
           </form>
         </div>
        <br>
-    </div>
-    <div class="container mt-5 mb-3">
-        <footer id="footer"  >
-            <a href="#" class="fab fa-facebook"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-google"></a>
-    </footer>
-    <div class="copy">
-    <small><p class="ourcopy">&copy;Copyright Clock Works. All Rights Reserved</p></small> 
-    <small><p class="ourcopy"> Developed with   <i class="fas fa-heart" style="color:red;"></i> by Clocksmiths  Team
-    </p></small> 
+=======
 
-</div>
+>>>>>>> 91b4d0978deb3fc00173d22ce76873eb65c277a4
+    </div>
+    <?php include_once "../PHP/footer.php" ?>
 </body>
 
 <script src="../bootstrap/jquery.js"></script>

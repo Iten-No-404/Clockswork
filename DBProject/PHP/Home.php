@@ -8,6 +8,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
     AlertJS("Welome " . $_SESSION['username'] . '!');
 } else {
     AlertJS("Please log in!");
-    RedirectJS("../HTML/login.html");
+    RedirectJS("../HTML/login.php");
 }
 ?>

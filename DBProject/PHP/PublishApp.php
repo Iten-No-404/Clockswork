@@ -1,7 +1,7 @@
 <?php
 // TODO: Check that the user is logged in before loading the page
-require 'connection.php';
-require 'app.php';
+require_once 'connection.php';
+require_once 'app.php';
 // if (session_status() == PHP_SESSION_NONE) {
 //     AlertJS("You must be logged in first");
 //     RedirectJS("../HTML/login.html");
@@ -18,6 +18,7 @@ if (isset($_POST['publish'])) {
 
     // Fetching data from the HTML form
     // The index/key for the _POST array should be whatever we specified in the input tag under the "name" attribute
+    $dbConnection = DBConnection::getInst()->getConnection();
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
     $apppic = $_FILES['apppicture']['name'];
     if ($apppic == "") {

@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 
     if ($userCheckResult->num_rows != 0) {
         AlertJS("Username or Email already in use!");
-        RedirectJS("../HTML/login.html");
+        RedirectJS("../HTML/login.php");
         $errors++;
     }
 
@@ -60,6 +60,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $userName;
         $_SESSION['loggedin'] = true;
         $_SESSION['userid'] = $fetchedresultID['U_ID'];
-        RedirectJS("../HTML/Home.html");
+        RedirectJS("../HTML/Home.php");
     }
 }

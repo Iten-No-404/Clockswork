@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $_SESSION['U_ID'] = null;
 AlertJS("You have been logged out");
-RedirectJS("../HTML/login.html");
+RedirectJS("../HTML/login.php");
 
 if (session_status() == PHP_SESSION_ACTIVE) {
     session_destroy();

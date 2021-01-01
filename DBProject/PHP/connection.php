@@ -1,5 +1,5 @@
 <?php
-include('functions.php');
+include_once 'functions.php';
 class DBConnection
 {
     public $serverName = 'localhost'; // server ip
