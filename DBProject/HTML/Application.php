@@ -167,7 +167,7 @@ require '../PHP/user.php';
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {?>
                            <div class="col-lg-1">
-                    <a href="../HTML/user.php">
+                    <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
                       <?php  $user=new user($row[" UserID"]);
                             $user->getProfilePicture($row[" UserID"]);
                                 ?>
@@ -175,7 +175,7 @@ require '../PHP/user.php';
 
                 </div>
                 <div class="col-lg-11">
-                    <a href="../HTML/user.php">
+                    <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
                         <h6><?php   $user=new user($row[" UserID"]);
                          $user->getUserName($row[" UserID"]); ?></h6>
                     </a>
