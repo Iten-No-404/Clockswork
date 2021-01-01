@@ -230,11 +230,21 @@ require '../PHP/app.php'
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <p>I love the game, I have been playing for months now. But the direction it is taking could make me to stop playing. Since the start of season 12, performance has been disregarded and it has become more about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it intend...</p>
-
+                       
                 </div>
             </div>
         </div>
-       
+        <div>
+          <form action="php/addreview.php" method="post">
+            <textarea name="Review_Description" id="" cols="40" rows="5">
+                
+            </textarea>
+           <label for="">Stars</label> <input type="text" name="Stars" >
+            <br>
+            <button class="btn btn-primary" type="button" name="submit">Review</button>
+          </form>
+        </div>
+       <br>
     </div>
     <div class="container mt-5 mb-3">
         <footer id="footer"  >
