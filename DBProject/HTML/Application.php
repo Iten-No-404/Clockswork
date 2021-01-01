@@ -179,7 +179,9 @@ session_start();
                 <div class="col-lg-11">
                     <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
                         <h6><?php   $user=new user($row[" UserID"]);
-                         $user->getUserName($row[" UserID"]); ?></h6>
+                         $user->getUserName($row[" UserID"]); 
+                         $user->getFName($row[" UserID"]);
+                         ?></h6>
                     </a>
 
                     <?php
