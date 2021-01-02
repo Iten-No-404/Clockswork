@@ -1,8 +1,11 @@
 <?php
 require 'app.php';
 require_once 'connection.php';
+require_once 'functions.php';
+session_start();
 if(isset($_POST['edit']))
 {
+     
     $dbConnection = DBConnection::getInst()->getConnection();
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
     $apppic = $_FILES['apppicture']['name'];
@@ -41,7 +44,9 @@ if(isset($_POST['edit']))
         $errors++;
     }
 
+     
     //Checks if the app name or app download link have already been used
+
     $checkApp = "SELECT * FROM applications WHERE Application_Name = '$appname' OR Application_Link = '$applink' LIMIT 1";
     $appCheckResult = $dbConnection->query($checkApp);
 
@@ -54,10 +59,14 @@ if(isset($_POST['edit']))
     if ($errors == 0) {
         $obj = new APP();
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, 0, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, 1);
-        mysqli_query($dbConnection, $insertq);
+        $insertq = $obj->editapp($appname, $appprice, $agerating, $appreq, $apppic, $applink, $appdescr, $apptrailer, $appregion, $_SESSION['app_id']);
+        // mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
-        AlertJS("Application Added Successfully!");
+        AlertJS("Application edited Successfully!");
+        $ApplicationID= $_SESSION['app_id'];
+  
+     
+     RedirectJS("../HTML/application.php?id=$ApplicationID");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)
         //RedirectJS("../HTML/app.html");
     }

@@ -214,9 +214,9 @@ class app
 
     //mysqli_query($dbConnection, $insertquery);
   }
-  public function editapp($Application_Name, $NumOfUsers, $Price, $Sale, $AgeRating, $System_Requirements, $Rating, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region, $Hide,$U_ID)
+  public function editapp($Application_Name, $Price, $AgeRating, $System_Requirements, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region,$App_ID)
   {
-    $result  = $this->dbConnection->query("UPDATE APP");
+    $result  = $this->dbConnection->query("UPDATE applications SET Application_Name= '$Application_Name',Price='$Price',AgeRating='$AgeRating',System_Requirements='$System_Requirements',Application_Picture='$Application_Picture',Application_Link='$Application_Link',AppDescription='$AppDescription',AppTrailer='$AppTrailer',Region='$Region' WHERE App_ID='$App_ID' ");
   }
 }
 ?>
