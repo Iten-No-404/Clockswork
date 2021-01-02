@@ -56,7 +56,8 @@
                 <input type="number" id="app-price" name="app-price" disabled="true">
                 <h6></h6>
                 <label for="age-rating">Age Rating:</label>
-                <select name="age-rating" id="age-rating">
+                <select name="age-rating" value="<?php
+                          $obj=new App(); $x=$obj->getAgeRating($_SESSION['app_id']); echo$x;?>" id="age-rating">
                     <option value=3>Everyone</option>
                     <option value=10>Everyone 10+</option>
                     <option value=13>Teen</option>
@@ -65,7 +66,8 @@
                 </select>
                 <h6></h6>
                 <label>Available in:</label>
-                <select id="region" name="region">
+                <select id="region" 
+                          name="region">
                     <option value="Everywhere">Everywhere</option>
                     <option value="Africa">Africa</option>
                     <option value="Arab States">Arab States</option>
@@ -343,6 +345,11 @@
                 <input type="url" id="app-trailer" value=" <?php
                           $obj=new App(); $x=$obj->getAppTrailer($_SESSION['app_id']); echo$x;?>" name="app-trailer">
                 <h6></h6>
+                <label>Sale</label>
+                <input type="number" value="<?php
+                          $obj=new App(); $x=$obj-> getSale($_SESSION['app_id']); echo$x;?>" name="Sale">
+                <label>Hide</label>
+                          <input type="text" name="Hide" id="">
                 <!-- TODO: Need to add the categories part-->
                 <!-- Can use something as in the following:-->
                 <!-- https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-rearrangeable.html -->

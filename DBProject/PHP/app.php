@@ -21,6 +21,28 @@ class app
       }
     }
   }
+  public function getname2($id)
+  {
+
+    $result = $this->dbConnection->query("SELECT DISTINCT Application_Name FROM  applications WHERE App_ID='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+        return $row["Application_Name"];
+      }
+    }
+  }
+  public function getRegion($id)
+  {
+
+    $result = $this->dbConnection->query("SELECT Region FROM  applications WHERE App_ID='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+        echo $row["Application_Name"];
+      }
+    }
+  }
 
   public function getallids()
   {
@@ -126,7 +148,7 @@ class app
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) { 
-        echo $row["Application_Link"];
+        return $row["Application_Link"];
       }
     }
   }
@@ -214,9 +236,9 @@ class app
 
     //mysqli_query($dbConnection, $insertquery);
   }
-  public function editapp($Application_Name, $Price, $AgeRating, $System_Requirements, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region,$App_ID)
+  public function editapp($Application_Name, $Price, $AgeRating, $System_Requirements, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region,$Sale,$Hide,$App_ID)
   {
-    $result  = $this->dbConnection->query("UPDATE applications SET Application_Name= '$Application_Name',Price='$Price',AgeRating='$AgeRating',System_Requirements='$System_Requirements',Application_Picture='$Application_Picture',Application_Link='$Application_Link',AppDescription='$AppDescription',AppTrailer='$AppTrailer',Region='$Region' WHERE App_ID='$App_ID' ");
+    $result  = $this->dbConnection->query("UPDATE applications SET Application_Name= '$Application_Name',Price='$Price',AgeRating='$AgeRating',System_Requirements='$System_Requirements',Application_Picture='$Application_Picture',Application_Link='$Application_Link',AppDescription='$AppDescription',AppTrailer='$AppTrailer',Region='$Region',Sale='$Sale',Hide='$Hide' WHERE App_ID='$App_ID' ");
   }
 }
 ?>
