@@ -233,6 +233,7 @@ session_start();
         </div>
        <br>
     </div>
+    <a href="Developerapps.php?id=<?php echo $_GET['id'];?>"><button class="btn btn-primary" type="button">Edit</button></a>
     <?php include_once "../PHP/footer.php" ?>
 </body>
 

@@ -120,6 +120,16 @@ class app
       <?php }
     }
   }
+  public function getApplication_Link2($id)
+  {
+    $result = $this->dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) { 
+        echo $row["Application_Link"];
+      }
+    }
+  }
   public function getApplication_Link($id)
   {
     $result = $this->dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
@@ -203,6 +213,10 @@ class app
     return $insertquery;
 
     //mysqli_query($dbConnection, $insertquery);
+  }
+  public function editapp($Application_Name, $NumOfUsers, $Price, $Sale, $AgeRating, $System_Requirements, $Rating, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region, $Hide,$U_ID)
+  {
+    $result  = $this->dbConnection->query("UPDATE APP");
   }
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 require 'review.php';
+require_once 'functions.php';
 session_start();
 
 if(isset($_POST['submit']))
@@ -19,5 +20,6 @@ if(isset($_POST['submit']))
 
 
   $obj->reviwed($UserID,$ApplicationID,$ReviewID);
+  RedirectJS("../HTML/application.php?id=$ApplicationID");
 }
 ?>
