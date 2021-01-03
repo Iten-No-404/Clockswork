@@ -89,6 +89,20 @@ class review{
        
           $this->dbConnection->query("INSERT INTO reviewed (UserID,ApplicationID,ReviewID) VALUES($UserID,$ApplicationID,$ReviewID)");
      }
+     public function deletefromreviwed($ApplicationID)
+     {
+       
+          $this->dbConnection->query("DELETE   FROM reviewed WHERE  ApplicationID=$ApplicationID");
+     }
+     public function select($ApplicationID)
+     {
+       $result= $this->dbConnection->query("SELECT ReviewID  FROM reviewed WHERE  ApplicationID=$ApplicationID");
+         return $result;
+     }
+     public function deletefromreviw($ReviewID)
+     {
+        $this->dbConnection->query("DELETE   FROM review WHERE ReviewID=$ReviewID");
+     }
      public function getuseridsandreviewids($ApplicationID)
      {
         $result= $this->dbConnection->query("SELECT UserID,ReviewID	FROM reviewed WHERE ApplicationID='$ApplicationID'");

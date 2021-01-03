@@ -244,14 +244,19 @@ class app
   {
     $result  = $this->dbConnection->query("INSERT INTO purchased_by (UserID,ApplicationID,Purchase_Date	)VALUES ($UserID,$ApplicationID,$Purchase_Date)");
   }
+  public function getmyapps($UserID)
+  {
+    $result = $this->dbConnection->query("SELECT ApplicationID FROM  purchased_by WHERE UserID=$UserID");
+     return $result;
+  }
   public function getids()
-     {
-        $result= $this->dbConnection->query("SELECT App_ID FROM  applications");
-       $x=-1;
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                if($row["App_ID"]>$x)
+  {
+    $result= $this->dbConnection->query("SELECT App_ID FROM  applications");
+   $x=-1;
+     if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+              if($row["App_ID"]>$x)
                 { $x=$row["App_ID"];
 
                 }
@@ -260,6 +265,17 @@ class app
         }
       return $x;
       
-     }
+  }
+  public function deleteapp($id)
+  {
+    echo "done";
+    $result="DELETE FROM applications WHERE App_ID=$id";
+    var_dump($result);
+    mysqli_query($this->dbConnection, $result);
+  }
+  public function deletefrompurchased_by($id)
+  {
+    $result  = $this->dbConnection->query("DELETE FROM purchased_by WHERE ApplicationID=$id  ");
+  }
 }
 ?>
