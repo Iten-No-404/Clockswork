@@ -10,12 +10,14 @@ $link=$obj->getApplication_Link2($id);
 $appdate = date('Y-m-d', time());                                                      
 $UserID=(int)$_SESSION['U_ID'];
 if($obj->selectpurchased_by($UserID,$id))
-$obj->purchased_by($UserID,$id,$appdate);
+{$obj->purchased_by($UserID,$id,$appdate);
+    $obj->updatenumofuser($id);
+}
 else {
     AlertJS("You already downloaded it");
     RedirectJS($link);
 }
-$obj->updatenumofuser($id);
+
 RedirectJS($link);
 
 

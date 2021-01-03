@@ -205,14 +205,15 @@ class app
   }
   public function getU_ID($id)
   {
-    $result = $this->dbConnection->query("SELECT FROM   U_ID applications WHERE App_ID='$id'");
+    $result = $this->dbConnection->query("SELECT U_ID FROM  applications WHERE App_ID='$id'");
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {
-        echo $row["U_ID"];
+        return $row["U_ID"];
       }
     }
   }
+
   public function getReview_Count($id)
   { ///may be different
     $result  = $this->dbConnection->query("SELECT COUNT(ReviewID) FROM  reviewed WHERE ApplicationID='$id'");

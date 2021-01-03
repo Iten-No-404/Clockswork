@@ -1,6 +1,7 @@
 <?php
 
-require '../PHP/app.php'
+require '../PHP/app.php';
+require_once '../PHP/user.php';
 
 ?>
 
@@ -87,8 +88,11 @@ require '../PHP/app.php'
                             </a>
                             <div>
                                 <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
-                                <a href="../HTML/user.html">
-                                    <h6 style="font-weight: bold;">Facebook</h6>
+                                <a href="../HTML/user.php?id=<?php echo $obj-> getU_ID($var) ?>">
+                                    <h6 style="font-weight: bold;"><?php $x=$obj-> getU_ID($var);
+                                    $userobj=new user($x);
+                                    $userobj->getUserName($x);
+                                           ?></h6>
                                 </a>
                             </div>
                         </div>
