@@ -75,19 +75,15 @@ session_start();
 
                         $obj->getPrice($id);
                         echo "<br>";
-                        $obj-> getAgeRating($id);
+                        $obj->getRating($id);
                      
                         ?>
 
-                        <br>
+                        
                     </p>
 
-                    <?php
-                    $obj = new App();
-                    $id = $_GET['id'];
-                    $obj->getRating($id);
-                    ?>
-                    <br><br>
+                 
+                  
                     <a href="../PHP/installapp.php?id=<?php   $obj = new App();
                         $id = $_GET['id']; echo$id; ?>">   <button class="btn btn-primary" type="button" name="install">Install
                     </button></a>
