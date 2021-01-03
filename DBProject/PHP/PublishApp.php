@@ -71,12 +71,12 @@ if (isset($_POST['publish'])) {
     if ($errors == 0) {
         $obj = new APP();
         $UserID=(int)$_SESSION['U_ID'];
-      echo $UserID;
+       $random=rand(1,5);
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, 0, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
        $appid= $obj->getids();
-       $obj->purchased_by($UserID,$appid,$appdate);
+  
        $ApplicationID= $obj->getids();
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");

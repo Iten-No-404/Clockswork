@@ -2,6 +2,7 @@
 require_once 'app.php';
 require_once 'review.php';
 require_once 'functions.php';
+
  $obj=new App();
  $review=new Review();
  $ApplicationID=(int)$_GET['id'];
