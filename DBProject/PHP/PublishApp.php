@@ -2,6 +2,8 @@
 // TODO: Check that the user is logged in before loading the page
 require_once 'connection.php';
 require_once 'app.php';
+session_start();
+
 // if (session_status() == PHP_SESSION_NONE) {
 //     AlertJS("You must be logged in first");
 //     RedirectJS("../HTML/login.html");
@@ -68,9 +70,13 @@ if (isset($_POST['publish'])) {
     // If there are no errors, can register
     if ($errors == 0) {
         $obj = new APP();
+        $UserID=(int)$_SESSION['U_ID'];
+      echo $UserID;
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, 0, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, 1);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, 0, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
+       $appid= $obj->getids();
+       $obj->purchased_by($UserID,$appid,$appdate);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)

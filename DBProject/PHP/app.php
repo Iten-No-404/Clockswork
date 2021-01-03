@@ -240,5 +240,26 @@ class app
   {
     $result  = $this->dbConnection->query("UPDATE applications SET Application_Name= '$Application_Name',Price='$Price',AgeRating='$AgeRating',System_Requirements='$System_Requirements',Application_Picture='$Application_Picture',Application_Link='$Application_Link',AppDescription='$AppDescription',AppTrailer='$AppTrailer',Region='$Region',Sale='$Sale',Hide='$Hide' WHERE App_ID='$App_ID' ");
   }
+  public function purchased_by($UserID,$ApplicationID,$Purchase_Date)
+  {
+    $result  = $this->dbConnection->query("INSERT INTO purchased_by (UserID,ApplicationID,Purchase_Date	)VALUES ($UserID,$ApplicationID,$Purchase_Date)");
+  }
+  public function getids()
+     {
+        $result= $this->dbConnection->query("SELECT App_ID FROM  applications");
+       $x=-1;
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                if($row["App_ID"]>$x)
+                { $x=$row["App_ID"];
+
+                }
+
+            }
+        }
+      return $x;
+      
+     }
 }
 ?>
