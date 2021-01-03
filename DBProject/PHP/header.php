@@ -11,6 +11,14 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
     RedirectJS("../HTML/login.php");
 }?>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/nav.css">
+ 
+
+</head>
 <header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
