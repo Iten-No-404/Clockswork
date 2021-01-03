@@ -191,8 +191,18 @@ session_start();
                                 <?php
                                       $review-> getStars($row["ReviewID"]);
                                     ?>
-                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?></p>
+                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?>
+                          
+                            </p>
                             <?php    $review->getReviewDate($row["ReviewID"]);   ?>
+                            <br>
+                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><button class="btn btn-dark" type="button"> <i class="fas fa-plus"></i></button></a>
+                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"> <button class="btn btn-dark" type="button"> <i class="fas fa-minus"></i></button></a>
+                           <br>
+                          <?php $review-> selectup($row["ReviewID"]);
+                                 
+                                    $review->selectdown($row["ReviewID"]);
+                              ?>
 
                         </div>
                         <div class="line"></div>

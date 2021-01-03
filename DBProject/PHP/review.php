@@ -33,6 +33,55 @@ class review{
       return $x;
       
      }
+      public  function insertup_down_voted_review($U_ID,$Review_id,$Up_Down)
+     {
+        $this->dbConnection->query("INSERT INTO up_down_voted_review (U_ID,Review_id,Up_Down) VALUES ($U_ID,$Review_id,'$Up_Down')");
+     }
+     public function selectup($Review_id)
+     {
+        $result=$this->dbConnection->query("SELECT  count(Review_id) FROM  up_down_voted_review WHERE Up_Down='1' AND Review_id=$Review_id");
+        if ($result->num_rows >0) {
+            // output data of each row
+         
+            while($row = $result->fetch_assoc()) {
+               
+                   echo $row["count(Review_id)"];
+                   echo " Up Voted";
+             
+
+            }
+        }
+       
+       
+     }
+     public function selectdown($Review_id)
+     {
+        echo"  ";
+        $result=$this->dbConnection->query("SELECT  count(Review_id) FROM  up_down_voted_review WHERE Up_Down='0' AND Review_id=$Review_id");
+        if ($result->num_rows >0) {
+            // output data of each row
+      
+            while($row = $result->fetch_assoc()) {
+           
+                   echo $row["count(Review_id)"];
+                   echo" Down Voted";
+               
+
+            }
+        }
+     
+
+     }
+     public function  selectup_down_voted_review($U_ID,$Review_id,$Up_Down)
+     {
+        $result=$this->dbConnection->query("SELECT  * FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id");
+        if ($result->num_rows > 0) {
+            $this->dbConnection->query("UPDATE up_down_voted_review SET Up_Down='$Up_Down' WHERE U_ID=$U_ID AND Review_id=$Review_id ");
+        }
+        else {
+            $this-> insertup_down_voted_review($U_ID,$Review_id,$Up_Down);
+        }
+     }
      public function insertreview($Review_Description,$ReviewDate,$Stars)
      {
         
@@ -107,6 +156,16 @@ class review{
      {
         $result= $this->dbConnection->query("SELECT UserID,ReviewID	FROM reviewed WHERE ApplicationID='$ApplicationID'");
         return $result;
+     }
+     public function getappidfromreviewed($ReviewID)
+     {
+        $result= $this->dbConnection->query("SELECT  ApplicationID	FROM reviewed WHERE ReviewID='$ReviewID'");
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                return $row["ApplicationID"];
+            }
+        }
      }
 }
 ?>

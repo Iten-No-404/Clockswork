@@ -59,7 +59,7 @@ require_once '../PHP/user.php';
     </div>
 
     <div class="appslist">
-        <div class="subtitle">
+        <div class="subtitle mt-3">
             <h1>Applications Available</h1>
         </div>
         <div class="container blockapp my-3">
