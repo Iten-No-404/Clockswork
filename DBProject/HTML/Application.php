@@ -88,12 +88,10 @@ session_start();
                     $obj->getRating($id);
                     ?>
                     <br><br>
-                    <button class="btn btn-primary" type="button"><?php
-                                                                    $obj = new App();
-                                                                    $id = $_GET['id'];
-                                                                    $obj->getApplication_Link($id);
-                                                                    ?>
-                    </button>
+                    <a href="../PHP/installapp.php?id=<?php   $obj = new App();
+                        $id = $_GET['id']; echo$id; ?>">   <button class="btn btn-primary" type="button" name="install">Install
+                    </button></a>
+                 
 
                 </div>
             </div>

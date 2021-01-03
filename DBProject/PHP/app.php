@@ -266,6 +266,20 @@ class app
       return $x;
       
   }
+  public function selectpurchased_by($UserID,$ApplicationID)
+  {
+    $result  = $this->dbConnection->query("SELECT * FROM purchased_by WHERE UserID=$UserID AND ApplicationID=$ApplicationID ");
+    
+    if ($result->num_rows > 0) {
+       return false;
+    }
+    return true;
+  }
+  public function updatenumofuser($ApplicationID)
+  {
+    $this->dbConnection->query("UPDATE applications SET NumOfUsers=NumOfUsers+1 WHERE  ApplicationID=$ApplicationID  ");
+
+  }
  
   public function deleteapp($id)
   {

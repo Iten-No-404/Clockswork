@@ -89,8 +89,8 @@ require '../PHP/app.php'
                             </a>
                             <div>
                                 <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
-                                <a href="Developerapps.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button">Edit</button></a>
-                                <a href="../PHP/deleteapp.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button">Delete</button></a>
+                                <a href="Developerapps.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button" name="Edit">Edit</button></a>
+                                <a href="../PHP/deleteapp.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button" name="Delete">Delete</button></a>
                             </div>
                         </div>
                         <div class="line my-2">

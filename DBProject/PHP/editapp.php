@@ -3,8 +3,7 @@ require 'app.php';
 require_once 'connection.php';
 require_once 'functions.php';
 session_start();
-if(isset($_POST['edit']))
-{
+
      
     $dbConnection = DBConnection::getInst()->getConnection();
     $appname = mysqli_real_escape_string($dbConnection, $_POST['application_name']);
@@ -99,5 +98,5 @@ else
         RedirectJS("../HTML/application.php?id=$ApplicationID");
     }
 
-}
+
 ?>
