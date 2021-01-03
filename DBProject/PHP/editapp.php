@@ -40,16 +40,12 @@ session_start();
     //$devID = $_SESSION['userid'];
     // Validation
     $errors = 0;
-    $nchars= strlen($Hide);
+
     if (empty($appname) || empty($applink) ) {
         AlertJS("A required field is empty");
         $errors++;
     }
-    if($nchars>1)
-    {
-        AlertJS("A hide is only one char");
-        $errors++;
-    }
+  
 
    
      
@@ -79,7 +75,7 @@ else
         $obj = new APP();
     
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->editapp($appname, $appprice, $agerating, $appreq, $apppic, $applink, $appdescr, $apptrailer, $appregion,$Sale,$Hidse, $_SESSION['app_id']);
+        $insertq = $obj->editapp($appname, $appprice, $agerating, $appreq, $apppic, $applink, $appdescr, $apptrailer, $appregion,$Sale,$Hide, $_SESSION['app_id']);
         // mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application edited Successfully!");

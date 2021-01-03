@@ -46,7 +46,7 @@ class app
 
   public function getallids()
   {
-    $result = $this->dbConnection->query("SELECT App_ID FROM  applications");
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0'");
     return $result;
   }
   public  function getNumOfUsers($id)
