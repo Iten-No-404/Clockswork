@@ -266,6 +266,7 @@ class app
       return $x;
       
   }
+ 
   public function deleteapp($id)
   {
     echo "done";

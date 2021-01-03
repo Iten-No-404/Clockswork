@@ -77,8 +77,10 @@ if (isset($_POST['publish'])) {
         mysqli_query($dbConnection, $insertq);
        $appid= $obj->getids();
        $obj->purchased_by($UserID,$appid,$appdate);
+       $ApplicationID= $obj->getids();
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
+        RedirectJS("../HTML/application.php?id=$ApplicationID");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)
         //RedirectJS("../HTML/app.html");
     }

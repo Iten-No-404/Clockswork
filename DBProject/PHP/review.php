@@ -101,7 +101,7 @@ class review{
      }
      public function deletefromreviw($ReviewID)
      {
-        $this->dbConnection->query("DELETE   FROM review WHERE ReviewID=$ReviewID");
+        $this->dbConnection->query("DELETE FROM review WHERE ReviewID=$ReviewID");
      }
      public function getuseridsandreviewids($ApplicationID)
      {
