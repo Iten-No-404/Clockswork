@@ -209,20 +209,34 @@ session_start();
         </div>
         <div>
           <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
-                <textarea name="Review_Description" id="" cols="40" rows="5">
+               <div class="row">
+                 <div class="col-lg-1">
+                   <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                        <?php   $user=new User($_SESSION['U_ID']);
+                            $user->getProfilePicture($_SESSION['U_ID']);
+                        ?>
+                    </a>
+                 </div>
+                 <div class="col-lg-11">
+                   <textarea name="Review_Description" id="" cols="40" rows="5">
+                      
                     
-                </textarea>
-                <br>
-                <label for="">Stars</label>
-                <select id="" name="Stars">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                    </select> 
-                <br>
-                <button class="btn btn-primary" type="submit" name="submit">Review</button>
+                    </textarea>
+                    <br>
+                    <label for="">Stars</label>
+                    <select id="" name="Stars">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                     </select> 
+                     <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                    
+                  </div>
+               </div>
+                
+               
           </form>
         </div>
        <br>

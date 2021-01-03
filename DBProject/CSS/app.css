@@ -13,9 +13,11 @@
 .line
 {
   width:95%;
-  height: 2px;
+  height: 1px;
   margin: 2.5% 2.5%;
-  background-color:rgb(113, 115, 116);;
+  background-color: #d8d8d8;
+ 
+
 }
 a:link
 {
@@ -86,6 +88,17 @@ background-color: #007bff;
   background-color: #1766f7;
   
   box-shadow: 5px 5px 5px 5px #888888;
+}
+textarea
+{
+  border: solid ;
+
+  border-radius: 5px ;
+  outline: none;
+}
+#review
+{
+  margin-left: 2%;
 }
 ul
 {
