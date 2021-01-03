@@ -68,14 +68,14 @@ require '../PHP/app.php'
                 <?php
                 $obj = new App();
                 $UserID=(int)$_SESSION['U_ID'];
- 
+        
                 $result = $obj->getmyapps($UserID);
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
-                        $var = $row["ApplicationID"]; ?>
+                        $var = $row["App_ID"]; ?>
                         <div class="col-lg-1">
-                            <a href="../HTML/Application.php ?id=<?php echo $row['ApplicationID']; ?>">
+                            <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
                                 <?php $obj->getApplication_Picturecircle($var) ?>
                             </a>
                         </div>
@@ -84,13 +84,13 @@ require '../PHP/app.php'
                                 <?php $obj->getRating($var);
                                 ?>
                             </div>
-                            <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['ApplicationID']; ?>">
+                            <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
                                 <h5><?php $obj->getname($var) ?></h5>
                             </a>
                             <div>
                                 <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
-                                <a href="Developerapps.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button" name="Edit">Edit</button></a>
-                                <a href="../PHP/deleteapp.php?id=<?php echo  $row['ApplicationID'];?>"><button class="btn btn-primary" type="button" name="Delete">Delete</button></a>
+                                <a href="Developerapps.php?id=<?php echo  $row['App_ID'];?>"><button class="btn btn-primary" type="button" name="Edit">Edit</button></a>
+                                <a href="../PHP/deleteapp.php?id=<?php echo  $row['App_ID'];?>"><button class="btn btn-primary" type="button" name="Delete">Delete</button></a>
                             </div>
                         </div>
                         <div class="line my-2">

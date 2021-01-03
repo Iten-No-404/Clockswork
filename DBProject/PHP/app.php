@@ -246,7 +246,7 @@ class app
   }
   public function getmyapps($UserID)
   {
-    $result = $this->dbConnection->query("SELECT ApplicationID FROM  purchased_by WHERE UserID=$UserID");
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE U_ID=$UserID");
      return $result;
   }
   public function getids()
@@ -254,7 +254,7 @@ class app
     $result= $this->dbConnection->query("SELECT App_ID FROM  applications");
    $x=-1;
      if ($result->num_rows > 0) {
-      // output data of each row
+      // output data of each rowget
       while($row = $result->fetch_assoc()) {
               if($row["App_ID"]>$x)
                 { $x=$row["App_ID"];
@@ -277,7 +277,7 @@ class app
   }
   public function updatenumofuser($ApplicationID)
   {
-    $this->dbConnection->query("UPDATE applications SET NumOfUsers=NumOfUsers+1 WHERE  ApplicationID=$ApplicationID  ");
+    $this->dbConnection->query("UPDATE applications SET NumOfUsers=NumOfUsers+1 WHERE  App_ID=$ApplicationID  ");
 
   }
  
