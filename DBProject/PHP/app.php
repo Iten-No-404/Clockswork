@@ -72,6 +72,19 @@ class app
       }
     }
   }
+  public function getPrice2($id)
+  {
+    $result = $this->dbConnection->query("SELECT Price FROM  applications WHERE App_ID='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+       
+         return  $row["Price"];
+    
+      }
+    }
+  }
+  
   public function getSale($id)
   {
     $result = $this->dbConnection->query("SELECT Sale FROM   applications WHERE App_ID='$id'");
@@ -89,6 +102,16 @@ class app
       // output data of each row
       while ($row = $result->fetch_assoc()) {
         echo $row["AgeRating"];
+      }
+    }
+  }
+  public function getAgeRating2($id)
+  {
+    $result = $this->dbConnection->query("SELECT AgeRating FROM applications WHERE App_ID='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+       return  $row["AgeRating"];
       }
     }
   }

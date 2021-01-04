@@ -115,6 +115,17 @@ class user
             }
         }
     }
+    public function getBDate2($id)
+    {
+        $result = $this->dbConnection->query("SELECT Bdate FROM  users WHERE U_ID='$id'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                 return $row["Bdate"];
+            }
+        }
+    }
     public function getGender($id)
     {
         $result = $this->dbConnection->query("SELECT Gender FROM  users WHERE U_ID='$id'");
@@ -169,6 +180,22 @@ class user
                 echo $row["Billing_Info"];
             }
         }
+    }
+    public function  getBalance2($id)
+    {
+        $result = $this->dbConnection->query("SELECT Balance FROM  users WHERE U_ID='$id'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Balance"];
+            }
+        }
+    }
+    public function  updateBalance($id ,$wallet)
+    {
+        $result = $this->dbConnection->query("UPDATE users  SET Balance=Balance-$wallet  WHERE U_ID='$id'");
+      
     }
     public function getBanEnd($id)
     {
