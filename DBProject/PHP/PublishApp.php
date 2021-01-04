@@ -73,7 +73,7 @@ if (isset($_POST['publish'])) {
         $UserID=(int)$_SESSION['U_ID'];
        $random=rand(1,5);
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '0', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
        $appid= $obj->getids();
   
