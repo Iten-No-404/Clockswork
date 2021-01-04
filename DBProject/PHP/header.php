@@ -33,7 +33,7 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
                     <a class="nav-link" href="../HTML/supportticket.php">Support</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../HTML/user.php">Profile</a>
+                    <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID'] ?>">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.php">About</a>

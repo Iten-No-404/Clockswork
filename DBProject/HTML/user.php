@@ -28,14 +28,35 @@
 <?php include_once '../PHP/header.php' ?>
 
 <body>
+    <?php
+        $shownUser = new user($_GET['id']);
+    ?>
+    <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
     <h1>Personal info</h1>
     <div class="container mt-3 cont1">
         <div class="row">
             <div class="col-lg-9">
-                <button class="btn btn-success" id="move"> <a href="../HTML/EditUserInfo.php">Edit Info</a></button>
+                <button class="btn btn-success" id="move"> <a href="../HTML/EditUserInfo.php? id= <?php echo $_SESSION['U_ID'] ?>">Edit Info</a></button>
             </div>
         </div>
-
+    <?php else : ?>
+    <?php 
+        $shownUser = new user($_GET['id']);
+        if ($shownUser->Username[strlen($shownUser->Username) - 1] != 's')
+        {
+            echo '<h1>' . $shownUser->Username . "'s info" . '</h1>';
+        }
+        else
+        {
+            echo '<h1>' . $shownUser->Username . "' info" . '</h1>';
+        }
+    ?>
+    <div class="container mt-3 cont1">
+        <div class="row">
+            <div class="col-lg-9">
+            </div>
+        </div>
+    <?php endif; ?>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -49,13 +70,15 @@
                 }
                 $currUser = new user($_SESSION['U_ID']);
                 ?>
-                <img class="img-fluid rounded-circle" sty src="<?php echo $currUser->Profile_Picture ?>" alt="">
+                <img class="img-fluid rounded-circle" sty src="<?php echo $shownUser->Profile_Picture ?>" alt="">
             </div>
         </div>
 
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[0] == 0 && $shownUser->Hide[1] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>
+
         <div class="line">
         </div>
-
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -64,20 +87,30 @@
             </div>
             <div class="col-lg-9">
                 <?php
-                //TODO: Check if another person is viewing someone else's profile
-                if (isset($currUser->FName)) {
-                    echo $currUser->FName;
+                if (isset($shownUser->FName))
+                {
+                    if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id'])
+                    {
+                    echo $shownUser->FName;
+                    }
                 }
-                if (isset($currUser->LName)) {
-                    echo " " . $currUser->LName;
+                if (isset($shownUser->LName))
+                {
+                    if ($shownUser->Hide[1] == 1 || $_SESSION['U_ID'] == $_GET['id'])
+                    {
+                    echo " " . $shownUser->LName;
+                    }
                 }
                 ?>
             </div>
         </div>
+        <?php endif; ?>
+
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[4] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>       
 
         <div class="line">
         </div>
-
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -86,16 +119,18 @@
             </div>
             <div class="col-lg-9">
 
-                <?php if (isset($currUser->Bdate)) {
-                    echo $currUser->Bdate;
+                <?php if (isset($shownUser->Bdate)) {
+                    echo $shownUser->Bdate;
                 } ?>
 
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[5] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>      
         <div class="line">
         </div>
-
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -104,20 +139,21 @@
             </div>
             <div class="col-lg-9">
                 <?php
-                if (isset($currUser->Gender)) {
-                    if ($currUser->Gender == "M") {
+                if (isset($shownUser->Gender)) {
+                    if ($shownUser->Gender == 'M') {
                         echo "Male";
-                    } else {
+                    }
+                    else
+                    {
                         echo "Female";
                     }
                 }
                 ?>
             </div>
         </div>
-
-        <div class="line">
-
-        </div>
+        <?php endif; ?>
+        <!--<div class="line"> 
+        </div> -->
         <!-- Disabled for now as it serves no purpose -->
         <!-- <div class="row">
             <div class="col-lg-3">
@@ -133,8 +169,11 @@
             </div>
 
         </div> -->
-        <div class="line">
 
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>      
+
+        <div class="line">
         </div>
         <div class="row">
             <div class="col-lg-3">
@@ -144,29 +183,30 @@
             </div>
             <div class="col-lg-9">
                 <?php
-                echo $currUser->Email;
+                echo $shownUser->Email;
                 ?>
             </div>
-
+        <?php endif; ?>
         </div>
-        <div class="line">
 
+        <div class="line">
         </div>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
-                    <h6> UserName</h6>
+                    <h6> Username</h6>
                 </label>
             </div>
             <div class="col-lg-9">
                 <?php
-                echo $currUser->Username;
+                echo $shownUser->Username;
                 ?>
             </div>
 
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>      
         </div>
         <div class="line">
-
         </div>
         <div class="row">
             <div class="col-lg-3">
@@ -176,15 +216,38 @@
             </div>
             <div class="col-lg-9">
                 <?php
-                if (isset($currUser->Address)) {
-                    echo $currUser->Address;
+                if (isset($shownUser->Address)) {
+                    echo $shownUser->Address;
                 }
                 ?>
             </div>
-
         </div>
-        <div class="line">
+        <?php endif; ?>
 
+        <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field ?>
+        <?php else : ?>      
+
+        <div class="line">
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="">
+                    <h6>Phone Number</h6> 
+                </label>
+            </div>
+            <div class="col-lg-9">
+                <?php
+                echo $shownUser->Phone_Number;
+                ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        
+
+        <?php if ($_SESSION['U_ID'] != $_GET['id']) : //Don't draw this entire field ?>
+        <?php else : ?>  
+        <div class="line">
         </div>
         <div class="row">
             <div class="col-lg-3">
@@ -199,29 +262,31 @@
                 }
                 ?>
             </div>
-
         </div>
-        <div class="line">
+        <?php endif; ?>
 
+        <div class="line">
         </div>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
-                    <h6>Type of User</h6>
+                    <h6>Type of User</h6> 
                 </label>
             </div>
             <div class="col-lg-9">
                 <?php
                 if (isset($currUser->Developer)) {
-                    if ($currUser->Developer == '0') {
+                    if ($currUser->Developer == '0')
+                    {
                         echo "User";
-                    } else {
+                    } 
+                    else
+                    {
                         echo "Developer";
                     }
                 }
                 ?>
             </div>
-
         </div>
 
 

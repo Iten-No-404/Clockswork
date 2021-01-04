@@ -19,6 +19,7 @@ class user
     public $Billing_Info;
     public $Ban_End;
     public $Profile_Picture;
+    public $Hide;
 
     // Creates a new object and initializes its data
     public function __construct($U_ID)
@@ -44,6 +45,7 @@ class user
             $this->Profile_Picture = $row['Profile_Picture'];
         else
             $this->Profile_Picture = "../IMAGES/DEFAULT_USER.jpg";
+        $this->Hide = $row['Hide'];
     }
 
     public function getFName($id)
@@ -239,9 +241,11 @@ class user
         $Address,
         $Bdate,
         $Gender,
-        $Profile_Picture
+        $Profile_Picture,
+        $Hide,
+        $Phone_Number
     ) {
-        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture' WHERE U_ID = $U_ID";
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
          $this->dbConnection->query($updateQuery);
     }
 }

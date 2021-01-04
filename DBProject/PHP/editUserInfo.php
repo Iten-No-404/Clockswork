@@ -74,6 +74,7 @@ if (isset($_POST['savechangesbtn'])) {
     $Email = $_POST['email'];
     $Username = $_POST['username'];
     $Address = mysqli_escape_string($currUserData->dbConnection, $_POST['address']);
+    $Phone_Number = $_POST['phone'];
     $errorCounter = 0;
 
     // If the date isn't in the correct format (yyyy-mm-dd), sets the value to the current (valid) date
@@ -94,7 +95,8 @@ if (isset($_POST['savechangesbtn'])) {
     if ($LName == "") {
         $LName = $currUserData->LName;
     }
-    if ($Gender == "" || $Gender != "M" || $Gender != "F") {
+    if ($Gender == "" || ($Gender != 'M' && $Gender != 'F'))
+    {
         $Gender = $currUserData->Gender;
     }
     if ($Username == "") {
@@ -103,12 +105,81 @@ if (isset($_POST['savechangesbtn'])) {
     if ($Address == "") {
         $Address = mysqli_escape_string($currUserData->dbConnection, $currUserData->Address);
     }
+    if ($Phone_Number = "")
+    {
+        $Phone_Number = $currUserData->Phone_Number;
+    }
 
     // Hashes the password for safe storage
     $HashedPass = password_hash($UnhasedPass, PASSWORD_DEFAULT);
     if ($UnhasedPass == "") {
         $HashedPass = $currUserData->Password;
     }
+
+    //Checking all the Hide CheckBoxes
+    if (isset($_POST['FNameCB']))
+    {
+        $currUserData->Hide[0] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[0] = 1;
+    }
+    
+    if (isset($_POST['LNameCB']))
+    {
+        $currUserData->Hide[1] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[1] = 1;
+    }
+
+    if (isset($_POST['BDateCB']))
+    {
+        $currUserData->Hide[4] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[4] = 1;
+    }
+
+    if (isset($_POST['GenderCB']))
+    {
+        $currUserData->Hide[5] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[5] = 1;
+    }
+
+    if (isset($_POST['EmailCB']))
+    {
+        $currUserData->Hide[2] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[2] = 1;
+    }
+
+    if (isset($_POST['AddressCB']))
+    {
+        $currUserData->Hide[3] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[3] = 1;
+    }
+
+    if (isset($_POST['PhoneCB']))
+    {
+        $currUserData->Hide[6] = 0;
+    }
+    else
+    {
+        $currUserData->Hide[6] = 1;
+    }
+
 
     // Updating the user's data in the DB
     $currUserData->UpdateUserInfo(
@@ -121,8 +192,10 @@ if (isset($_POST['savechangesbtn'])) {
         $Address,
         $BDate,
         $Gender,
-        $ImagePath
+        $ImagePath,
+        $currUserData->Hide,
+        $Phone_Number
     );
-    RedirectJS("../HTML/user.php");
+    RedirectJS("../HTML/user.php? id=" . $_SESSION['U_ID']);
 }
 ?>

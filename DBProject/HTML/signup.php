@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<?php include_once 'signup.php' ?>
-=======
 <?php include('../PHP/signup.php') ?>
->>>>>>> c6340621e82d3a0d6f1b00dc4c66e9c11bbf9589
 <!DOCTYPE html>
 <html lang="en">
 
