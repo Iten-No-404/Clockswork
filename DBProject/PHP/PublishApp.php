@@ -46,7 +46,7 @@ if (isset($_POST['publish'])) {
     $appreq = mysqli_real_escape_string($dbConnection, $_POST['system-requirements']);
     $apptrailer = mysqli_real_escape_string($dbConnection, $_POST['app-trailer']);
     if ($apptrailer == "") {
-        $apptrailer = NULL;
+        $apptrailer = "https://www.youtube.com/watch?v=fV_4o9Vl0gE";
     }
     $timezone = date_default_timezone_get();
     $appdate = date('Y-m-d', time());
@@ -73,7 +73,7 @@ if (isset($_POST['publish'])) {
         $UserID=(int)$_SESSION['U_ID'];
        $random=rand(1,5);
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '0', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
        $appid= $obj->getids();
   

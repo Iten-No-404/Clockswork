@@ -75,19 +75,15 @@ session_start();
 
                         $obj->getPrice($id);
                         echo "<br>";
-                        $obj-> getAgeRating($id);
+                        $obj->getRating($id);
                      
                         ?>
 
-                        <br>
+                        
                     </p>
 
-                    <?php
-                    $obj = new App();
-                    $id = $_GET['id'];
-                    $obj->getRating($id);
-                    ?>
-                    <br><br>
+                 
+                  
                     <a href="../PHP/installapp.php?id=<?php   $obj = new App();
                         $id = $_GET['id']; echo$id; ?>">   <button class="btn btn-primary" type="button" name="install">Install
                     </button></a>
@@ -97,7 +93,10 @@ session_start();
             </div>
         </div>
         <div class="container my-3">
-            <div id="my-carousel" class="carousel slide" data-ride="carousel">
+         <?php $obj = new App();
+               $obj->getAppTrailer($_GET['id']);
+            ?>
+            <!-- <div id="my-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li class="active" data-target="#my-carousel" data-slide-to="0" aria-current="location"></li>
                     <li data-target="#my-carousel" data-slide-to="2"></li>
@@ -125,9 +124,9 @@ session_start();
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div> -->
         </div>
-        <a href=""></a>
+        <!-- <a href=""></a> -->
         <div class="container mt-3">
             <h1>Description</h1>
             <p>
@@ -195,8 +194,18 @@ session_start();
                                 <?php
                                       $review-> getStars($row["ReviewID"]);
                                     ?>
-                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?></p>
+                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?>
+                          
+                            </p>
                             <?php    $review->getReviewDate($row["ReviewID"]);   ?>
+                            <br>
+                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><button class="btn btn-dark" type="button"> <i class="fas fa-plus"></i></button></a>
+                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"> <button class="btn btn-dark" type="button"> <i class="fas fa-minus"></i></button></a>
+                           <br>
+                          <?php $review-> selectup($row["ReviewID"]);
+                                 
+                                    $review->selectdown($row["ReviewID"]);
+                              ?>
 
                         </div>
                         <div class="line"></div>
@@ -213,20 +222,34 @@ session_start();
         </div>
         <div>
           <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
-                <textarea name="Review_Description" id="" cols="40" rows="5">
+               <div class="row">
+                 <div class="col-lg-1">
+                   <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                        <?php   $user=new User($_SESSION['U_ID']);
+                            $user->getProfilePicture($_SESSION['U_ID']);
+                        ?>
+                    </a>
+                 </div>
+                 <div class="col-lg-11">
+                   <textarea name="Review_Description" id="" cols="40" rows="5">
+                      
                     
-                </textarea>
-                <br>
-                <label for="">Stars</label>
-                <select id="" name="Stars">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                    </select> 
-                <br>
-                <button class="btn btn-primary" type="submit" name="submit">Review</button>
+                    </textarea>
+                    <br>
+                    <label for="">Stars</label>
+                    <select id="" name="Stars">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                     </select> 
+                     <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                    
+                  </div>
+               </div>
+                
+               
           </form>
         </div>
        <br>

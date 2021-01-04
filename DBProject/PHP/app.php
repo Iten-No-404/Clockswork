@@ -46,7 +46,7 @@ class app
 
   public function getallids()
   {
-    $result = $this->dbConnection->query("SELECT App_ID FROM  applications");
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0'");
     return $result;
   }
   public  function getNumOfUsers($id)
@@ -176,12 +176,19 @@ class app
   public function getAppTrailer($id)
   {
     $result = $this->dbConnection->query("SELECT AppTrailer FROM  applications WHERE App_ID='$id'");
-    if ($result->num_rows > 0) {
+    
+    if ($result->num_rows >0) {
       // output data of each row
-      while ($row = $result->fetch_assoc()) {
-        echo $row["AppTrailer"];
-      }
-    }
+      // output data of each row
+      while ($row = $result->fetch_assoc()) { ?>
+         <iframe src="<?php  echo $row['AppTrailer'];   ?>" width="100%" height="850px"></iframe>
+
+      <?php }
+         
+
+     }
+    
+  
   }
   public function getHide($id)
   {

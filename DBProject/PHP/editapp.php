@@ -40,16 +40,12 @@ session_start();
     //$devID = $_SESSION['userid'];
     // Validation
     $errors = 0;
-    $nchars= strlen($Hide);
+
     if (empty($appname) || empty($applink) ) {
         AlertJS("A required field is empty");
         $errors++;
     }
-    if($nchars>1)
-    {
-        AlertJS("A hide is only one char");
-        $errors++;
-    }
+  
 
    
      
@@ -61,6 +57,18 @@ session_start();
 
    if($result1== $appname && $result2==$applink )
    echo "done";
+else if($result1==$appname)
+{
+    $x=$obj2->getApplication_Link2($applink);
+    if($x==$applink)
+    $errors++;
+}
+else if($result2==$applink)
+{
+   $x= $obj2->getname2($appname);
+   if($x==$appname)
+   $errors++;
+}
 else
    { $checkApp = "SELECT * FROM applications WHERE Application_Name = '$appname' OR Application_Link = '$applink' LIMIT 1";
     $appCheckResult = $dbConnection->query($checkApp);
@@ -79,7 +87,7 @@ else
         $obj = new APP();
     
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->editapp($appname, $appprice, $agerating, $appreq, $apppic, $applink, $appdescr, $apptrailer, $appregion,$Sale,$Hidse, $_SESSION['app_id']);
+        $insertq = $obj->editapp($appname, $appprice, $agerating, $appreq, $apppic, $applink, $appdescr, $apptrailer, $appregion,$Sale,$Hide, $_SESSION['app_id']);
         // mysqli_query($dbConnection, $insertq);
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application edited Successfully!");

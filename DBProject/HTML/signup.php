@@ -1,4 +1,4 @@
-<?php include('../PHP/signup.php') ?>
+<?php include_once 'signup.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 

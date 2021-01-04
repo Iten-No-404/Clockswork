@@ -348,8 +348,13 @@
                 <label>Sale</label>
                 <input type="number" value="<?php
                           $obj=new App(); $x=$obj-> getSale($_SESSION['app_id']); echo$x;?>" name="Sale">
+                          <br>
                 <label>Hide</label>
-                          <input type="text" name="Hide" id="">
+                <select id="" name="Hide">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                               
+                     </select> 
                 <!-- TODO: Need to add the categories part-->
                 <!-- Can use something as in the following:-->
                 <!-- https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-rearrangeable.html -->
