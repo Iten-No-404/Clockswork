@@ -72,16 +72,24 @@ class review{
      
 
      }
+  
      public function  selectup_down_voted_review($U_ID,$Review_id,$Up_Down)
      {
-        $result=$this->dbConnection->query("SELECT  * FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id");
+        $result=$this->dbConnection->query("SELECT Up_Down FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id");
         if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+             if($row['Up_Down'] !=$Up_Down)
             $this->dbConnection->query("UPDATE up_down_voted_review SET Up_Down='$Up_Down' WHERE U_ID=$U_ID AND Review_id=$Review_id ");
+            else {
+                $this->dbConnection->query("DELETE FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id ");
+
+            }
         }
         else {
             $this-> insertup_down_voted_review($U_ID,$Review_id,$Up_Down);
         }
      }
+   
      public function insertreview($Review_Description,$ReviewDate,$Stars)
      {
         
