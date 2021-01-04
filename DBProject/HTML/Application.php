@@ -93,7 +93,10 @@ session_start();
             </div>
         </div>
         <div class="container my-3">
-            <div id="my-carousel" class="carousel slide" data-ride="carousel">
+         <?php $obj = new App();
+               $obj->getAppTrailer($_GET['id']);
+            ?>
+            <!-- <div id="my-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li class="active" data-target="#my-carousel" data-slide-to="0" aria-current="location"></li>
                     <li data-target="#my-carousel" data-slide-to="2"></li>
@@ -121,9 +124,9 @@ session_start();
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div> -->
         </div>
-        <a href=""></a>
+        <!-- <a href=""></a> -->
         <div class="container mt-3">
             <h1>Description</h1>
             <p>
