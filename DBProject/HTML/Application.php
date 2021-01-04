@@ -197,7 +197,15 @@ session_start();
                             <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?>
                           
                             </p>
-                            <?php    $review->getReviewDate($row["ReviewID"]);   ?>
+                            <?php    $review->getReviewDate($row["ReviewID"]);   
+                            
+                                   if($_SESSION['U_ID']==$row['UserID'])
+                                    {?>
+                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete Review</button></a>
+                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit Review</button></a>
+
+                                   <?php }   
+                            ?>
                             <br>
                             <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><button class="btn btn-dark" type="button"> <i class="fas fa-plus"></i></button></a>
                            <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"> <button class="btn btn-dark" type="button"> <i class="fas fa-minus"></i></button></a>
@@ -212,11 +220,11 @@ session_start();
               
 
 
-                   <?php }
+                <?php }
                   }
                          
                          
-                         ?>
+                 ?>
               
             </div>
         </div>

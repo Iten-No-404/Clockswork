@@ -87,6 +87,11 @@ class review{
         
         $this->dbConnection->query("INSERT INTO review (Review_Description,ReviewDate,Stars) VALUES ('$Review_Description','$ReviewDate','$Stars')");
      }
+     public  function updatereview($Review_Description,$Stars,$id)
+    {
+        $this->dbConnection->query("UPDATE  review  SET Review_Description='$Review_Description',Stars='$Stars' WHERE ReviewID='$id' ");
+
+    }
      public function getReviewDate($id)
      {
           $result= $this->dbConnection->query("SELECT ReviewDate FROM  review WHERE ReviewID='$id'");
@@ -142,6 +147,11 @@ class review{
      {
        
           $this->dbConnection->query("DELETE   FROM reviewed WHERE  ApplicationID=$ApplicationID");
+     }
+     public function deletefromreviwedByid($ReviewID)
+     {
+       
+          $this->dbConnection->query("DELETE   FROM reviewed WHERE  ReviewID=$ReviewID");
      }
      public function select($ApplicationID)
      {
