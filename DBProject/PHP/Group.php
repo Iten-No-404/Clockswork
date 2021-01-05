@@ -107,6 +107,11 @@ class group
             }
         }
      }
+     public function insertqroup($GroupName,$Date_Created,$Group_picture,$Group_Description,$U_ID)
+     {
+        $result = $this->dbConnection->query("INSERT INTO Groups (GroupName,Date_Created,Group_picture,Group_Description,U_ID)VALUES('$GroupName','$Date_Created','$Group_picture','$Group_Description',$U_ID)");
+
+     }
 
 }
 
