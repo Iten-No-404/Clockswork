@@ -13,12 +13,12 @@ class group
      public $U_ID;
      
      // Creates a new object and initializes its data
-     function __construct($Group_ID)
+     public function __construct($Group_ID) //why id??????????????
      {
          $this->dbConnection = DBConnection::getInst()->getConnection();
          $result = $this->dbConnection->query("SELECT * FROM Groups WHERE Group_ID = '$Group_ID'");
-         $row = $result->fetch_assoc();
-         $this->Group_ID = $row['Group_ID'];
+         $row = $result->fetch_assoc(); //why????
+         $this->Group_ID = $row['Group_ID'];//?????
          $this->GroupName = $row['GroupName'];
          $this->Date_Created = $row['Date_Created'];
          $this->Group_Description = $row['Group_Description'];
@@ -112,6 +112,11 @@ class group
         $result = $this->dbConnection->query("INSERT INTO Groups (GroupName,Date_Created,Group_picture,Group_Description,U_ID)VALUES('$GroupName','$Date_Created','$Group_picture','$Group_Description',$U_ID)");
 
      }
+     public function insertmember_in($U_ID,$Group_ID)
+     {
+        $result = $this->dbConnection->query("INSERT INTO member_in (U_ID,Group_ID)VALUES($U_ID,$Group_ID)");
+     }
+    
 
 }
 
