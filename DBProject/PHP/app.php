@@ -203,13 +203,20 @@ class app
     if ($result->num_rows >0) {
       // output data of each row
       // output data of each row
-      while ($row = $result->fetch_assoc()) { ?>
-         <iframe src="<?php  echo $row['AppTrailer'];   ?>" width="100%" height="850px"></iframe>
+      while ($row = $result->fetch_assoc()) { 
+       
+       if(! is_null($row["AppTrailer"])){?>
+        <iframe src="<?php echo $row["AppTrailer"]?>" width="100%" height="850px"></iframe>
 
-      <?php }
+        <?php }
+        
+
+
+     }
          
 
      }
+   
     
   
   }
