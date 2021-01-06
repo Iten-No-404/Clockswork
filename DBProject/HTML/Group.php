@@ -1,4 +1,5 @@
 <?php require_once '../PHP/Group.php';
+    require_once '../PHP/user.php';
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,14 +53,18 @@
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-1">
-                <img class="img-fluid rounded-circle"
-                    src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+              <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                        <?php   $user=new User($_SESSION['U_ID']);
+                            $user->getProfilePicture($_SESSION['U_ID']);
+                        ?>
+                    </a>
 
 
             </div>
             <div class="col-lg-11 posts" onclick="display()">
-
-                <h5 class="mt-2">What is on Your mind,Radwa?</h5>
+ 
+                <h5 class="mt-3">What is on Your mind,<?php $user=new User($_SESSION['U_ID']);
+                    $user->getUserName($_SESSION['U_ID']); ?> ?</h5>
 
             </div>
         </div>
@@ -68,23 +73,30 @@
 
     <div class="line"></div>
     <div class="container my-5 cla10">
-        <div class="row">
+      <form action="../PHP/insertpost.php?id=<?php echo $_GET['id'];?>" method="post">
+     
+         <div class="row">
             <div class="col-lg-1">
-                <img class="img-fluid rounded-circle"
-                    src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+              <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                        <?php   $user=new User($_SESSION['U_ID']);
+                            $user->getProfilePicture($_SESSION['U_ID']);
+                        ?>
+                    </a>
 
 
             </div>
             <div class="col-lg-11">
-                <textarea name="" id="" cols="80" rows="5"></textarea>
-                <br>
-                <div style="display: flex;">
-                    <button class="btn btn-light" type="button">Post</button>
+                    <textarea name="TEXTpost" id="" cols="80" rows="5"></textarea>
+                    <br>
+                    <div style="display: flex;">
+                       <input id="my-input" class="form-control-file" type="file" name="picture">
 
-                    <input id="my-input" class="form-control-file" type="file" name="">
-                    <span onclick="hide()">&times;</span>
+                         <button class="btn btn-light" type="submit" name="">Post</button>
 
-                </div>
+                        <span onclick="hide()">&times;</span>
+
+                    </div>
+         
             </div>
 
 
@@ -92,7 +104,8 @@
 
 
 
-        </div>
+         </div>
+      </form>
     </div>
 
     <div class="container my-3">

@@ -14,7 +14,7 @@ class post
      
      }
       public function insertpost($TEXTpost,$Date_Written,$picture,$U_ID,$group_id)
-      {
+      {  echo "done";
          $result= $this->dbConnection->query("INSERT INTO post (TEXTpost,Date_Written,picture,U_ID,group_id)VALUES ('$TEXTpost','$Date_Written','$picture',$U_ID,$group_id) ");
 
       }
