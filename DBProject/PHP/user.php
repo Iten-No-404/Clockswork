@@ -269,9 +269,11 @@ class user
         $Hide,
         $Phone_Number
     ) {
-        if ($Bdate != NULL)
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+        if ($Bdate != NULL) {
             $Bdate = "'" . $Bdate . "'";
-        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = $Bdate, Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+            $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = $Bdate, Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+        }
         $this->dbConnection->query($updateQuery);
     }
 }

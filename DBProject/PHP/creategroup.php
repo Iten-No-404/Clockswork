@@ -37,6 +37,7 @@ if (isset($_POST['create'])) {
         $GroupIDQuery = "SELECT GROUP_ID FROM groups WHERE U_ID=$groupOwner AND GroupName='$groupName'";
         $GIDQueryResult = $dbConnection->query($GroupIDQuery);
         $groupID = mysqli_fetch_assoc($GIDQueryResult);
+        var_dump($groupID);
         $groupID = $groupID['GROUP_ID'];
 
         group::InsertMember_in($groupOwner, $groupID);
@@ -49,8 +50,7 @@ if (isset($_POST['create'])) {
         group::UpdateGroupPic($ImagePath, $groupID);
 
         AlertJS('Group created successfully!\npress OK to go to the home page.');
-        // TODO: Redirect the user to their own group 
-        RedirectJS('../HTML/Home.php');
+        RedirectJS("../HTML/Group.php?id=$groupID");
     }
     // Otherwise, alert the user and redoirect the user to the home page
     else {

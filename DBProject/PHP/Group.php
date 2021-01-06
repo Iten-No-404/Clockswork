@@ -110,7 +110,7 @@ class group
     public static function InsertGroup($GroupName, $Date_Created, $Group_picture, $Group_Description, $U_ID)
     {
         $dbConnection = DBConnection::getInst()->getConnection();
-        $result = $dbConnection->query("INSERT INTO Groups (GroupName,Date_Created,Group_picture,Group_Description,U_ID)VALUES('$GroupName','$Date_Created','$Group_picture','$Group_Description',$U_ID)");
+        $result = $dbConnection->query("INSERT INTO groups (GroupName,Date_Created,Group_picture,Group_Description,U_ID)VALUES('$GroupName','$Date_Created','$Group_picture','$Group_Description',$U_ID)");
     }
 
     public static function InsertMember_in($U_ID, $Group_ID)
