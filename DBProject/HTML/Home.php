@@ -2,6 +2,10 @@
     Run "Home.php" on page load so it check for session.
     Load Apps from the database and display them instead of the current static layout.
  -->
+ <?php
+require '../PHP/app.php';
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,324 +34,48 @@
 
 <body>
 
+<?php
+    $textcounter = 0;
+    $textarray = array(' Best Entertainment apps ',' Popular Apps & Games', 'Recommended For You', 'Take a look At These');
+    $count = 0; 
+    $obj = new App();
+    $result = $obj->getallids();
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc() and $textcounter<4) {
+            $var = $row["App_ID"]; 
+            if($count%6==0)  {?>
     <div class="container-fluid mt-3" style="height: 10%; width: 100%;">
-
         <div class="head">
-
-            <h4> Best Entertainment apps </h4>
-            <button class="btn btn-primary btn1" type="button">See More</button>
+            <h4> <?php echo $textarray[$textcounter]; ?> </h4>
+            <a href="../HTML/Browse.php">
+            <button class="btn btn-primary btn1" style="width: 100px;" type="button">See More</button>
+            </a>
         </div>
-
         <div class="row mt-3">
+        <?php } ?>
             <div class="col-lg-2 mb-3">
                 <div class="card">
-                    <img class="card-img-top" src="../IMAGES/download (2).png" alt="">
+                <a href="../HTML/Application.php ?id=<?php echo $var; ?>">
+                    <?php echo $obj->getApplication_Pictureformain($var); ?>
+                </a>
                     <div class="card-body">
                         <div class="appname">
-                            <h5 class="card-title">Pinterset</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/download.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Twitter</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/download (1).jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Instagram</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/facebook-messenger-2-569346.webp" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Messenger</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/linke3(1).png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Linkedin</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-2 mb-3">
-
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/pap(3).jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Pubg</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-    <br>
-
-    <!-- breaksection -->
-    <div class="container-fluid mt-3">
-        <div class="head">
-            <h4> Recommended For You</h4>
-            <button class="btn btn-primary btn1" type="button">See More</button>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/faecc.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Facebook</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/clash(3).jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Clashofclans</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/snap(3).png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Snapchat </h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/sub.jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Subway</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/call.jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Callofduty</h6>
-                            <a href="../HTML/App.html">
-                                <button class="btn btn-primary" type="button">download</button>
+                        <a href="../HTML/Application.php ?id=<?php echo $var; ?>">
+                            <h5 class="card-title"><?php $obj->getname($var) ?></h5>
                             </a>
+                            <a href="../PHP/installapp.php?id=<?php echo $var; ?>">   
+                            <button class="btn btn-primary" type="button" name="install">Install</button></a>
                         </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <?php $obj->getRating($var); ?>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/mail.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Gmail</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
+            <?php if($count%6==5) { ?>
         </div>
-
-
-
-    </div>
-    <!-- break -->
-    <div class="container-fluid mt-3">
-        <div class="head">
-            <h4> Popluar Apps & Games</h4>
-            <button class="btn btn-primary btn1" type="button">See More</button>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/tik.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">TikTok</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/sound.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">SoundCloud</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/share.jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Share it</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/class(3).jpg" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h6 class="card-title">Class Room</h6>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/word2.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Word</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="../IMAGES/drive.png" alt="">
-                    <div class="card-body">
-                        <div class="appname">
-                            <h5 class="card-title">Drive</h5>
-                            <button class="btn btn-primary" type="button">download</button>
-                        </div>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div> 
+    <br> <?php $textcounter++; } ?>
+    <?php $count++; } } ?>
 
         <?php include_once "../PHP/footer.php" ?>
 </body>

@@ -341,5 +341,23 @@ class app
       }
     }
   }
+
+  public function getallidsbyusers()
+  {
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0' ORDER BY NumOfUsers DESC");
+    return $result;
+  }
+
+  public function getApplication_Pictureformain($id)
+  {
+    $result = $this->dbConnection->query("SELECT Application_Picture FROM   applications WHERE App_ID='$id'");
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) { ?>
+        <img class="card-img-top" src="<?php echo $row["Application_Picture"]; ?>" alt="">
+      <?php }
+    }
+  }
 }
 ?>
