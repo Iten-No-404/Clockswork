@@ -13,9 +13,9 @@ class post
         
      
      }
-      public function insertpost($TEXTpost,$Date_Written,$picture,$U_ID,$group_id)
-      {  echo "done";
-         $result= $this->dbConnection->query("INSERT INTO post (TEXTpost,Date_Written,picture,U_ID,group_id)VALUES ('$TEXTpost','$Date_Written','$picture',$U_ID,$group_id) ");
+      public function insertpost($TEXTpost,$Date_Written,$post_id,$picture,$U_ID,$group_id)
+      {  //echo "done";
+         $result= $this->dbConnection->query("INSERT INTO post (TEXTpost,Date_Written,Post_id,picture,U_ID,group_id) VALUES ('$TEXTpost','$Date_Written',$post_id,'$picture',$U_ID,$group_id) ");
 
       }
      public function getTEXTpost($id)
@@ -95,8 +95,17 @@ class post
         $result= $this->dbConnection->query("INSERT INTO up_down_voted_post (U_ID,Post_id,Up_Down)VALUES ($U_ID,$Post_id,$Up_Down) ");
 
     }
-    
-
+    public function postgetmaxidp1()
+    {
+       $query = $this->dbConnection->query("SELECT DISTINCT Post_id FROM post Order By Post_id DESC LIMIT 1");
+       if ($query->num_rows > 0) 
+       {
+         while ($row = $query->fetch_assoc()) 
+         {
+          return ((int)($row["Post_id"]) + 1);
+         }
+       }
+       else
+        return 1;
+   }
 }
-
-?>

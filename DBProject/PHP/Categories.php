@@ -91,6 +91,8 @@ class categories{
           echo ((int)($row["Category_ID"]) +1);
         }
       }
+      else
+        echo 1;
   }
 
   public  function insertappcategory($appid, $categoryid)

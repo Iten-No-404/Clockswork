@@ -74,7 +74,7 @@
 
     <div class="line"></div>
     <div class="container my-5 cla10">
-      <form action="../PHP/insertpost.php?id=<?php echo $_GET['id'];?>" method="post">
+      <form action="../PHP/insertpost.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
      
          <div class="row">
             <div class="col-lg-1">
@@ -90,9 +90,9 @@
                     <textarea name="TEXTpost" id="" cols="80" rows="5"></textarea>
                     <br>
                     <div style="display: flex;">
-                       <input id="my-input" class="form-control-file" type="file" name="picture">
+                       <input id="picture" class="form-control-file" type="file" name="picture">
 
-                         <button class="btn btn-light" type="submit" name="">Post</button>
+                         <button class="btn btn-light" type="submit" name="writeapost">Post</button>
 
                         <span onclick="hide()">&times;</span>
 
