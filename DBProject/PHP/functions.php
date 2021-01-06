@@ -19,7 +19,7 @@ function RedirectJS(string $location)
 // ImagesDirectory: A path to the folder where you store your images
 // uploadFieldName: The name of the upload HTML element
 // errorRedirectPage: The page where you redirect the user if an upload error occurs
-function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage)
+function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $required=false)
 {
     $target_dir = $ImagesDirectory;
     $target_file = $target_dir . $_FILES[$uploadFieldName]['name'];
@@ -35,7 +35,7 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage)
             $uploadOk = 0;
         }
     }
-    else
+    else if ($required)
     {
         AlertJS('Please upload a picture!');
         RedirectJS($errorRedirectPage);
@@ -51,12 +51,12 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage)
     } else {
 
         // Check if file already exists
-        if (file_exists($target_file)) {
+        if (file_exists($target_file && $target_file != $target_dir)) {
             $ImagePath = $target_file;
         } else if (move_uploaded_file($_FILES[$uploadFieldName]["tmp_name"], $target_file)) {
             $ImagePath = $target_file;
             // echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-        } else {
+        } else if ($required) {
             AlertJS("Sorry, there was an error uploading your file.");
         }
     }
