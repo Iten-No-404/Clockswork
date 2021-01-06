@@ -1,3 +1,5 @@
+<?php require_once '../PHP/Group.php';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,20 +30,21 @@
 <?php include_once '../PHP/header.php' ?>
 
 <body>
-    <div class="group-title">
-        <div class="grouppic">
-            <!-- <img  src="../IMAGES/pexels-jeshootscom-442576.jpg" alt=""> -->
 
-        </div>
-        <!--<div class="line"> </div>-->
-    </div>
-    </div>
     <div class="container mb-2 ">
-        <img class="img-fluid" src="../IMAGES/pexels-jeshootscom-442576.jpg" alt="">
+       <?php $id=$_GET['id'];
+          $obj=new GRoup($id);?>
+          <img class="img-fluid"  width="100%"src="<?php $obj->getGroupPicture2($id);?>" alt="">
+          <?php
+       ?>
+       
         <div class="grouptitleborder mt-3">
-            <H1>PUPG Campers</H1>
-            <H6>1 member</H6>
-            <h6>All PUBG Campers unite in a heated discussion for the best map to camp in.</h6>
+          <?php $id=$_GET['id'];
+                $obj=new GRoup($id);
+                  ?>  <H1><?php $obj->getGroupName($id);?></H1>
+                    <H6><?php $obj->GetNumMembers($id);?></H6>
+                    <h6><?php $obj->getGroupDescription($id);?></h6>
+           
         </div>
     </div>
 
@@ -154,6 +157,7 @@
 
 
     <div class="line"></div>
+    
     <?php include_once "../PHP/footer.php" ?>
                 
 </body>

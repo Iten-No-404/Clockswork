@@ -82,6 +82,19 @@ class group
             }
         }
     }
+    public function getGroupPicture2($id)
+    {
+        $result = $this->dbConnection->query("SELECT Group_picture FROM  Groups WHERE Group_ID='$id'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+
+                 echo $row["Group_picture"];
+            
+            }
+        }
+    }
     public function getGroupPicture_Circle($id)
     {
         $result = $this->dbConnection->query("SELECT Group_picture FROM  Groups WHERE Group_ID='$id'");
@@ -116,8 +129,14 @@ class group
 
     public function GetNumMembers($GROUP_ID)
     {
-        $result = $this->dbConnection->query("SELECT U_ID FROM member_in WHERE Group_ID=$GROUP_ID");
-        return $result->num_rows;
+        $result = $this->dbConnection->query("SELECT COUNT(U_ID) FROM member_in WHERE Group_ID=$GROUP_ID");
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                 echo $row["COUNT(U_ID)"];
+                
+            }
+        }
     }
 }
 
