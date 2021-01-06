@@ -1,5 +1,6 @@
 <?php require_once '../PHP/Group.php';
     require_once '../PHP/user.php';
+    require_once '../PHP/post.php';
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,7 @@
        <?php $id=$_GET['id'];
           $obj=new GRoup($id);?>
           <img class="img-fluid"  width="100%"src="<?php $obj->getGroupPicture2($id);?>" alt="">
-          <?php
+       <?php
        ?>
        
         <div class="grouptitleborder mt-3">
@@ -108,53 +109,55 @@
       </form>
     </div>
 
-    <div class="container my-3">
-
-        <div class="row mt-2">
-            <div class="col-lg-1">
-                <img class="img-fluid rounded-circle"
-                    src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
-
-
-            </div>
-
-            <div class="col-lg-11">
-                <h6>Radwa Ahmed</h6>
-
-                <p>I love the game, I have been playing for months now. But the direction it is taking could make me to
-                    stop playing. Since the start of season 12, performance has been disregarded and it has become more
-                    about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it
-                    intend...</p>
-
-            </div>
-
-
-        </div>
-    </div>
+  
     <div class="line"></div>
     <div class="container my-3">
-
+       
         <div class="row mt-2">
-            <div class="col-lg-1">
-                <img class="img-fluid rounded-circle"
-                    src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
+        <?php
+           $obj=new post();
+           $result=$obj->select($_GET['id']);
+        ?>   
+        <?php   
+           if ($result->num_rows > 0)
+           {
+                
+                while ($row = $result->fetch_assoc())
+                {   
+                    
+        ?>          
+                    <div class="col-lg-1">
+                    <a href="../HTML/user.php?id=<?php echo $row['U_ID'] ?>">
+                        <?php   $user=new User($row['U_ID']);
+                            $user->getProfilePicture($row['U_ID']);
+                        ?>
+                    </a>
 
 
-            </div>
 
-            <div class="col-lg-11">
-                <h6>Radwa Ahmed</h6>
+                    </div>
+
+                    <div class="col-lg-11">
+                        <h6>  <a href="../HTML/user.php?id=<?php echo $row['U_ID'] ?>">
+                          <?php   $user=new User($row['U_ID']);
+                            $user->getUserName($row['U_ID']);
+                          ?>
+                    </a></h6>
 
 
-                <p>I love the game, I have been playing for months now. But the direction it is taking could make me to
-                    stop playing. Since the start of season 12, performance has been disregarded and it has become more
-                    about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it
-                    intend...</p>
-                <img class="img" src="../IMAGES/pp.webp" alt="">
-            </div>
+                        <p> <?php $obj->getTEXTpost($row['Post_id']);?> </p>
+                        <img class="img" src="<?php $obj->getpicture($row['Post_id']);?>" alt="">
+                    </div>
+                    
+                <?php }
+           }
+          
+               ?>    
 
 
         </div>
+        
+            
     </div>
     <!-- <div class="conatiner my-3">
         <div class="row mt-2">

@@ -71,6 +71,11 @@ class post
             }
         }
      }
+     public function select($group_id)
+     {
+        $result = $this->dbConnection->query("SELECT Post_id,U_ID FROM  post WHERE group_id=$group_id");
+            return $result;
+     }
     
      public function getgroup_id($id)
      {
