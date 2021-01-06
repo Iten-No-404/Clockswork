@@ -1,6 +1,14 @@
+<?php
+
+require '../PHP/app.php';
+require_once '../PHP/user.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+        include_once '../PHP/Categories.php'
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,92 +40,47 @@
 
     <div>
         <div class="subtitle">
-            <h1>Social Applications</h1>
+            <h1><?php $cobj = new categories(); $cid = $_GET['id']; $result=$cobj->getApps($cid); echo $cobj-> getCategoryName($cid);?> Applications</h1>
         </div>
         <div class="container blockapp my-3">
 
-            <div class="applet">
-                <div class="row mt-2">
-                    <div class="col-lg-1">
-                        <a href="../HTML/App.html">
-                            <img class="img-fluid rounded-circle" src="../IMAGES/download (1).png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-lg-11">
-                        <div class="float-lg-right">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </div>
-                        <a class="catlinks" href="../HTML/App.html">
-                            <h5>Facebook</h5>
-                        </a>
-                        <div>
-                            <H6 class="float-lg-right"> Users: 105958907, Age Rating: 12+, Price: Free</H6>
-                            <a href="../HTML/user.html">
-                                <h6 style="font-weight: bold;">Facebook</h6>
+        <div class="row mt-2">
+                <?php
+                $obj = new App();
+                //$result = $obj->getallids();
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+                        $var = $row["App_ID"]; ?>
+                        <div class="col-lg-1">
+                            <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                <?php $obj->getApplication_Picturecircle($var) ?>
                             </a>
                         </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="applet">
-                <div class="row mt-2">
-                    <div class="col-lg-1">
-                        <a href="../HTML/App.html">
-                            <img class="img-fluid rounded-circle" src="../IMAGES/download (1).jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="col-lg-11">
-                        <div class="float-lg-right">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </div>
-                        <a class="catlinks" href="../HTML/App.html">
-                            <h5>Instagram</h5>
-                        </a>
-                        <div>
-                            <H6 class="float-lg-right"> Users: 8268472, Age Rating: 12+, Price: Free</H6>
-                            <a href="../HTML/user.html">
-                                <h6 style="font-weight: bold;">Instagram</h6>
+                        <div class="col-lg-11">
+                            <div class="float-lg-right">
+                                <?php $obj->getRating($var);
+                                ?>
+                            </div>
+                            <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                <h5><?php $obj->getname($var) ?></h5>
                             </a>
+                            <div>
+                                <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
+                                <a href="../HTML/user.php?id=<?php echo $obj-> getU_ID($var) ?>">
+                                    <h6 style="font-weight: bold;"><?php $x=$obj-> getU_ID($var);
+                                    $userobj=new user($x);
+                                    $userobj->getUserName($x);
+                                           ?></h6>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
+                        <div class="line my-2">
+                        </div>
+                <?php }
+                }
+                ?>
             </div>
-            <div class="applet">
-                <div class="row mt-2">
-                    <div class="col-lg-1">
-                        <a href="../HTML/App.html">
-                            <img class="img-fluid rounded-circle" src="../IMAGES/download (2).png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-lg-11">
-                        <div class="float-lg-right">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                        </div>
-                        <a class="catlinks" href="../HTML/App.html">
-                            <h5>Pinterest</h5>
-                        </a>
-                        <div>
-                            <H6 class="float-lg-right"> Users: 2734848, Age Rating: 12+, Price: Free</H6>
-                            <a href="../HTML/user.html">
-                                <h6 style="font-weight: bold;">Pinterest</h6>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
         </div>
     </div>
 

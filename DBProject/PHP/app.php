@@ -293,5 +293,16 @@ class app
   {
     $result  = $this->dbConnection->query("DELETE FROM purchased_by WHERE ApplicationID=$id  ");
   }
+
+  public function getIDfromName($Name)
+  {
+    $result = $this->dbConnection->query("SELECT DISTINCT App_ID FROM applications WHERE Application_Name='$id'");
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while ($row = $result->fetch_assoc()) {
+        echo $row["App_ID"];
+      }
+    }
+  }
 }
 ?>

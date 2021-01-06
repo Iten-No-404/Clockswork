@@ -1,4 +1,5 @@
 <?php include_once('PublishApp.php') ?>
+<?php include_once '../PHP/Categories.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/PublishApp.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
@@ -23,6 +25,13 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="../CSS/user.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../src/bootstrap-duallistbox.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/bootstrap-duallistbox.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/bootstrap-duallistbox.min.css">
     <title>Publish</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
@@ -34,15 +43,21 @@
     <div style="text-align: center; margin-left: 5%; margin-right: 5%;">
         <form action="../PHP/PublishApp.php" method="POST" enctype="multipart/form-data">
             <div class="container mt-3 cont1">
-                <label>Name:</label>
+                <div>
+                    <label>Name:</label>
                 <input type="text" placeholder="MyApplication" id="application_name" name="application_name">
                 <h6 id="app-name"></h6>
+                </div>
+                <div>
                 <label>Image:</label>
                 <input type="file" id="apppicture" name="apppicture">
                 <h6></h6>
+                </div>
+                <div>
                 <label>App Download Link:</label>
                 <input type="url" id="application-link" name="application-link">
                 <h6 id="app-link"></h6>
+                </div>
                 <input type="radio" value="0" id="freeapp" name="price" checked=true onclick="freechecked()">
                 <label>Free</label>
                 <input type="radio" value="1" id="premiumapp" name="price" onclick="premiumchecked()">
@@ -333,9 +348,18 @@
                 <label>App Trailer Link:</label>
                 <input type="url" id="app-trailer" name="app-trailer">
                 <h6></h6>
-                <!-- TODO: Need to add the categories part-->
-                <!-- Can use something as in the following:-->
-                <!-- https://www.w3.org/TR/wai-aria-practices-1.1/examples/listbox/listbox-rearrangeable.html -->
+                <div>
+                <label>Create a New Category:</label>
+                <input type="text" placeholder="Category Name" id="new_category_name" name="new_category_name">
+                <h6 id="cat-name"></h6>
+                <button class="btn btn-primary" type="button" id="add_category" name="add_category">Add</button>
+                </div>
+                <div class="container">
+                <div class="form-group">
+                <select multiple class="form-control" id="categories_duallistbox" name="categories_duallistbox[]">
+                </select>
+                </div>
+                </div>
                 <br>
                 <button class="btn btn-primary" type="submit" id="publish" name="publish">Publish Request</button>
             </div>
@@ -350,5 +374,121 @@
 <script src="../bootstrap/popper.main.js"></script>
 <script src="../bootstrap/bootstrap.js"></script>
 <script src="../Js/publishapp.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- <script src="dist/jquery.bootstrap-duallistbox.min.js"></script> -->
+    <script src="../JS/jquery.bootstrap-duallistbox.js"></script>
+    <script src="../JS/jquery.bootstrap-duallistbox.min.js"></script>
+<script>
+    $(document).ready(function () {
+   
+   var categories = $('select[name="categories_duallistbox[]"]').bootstrapDualListbox(
+   {
+   nonSelectedListLabel: 'Non-selected Categories',
+   selectedListLabel: 'Selected Categories',
+   preserveSelectionOnMove: 'moved',
+   //moveOnSelect: false,
+   showFilterInputs: false
+   }
+   );
 
+   <?php
+        $cobj=new categories();
+        $cresult= $cobj->getallcategories();
+        ?>
+        <?php
+        if ($cresult->num_rows > 0) {
+            // output data of each row
+            while($crow = $cresult->fetch_assoc()) {
+                $cvar = $crow["Category_ID"]; ?>
+     var str1 = "<option id= 'cat-";
+     var str2 = "<?php echo $cobj-> getCategoryName($cvar) ?>";//cat name from php
+     var str3 = "' value=";
+     var str4 = "<?php echo $crow['Category_ID']; ?>";//id value from php
+     var str5 = '>';
+     var str6 = "<?php echo $cobj-> getCategoryName($cvar) ?>";//cat name from php
+     var str7 = "</option>";
+     var res = str1.concat(str2.toLowerCase(), str3, str4, str5, str6, str7);
+     categories.append(res);
+     <?php } } ?>
+   categories.bootstrapDualListbox('refresh');
+
+ $("#application_name").on("focusout",function () {
+     if($(this).val().length==0 &&   $("#app-name").empty())
+     {
+         $(this).css("border-color","red");
+        $("#app-name").append("Application name can't be empty!");
+        
+     }
+     else{
+         $("#app-name").remove();
+         $(this).css("border-color","white");
+     }
+ }
+ );
+ $("#application-link").on("focusout",function () {
+     
+     if($(this).val().length==0 && $("#app-link").empty())
+     {
+        $("#app-link").append("Please input the app download link!");
+        $(this).css("border-color","red");
+     }
+     else{
+         $("#app-link").remove();
+         $(this).css("border-color","white");
+     }
+ } )
+ $("#add_category").click(function() {
+    var catname = (document.getElementById("new_category_name")).value;
+    if(catname =="")//checking if the textbox is empty
+    {
+        alert("Can't add an empty category!!!");
+    }
+    else
+    {
+        var newcatname = "cat-";
+        newcatname = newcatname.concat(catname.toLowerCase());
+        var myEle = document.getElementById(newcatname);
+    if(myEle)
+    {
+        //If the category already exists 
+        alert("Category already exists!!!");
+    }
+    else
+    {
+        //Add it to the database, then add it to the selected list
+        var str1 = "<option id= 'cat-";
+        var str2 = catname;//cat name from php
+        var str3 = "' value=";
+        var str4 = "<?php $newid = $cobj->getmaxidp1(); echo $newid; ?>";//id value from php
+        var str5 = ' selected>';
+        var str6 = catname;//cat name from php
+        var str7 = "</option>";
+        var res = str1.concat(str2.toLowerCase(), str3, str4, str5, str6, str7);
+     categories.append(res);
+     categories.bootstrapDualListbox('refresh');
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "../PHP/PublishApp.php");
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        var temp = "name=";
+        temp = temp.concat(catname);
+        xhr.send(temp);
+     //Last step, add it into the database, may also leave that to after the submition, the code works without the following line
+
+    }
+    }
+ })
+} )
+</script>
 </html>

@@ -2,6 +2,7 @@
 // TODO: Check that the user is logged in before loading the page
 require_once 'connection.php';
 require_once 'app.php';
+require_once '../PHP/Categories.php';
 session_start();
 
 // if (session_status() == PHP_SESSION_NONE) {
@@ -73,15 +74,36 @@ if (isset($_POST['publish'])) {
         $UserID=(int)$_SESSION['U_ID'];
        $random=rand(1,5);
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
-        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '1', $appdate, $UserID);
+        $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '0', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
        $appid= $obj->getids();
   
        $ApplicationID= $obj->getids();
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
+        //Categories Insertion in with the App
+        $catobj = new categories();
+        if(!empty($_POST['categories_duallistbox']) )
+        {
+            foreach ($_POST['categories_duallistbox'] as $selectedOption)
+            {
+                $result = $catobj->insertappcategory($ApplicationID,(int)$selectedOption);
+                //if($result)
+                    //AlertJS("Category Insertion Successful!");
+            }
+        }
+        else
+        {
+            AlertJS("Category Insertion Failed :'(");
+        }
+        $catobj->deleteemptycategories();
         RedirectJS("../HTML/application.php?id=$ApplicationID");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)
         //RedirectJS("../HTML/app.html");
     }
 }
+
+//{
+ //foreach ($_POST as $newcat)
+   // $cobj->addnewCategorywithid($newid, $newcategory);
+//}

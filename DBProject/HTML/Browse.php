@@ -42,6 +42,7 @@ require_once '../PHP/user.php';
     ?>
     <?php
         $cobj=new categories();
+        $cobj->deleteemptycategories();
         $cresult= $cobj->getallids();
         if ($cresult->num_rows > 0) {
         // output data of each row
@@ -51,7 +52,8 @@ require_once '../PHP/user.php';
             <div class="col-12">
                 <i class="icon far fa-fw fa-circle"></i>
                 <span class="txt-action idx-27">
-                <?php  $cobj-> getCategoryName($cvar) ?>
+                <?php  $cobj-> getCategoryName($cvar) ?>  
+                <?php $cobj->getAppCount($cvar) ?>
                 </span>
             </div>
             </a>
