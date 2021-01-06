@@ -75,10 +75,11 @@ if (isset($_POST['savechangesbtn'])) {
         $LName = $currUserData->LName;
     }
     if ($Gender == "" || ($Gender != 'M' && $Gender != 'F')) {
-        if ($currUserData->Gender = null)
+        if ($currUserData->Gender == null)
             $Gender = null;
         else
-            $Gender = $currUserData->Gender;
+            $temp = $currUserData->Gender;
+            $Gender = $temp;
     }
     if ($Username == "") {
         $Username = $currUserData->Username;

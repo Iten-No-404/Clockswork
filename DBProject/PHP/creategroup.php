@@ -34,10 +34,10 @@ if (isset($_POST['create'])) {
         group::InsertGroup($groupName, $currDate, NULL, $groupDesc, $groupOwner);
 
         // Add the owner as a member
-        $GroupIDQuery = "SELECT Group_ID FROM groups WHERE U_ID=$groupOwner AND GroupName='$groupName'";
+        $GroupIDQuery = "SELECT GROUP_ID FROM groups WHERE U_ID=$groupOwner AND GroupName='$groupName'";
         $GIDQueryResult = $dbConnection->query($GroupIDQuery);
         $groupID = mysqli_fetch_assoc($GIDQueryResult);
-        $groupID = $groupID['Group_ID'];
+        $groupID = $groupID['GROUP_ID'];
 
         group::InsertMember_in($groupOwner, $groupID);
 
