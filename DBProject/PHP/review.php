@@ -72,21 +72,34 @@ class review{
      
 
      }
+  
      public function  selectup_down_voted_review($U_ID,$Review_id,$Up_Down)
      {
-        $result=$this->dbConnection->query("SELECT  * FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id");
+        $result=$this->dbConnection->query("SELECT Up_Down FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id");
         if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+             if($row['Up_Down'] !=$Up_Down)
             $this->dbConnection->query("UPDATE up_down_voted_review SET Up_Down='$Up_Down' WHERE U_ID=$U_ID AND Review_id=$Review_id ");
+            else {
+                $this->dbConnection->query("DELETE FROM  up_down_voted_review WHERE U_ID=$U_ID AND Review_id=$Review_id ");
+
+            }
         }
         else {
             $this-> insertup_down_voted_review($U_ID,$Review_id,$Up_Down);
         }
      }
+   
      public function insertreview($Review_Description,$ReviewDate,$Stars)
      {
         
         $this->dbConnection->query("INSERT INTO review (Review_Description,ReviewDate,Stars) VALUES ('$Review_Description','$ReviewDate','$Stars')");
      }
+     public  function updatereview($Review_Description,$Stars,$id)
+    {
+        $this->dbConnection->query("UPDATE  review  SET Review_Description='$Review_Description',Stars='$Stars' WHERE ReviewID='$id' ");
+
+    }
      public function getReviewDate($id)
      {
           $result= $this->dbConnection->query("SELECT ReviewDate FROM  review WHERE ReviewID='$id'");
@@ -142,6 +155,11 @@ class review{
      {
        
           $this->dbConnection->query("DELETE   FROM reviewed WHERE  ApplicationID=$ApplicationID");
+     }
+     public function deletefromreviwedByid($ReviewID)
+     {
+       
+          $this->dbConnection->query("DELETE   FROM reviewed WHERE  ReviewID=$ReviewID");
      }
      public function select($ApplicationID)
      {

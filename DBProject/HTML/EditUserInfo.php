@@ -27,6 +27,7 @@
 </head>
 <?php include_once '../PHP/header.php' ?>
 
+<?php $shownUser = new user($_GET['id']);  ?>
 
 <body>
     <h1>Editing personal info</h1>
@@ -72,17 +73,28 @@
                 </div>
             </div>
 
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="FNameCB" value="FNameChkBox" <?php if ($shownUser->Hide[0] == 0) : ?> checked <?php endif; ?>>
+                <label for="FName">Hide</label><br>
+            </div>
+
             <div class="line">
             </div>
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
+
                         <h6>Last Name</h6>
                     </label>
                 </div>
                 <div class="col-lg-9">
                     <input type="lname" placeholder="LastName" id="lname" name="lname">
                 </div>
+            </div>
+
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="LNameCB" value="FNameChkBox" <?php if ($shownUser->Hide[1] == 0) : ?> checked <?php endif; ?>>
+                <label for="LName">Hide</label><br>
             </div>
 
             <div class="line">
@@ -101,6 +113,11 @@
                 </div>
             </div>
 
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="BDateCB" value="FNameChkBox" <?php if ($shownUser->Hide[4] == 0) : ?> checked <?php endif; ?>>
+                <label for="BDate">Hide</label><br>
+            </div>
+
             <div class="line">
             </div>
 
@@ -113,6 +130,11 @@
                 <div class="col-lg-9">
                     <input type="Gender" placeholder="'M' or 'F'" id="gender" name="gender">
                 </div>
+            </div>
+
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="GenderCB" value="FNameChkBox" <?php if ($shownUser->Hide[5] == 0) : ?> checked <?php endif; ?>>
+                <label for="Gender">Hide</label><br>
             </div>
 
             <div class="line">
@@ -146,6 +168,12 @@
                 </div>
 
             </div>
+
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="EmailCB" value="FNameChkBox" <?php if ($shownUser->Hide[2] == 0) : ?> checked <?php endif; ?>>
+                <label for="Email">Hide</label><br>
+            </div>
+
             <div class="line">
 
             </div>
@@ -157,12 +185,28 @@
                 </div>
                 <div class="col-lg-9">
                     <input type="Username" placeholder="WackyWohooPizzaMan" id="username" name="username">
-
                 </div>
-
             </div>
-            <div class="line">
 
+            <div class="line">
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="">
+                        <h6>Phone Number</h6>
+                    </label>
+                </div>
+                <div class="col-lg-9">
+                    <input type="lname" placeholder="01023456789" id="phone" name="phone">
+                </div>
+            </div>
+
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="PhoneCB" value="FNameChkBox" <?php if ($shownUser->Hide[6] == 0) : ?> checked <?php endif; ?>>
+                <label for="Phone">Hide</label><br>
+            </div>
+
+            <div class="line">
             </div>
             <div class="row">
                 <div class="col-lg-3">
@@ -175,6 +219,11 @@
 
                 </div>
 
+            </div>
+
+            <div style="text-align:right; width:100%; padding:0;">
+                <input type="checkbox" id="myCheck" name="AddressCB" value="FNameChkBox" <?php if ($shownUser->Hide[3] == 0) : ?> checked <?php endif; ?>>
+                <label for="Address">Hide</label><br>
             </div>
     </form>
 

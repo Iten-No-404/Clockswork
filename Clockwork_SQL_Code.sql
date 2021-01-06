@@ -18,6 +18,8 @@ CREATE TABLE  Users  (
 	 Billing_Info  TEXT NOT NULL DEFAULT 'No information available.', -- long strings are stored as text instead of VARCHAR
 	 Ban_End  FLOAT NOT NULL DEFAULT '0',
 	 Profile_Picture  TEXT, -- (image path)long strings are stored as text instead of VARCHAR
+     Hide VARCHAR(12) DEFAULT '111111111111', -- A string that's used as an array of boolean to decide wether to hide an attribute or not
+     -- Hide or Not : FName LName Email Address Bdate Gender Phone_Number 
 	PRIMARY KEY ( U_ID )
 );
 

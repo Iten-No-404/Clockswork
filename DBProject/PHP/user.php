@@ -19,6 +19,7 @@ class user
     public $Billing_Info;
     public $Ban_End;
     public $Profile_Picture;
+    public $Hide;
 
     // Creates a new object and initializes its data
     public function __construct($U_ID)
@@ -44,6 +45,7 @@ class user
             $this->Profile_Picture = $row['Profile_Picture'];
         else
             $this->Profile_Picture = "../IMAGES/DEFAULT_USER.jpg";
+        $this->Hide = $row['Hide'];
     }
 
     public function getFName($id)
@@ -113,6 +115,17 @@ class user
             }
         }
     }
+    public function getBDate2($id)
+    {
+        $result = $this->dbConnection->query("SELECT Bdate FROM  users WHERE U_ID='$id'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                 return $row["Bdate"];
+            }
+        }
+    }
     public function getGender($id)
     {
         $result = $this->dbConnection->query("SELECT Gender FROM  users WHERE U_ID='$id'");
@@ -167,6 +180,22 @@ class user
                 echo $row["Billing_Info"];
             }
         }
+    }
+    public function  getBalance2($id)
+    {
+        $result = $this->dbConnection->query("SELECT Balance FROM  users WHERE U_ID='$id'");
+        // If the query returns a result
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Balance"];
+            }
+        }
+    }
+    public function  updateBalance($id ,$wallet)
+    {
+        $result = $this->dbConnection->query("UPDATE users  SET Balance=Balance-$wallet  WHERE U_ID='$id'");
+      
     }
     public function getBanEnd($id)
     {
@@ -239,9 +268,11 @@ class user
         $Address,
         $Bdate,
         $Gender,
-        $Profile_Picture
+        $Profile_Picture,
+        $Hide,
+        $Phone_Number
     ) {
-        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture' WHERE U_ID = $U_ID";
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
          $this->dbConnection->query($updateQuery);
     }
 }

@@ -93,7 +93,10 @@ session_start();
             </div>
         </div>
         <div class="container my-3">
-            <div id="my-carousel" class="carousel slide" data-ride="carousel">
+         <?php $obj = new App();
+               $obj->getAppTrailer($_GET['id']);
+            ?>
+            <!-- <div id="my-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li class="active" data-target="#my-carousel" data-slide-to="0" aria-current="location"></li>
                     <li data-target="#my-carousel" data-slide-to="2"></li>
@@ -121,9 +124,9 @@ session_start();
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
-            </div>
+            </div> -->
         </div>
-        <a href=""></a>
+        <!-- <a href=""></a> -->
         <div class="container mt-3">
             <h1>Description</h1>
             <p>
@@ -194,7 +197,15 @@ session_start();
                             <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?>
                           
                             </p>
-                            <?php    $review->getReviewDate($row["ReviewID"]);   ?>
+                            <?php    $review->getReviewDate($row["ReviewID"]);   
+                            
+                                   if($_SESSION['U_ID']==$row['UserID'])
+                                    {?>
+                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete Review</button></a>
+                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit Review</button></a>
+
+                                   <?php }   
+                            ?>
                             <br>
                             <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><button class="btn btn-dark" type="button"> <i class="fas fa-plus"></i></button></a>
                            <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"> <button class="btn btn-dark" type="button"> <i class="fas fa-minus"></i></button></a>
@@ -209,11 +220,11 @@ session_start();
               
 
 
-                   <?php }
+                <?php }
                   }
                          
                          
-                         ?>
+                 ?>
               
             </div>
         </div>

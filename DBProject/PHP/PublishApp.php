@@ -47,7 +47,7 @@ if (isset($_POST['publish'])) {
     $appreq = mysqli_real_escape_string($dbConnection, $_POST['system-requirements']);
     $apptrailer = mysqli_real_escape_string($dbConnection, $_POST['app-trailer']);
     if ($apptrailer == "") {
-        $apptrailer = NULL;
+        $apptrailer = "https://www.youtube.com/watch?v=fV_4o9Vl0gE";
     }
     $timezone = date_default_timezone_get();
     $appdate = date('Y-m-d', time());
