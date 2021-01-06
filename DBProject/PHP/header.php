@@ -9,14 +9,14 @@ $fileName = basename($_SERVER['PHP_SELF']);
 if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signup.php") {
     AlertJS("Please log in!");
     RedirectJS("../HTML/login.php");
-}?>
+} ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="icon" href="../IMAGES/clock.jpg"  class="img-fluid rounded-circle" type="image/jpg">
+    <link rel="icon" href="../IMAGES/Clockworks.png" class="img-fluid rounded-circle" type="image/jpg">
 
 </head>
 <header>
@@ -35,6 +35,9 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
                     <a class="nav-link" href="../HTML/Groups_List.php">Groups</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="../HTML/CreateGroup.php">Create a group!</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="../HTML/PublishApp.php">Publish </a>
                 </li>
                 <li class="nav-item">
@@ -50,7 +53,7 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
                     <a class="nav-link" href="../PHP/logout.php">Log out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO">CLICK ME</a>
+                    <a class="nav-link" href="https://music.youtube.com/watch?v=QkFJau6aK3w&feature=share">CLICK ME</a>
                 </li>
 
             </ul>

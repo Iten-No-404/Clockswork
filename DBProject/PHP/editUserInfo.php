@@ -27,43 +27,10 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST['savechangesbtn'])) {
     // Getting the current user's data (before editing)
     $currUserData = new user($_SESSION['U_ID']);
+    
+    $ImagePath = UploadFile('../IMAGES/','userpicture','../HTML/EditUserInfo.php');
 
-
-    // Plagiarized from: https://www.w3schools.com/php/php_file_upload.asp
-    $target_dir = "../IMAGES/";
-    $target_file = $target_dir . $_FILES['userpicture']['name'];
-    $uploadOk = 1;
-
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["uploadImage"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if ($check !== false) {
-            $uploadOk = 1;
-        } else {
-            $uploadOk = 0;
-        }
-    }
-
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        AlertJS("File is not an image.");
-        RedirectJS("../HTML/EditUserInfo.php");
-
-        // if everything is ok, try to upload file
-    } else {
-
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            $ImagePath = $target_file;
-        } else if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            $ImagePath = $target_file;
-            // echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-        } else {
-            AlertJS("Sorry, there was an error uploading your file.");
-        }
-    }
-
-    if (!isset($ImagePath))
+    if ($ImagePath =='')
         $ImagePath = $currUserData->Profile_Picture;
 
     $FName = $_POST['fname'];
@@ -198,4 +165,3 @@ if (isset($_POST['savechangesbtn'])) {
     );
     RedirectJS("../HTML/user.php? id=" . $_SESSION['U_ID']);
 }
-?>
