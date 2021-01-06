@@ -77,7 +77,7 @@ class group
             // output data of each row
             while ($row = $result->fetch_assoc()) {
 ?>
-                <img class="img-fluid rounded-circle"  src="<?php echo $row["Group_picture"]; ?>" alt="">
+                <img class="img-fluid rounded-circle" src="<?php echo $row["Group_picture"]; ?>" alt="">
             <?php
             }
         }
@@ -90,8 +90,7 @@ class group
             // output data of each row
             while ($row = $result->fetch_assoc()) {
 
-                 echo $row["Group_picture"];
-            
+                echo $row["Group_picture"];
             }
         }
     }
@@ -133,10 +132,15 @@ class group
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                 echo $row["COUNT(U_ID)"];
-                
+                echo $row["COUNT(U_ID)"];
             }
         }
+    }
+
+    public static function UpdateGroupPic($picPath, $groupID)
+    {
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $result = $dbConnection->query("UPDATE groups SET Group_picture='$picPath' WHERE GROUP_ID=$groupID");
     }
 }
 

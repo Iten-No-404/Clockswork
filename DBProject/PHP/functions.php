@@ -19,10 +19,12 @@ function RedirectJS(string $location)
 // ImagesDirectory: A path to the folder where you store your images
 // uploadFieldName: The name of the upload HTML element
 // errorRedirectPage: The page where you redirect the user if an upload error occurs
-function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $required=false)
+function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $namePart1, $namePart2, $required = false)
 {
     $target_dir = $ImagesDirectory;
-    $target_file = $target_dir . $_FILES[$uploadFieldName]['name'];
+    $fileExt = explode('.', $_FILES[$uploadFieldName]['name']);
+    $fileRealExt = strtolower(end($fileExt));
+    $target_file = $target_dir . $namePart1 . "_" . $namePart2 . "." . $fileRealExt;
     $uploadOk = 1;
     $ImagePath = '';
 
@@ -34,9 +36,7 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $req
         } else {
             $uploadOk = 0;
         }
-    }
-    else if ($required)
-    {
+    } else if ($required) {
         AlertJS('Please upload a picture!');
         RedirectJS($errorRedirectPage);
         return $ImagePath;
@@ -62,4 +62,10 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $req
     }
 
     return $ImagePath;
+}
+
+// https://www.codexworld.com/how-to/validate-date-input-string-in-php/#:~:text=The%20validateDate()%20function%20checks,string%20is%20valid%2C%20otherwise%20FALSE.
+function validateDate($date, $format = 'Y-m-d'){
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) === $date;
 }

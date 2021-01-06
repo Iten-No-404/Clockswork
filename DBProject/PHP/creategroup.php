@@ -4,26 +4,18 @@ include_once 'group.php';
 
 if (isset($_POST['create'])) {
 
-    $ImagePath = UploadFile('../IMAGES/', 'group_picture', '../HTML/CreateGroup.php');
-
-    // If some error occured while uploading the image, don't continue execution
-    if($ImagePath == '')
-        return;
-
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    
+
     // Grabbing the data
     $dbConnection = DBConnection::getInst()->getConnection();
     $groupOwner = $_SESSION['U_ID'];
     $groupName = mysqli_real_escape_string($dbConnection, $_POST['group_name']);
-    $groupPic = $ImagePath;
     $groupDesc = mysqli_real_escape_string($dbConnection, $_POST['group_description']);
-    
 
-    if($groupName == '' || $groupPic == '' || $groupDesc == '')
-    {
+
+    if ($groupName == '' || $groupDesc == '') {
         AlertJS('A field is empty!');
         RedirectJS('../HTML/CreateGroup.php');
         return;
@@ -39,15 +31,22 @@ if (isset($_POST['create'])) {
         // Create the group
         $currDate = new DateTime();
         $currDate = $currDate->format('Y-m-d');
-        group::InsertGroup($groupName,$currDate, $groupPic, $groupDesc, $groupOwner);
+        group::InsertGroup($groupName, $currDate, NULL, $groupDesc, $groupOwner);
 
         // Add the owner as a member
         $GroupIDQuery = "SELECT Group_ID FROM groups WHERE U_ID=$groupOwner AND GroupName='$groupName'";
         $GIDQueryResult = $dbConnection->query($GroupIDQuery);
         $groupID = mysqli_fetch_assoc($GIDQueryResult);
         $groupID = $groupID['Group_ID'];
-        
+
         group::InsertMember_in($groupOwner, $groupID);
+
+        $ImagePath = UploadFile('../IMAGES/', 'group_picture', '../HTML/CreateGroup.php', $groupOwner, $groupName);
+        // If some error occured while uploading the image, don't continue execution
+        if ($ImagePath == '')
+            $ImagePath = "../IMAGES/Default_Group.png";
+
+        group::UpdateGroupPic($ImagePath, $groupID);
 
         AlertJS('Group created successfully!\npress OK to go to the home page.');
         // TODO: Redirect the user to their own group 

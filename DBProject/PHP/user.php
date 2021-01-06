@@ -24,7 +24,7 @@ class user
     // Creates a new object and initializes its data
     public function __construct($U_ID)
     {
-        $this ->dbConnection = DBConnection::getInst()->getConnection();
+        $this->dbConnection = DBConnection::getInst()->getConnection();
         $result = $this->dbConnection->query("SELECT * FROM  users WHERE U_ID='$U_ID'");
         $row = $result->fetch_assoc();
         $this->U_ID = $row['U_ID'];
@@ -122,7 +122,7 @@ class user
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                 return $row["Bdate"];
+                return $row["Bdate"];
             }
         }
     }
@@ -192,10 +192,9 @@ class user
             }
         }
     }
-    public function  updateBalance($id ,$wallet)
+    public function  updateBalance($id, $wallet)
     {
         $result = $this->dbConnection->query("UPDATE users  SET Balance=Balance-$wallet  WHERE U_ID='$id'");
-      
     }
     public function getBanEnd($id)
     {
@@ -214,17 +213,15 @@ class user
         // If the query returns a result
         if ($result->num_rows > 0) {
             // output data of each row
-            while ($row = $result->fetch_assoc()) {?>
-              <?php if ($row['Profile_Picture'])?>
-                            <img class="img-fluid rounded-circle" src="<?php echo $row['Profile_Picture'];?>" alt="">
-              <?php if(!$row['Profile_Picture']) 
-               {?>
-                <img class="img-fluid rounded-circle" src="../IMAGES/DEFAULT_USER.jpg" alt="">
-             <?php }
+            while ($row = $result->fetch_assoc()) { ?>
+                <?php if ($row['Profile_Picture']) ?>
+                <img class="img-fluid rounded-circle" src="<?php echo $row['Profile_Picture']; ?>" alt="">
+                <?php if (!$row['Profile_Picture']) { ?>
+                    <img class="img-fluid rounded-circle" src="../IMAGES/DEFAULT_USER.jpg" alt="">
+                <?php }
                 ?>
-           <?php }
+<?php }
         }
-    
     }
 
     // Probably won't get much use for now
@@ -272,8 +269,10 @@ class user
         $Hide,
         $Phone_Number
     ) {
-        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = '$Bdate', Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
-         $this->dbConnection->query($updateQuery);
+        if ($Bdate != NULL)
+            $Bdate = "'" . $Bdate . "'";
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = $Bdate, Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+        $this->dbConnection->query($updateQuery);
     }
 }
 ?>

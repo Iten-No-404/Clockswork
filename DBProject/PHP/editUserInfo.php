@@ -27,15 +27,15 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST['savechangesbtn'])) {
     // Getting the current user's data (before editing)
     $currUserData = new user($_SESSION['U_ID']);
-    
-    $ImagePath = UploadFile('../IMAGES/','userpicture','../HTML/EditUserInfo.php');
 
-    if ($ImagePath =='')
+    $ImagePath = UploadFile('../IMAGES/', 'userpicture', '../HTML/EditUserInfo.php', $currUserData->U_ID, date('Y-m-d'));
+
+    if ($ImagePath == '')
         $ImagePath = $currUserData->Profile_Picture;
 
     $FName = $_POST['fname'];
     $LName = $_POST['lname'];
-    $BDate = $_POST['bdate'];
+    $BDate = explode("-", $_POST['bdate']);
     $Gender = $_POST['gender'];
     $UnhasedPass = $_POST['password'];
     $Email = $_POST['email'];
@@ -44,15 +44,27 @@ if (isset($_POST['savechangesbtn'])) {
     $Phone_Number = $_POST['phone'];
     $errorCounter = 0;
 
-    // If the date isn't in the correct format (yyyy-mm-dd), sets the value to the current (valid) date
-    if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $BDate)) {
-        $BDate = $currUserData->Bdate;
-        $errorCounter++;
+
+
+    // If the date isn't in the correct format (yyyy-mm-dd) or no input is give, sets the value to the current (valid?) date
+    if (count($BDate) < 3 || !checkdate($BDate[1], $BDate[2], $BDate[0]) || $BDate == "") {
+        if ($currUserData->Bdate == null || $currUserData->Bdate == "" || $currUserData->Bdate == "0000-00-00")
+            $BDate = NULL;
+        else
+            $BDate = $currUserData->Bdate;
+        if ($BDate != "")   // Gives an error only if the data is invalid
+            $errorCounter++;
     }
-    // If the email is invalid, sets the variable to the current (valid) email
-    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+    // If the date is valid, glue it back together
+    else {
+        $BDate = implode("-", $BDate);
+        $BDate = "$BDate";
+    }
+    // If the email is invalid or no input is given, sets the variable to the current (valid) email
+    if (!filter_var($Email, FILTER_VALIDATE_EMAIL) || $Email == "") {
         $Email = $currUserData->Email;
-        $errorCounter++;
+        if ($Email != "")   // Gives an error only if the data is invalid
+            $errorCounter++;
     }
 
     // Checking if the other fields are empty
@@ -62,9 +74,11 @@ if (isset($_POST['savechangesbtn'])) {
     if ($LName == "") {
         $LName = $currUserData->LName;
     }
-    if ($Gender == "" || ($Gender != 'M' && $Gender != 'F'))
-    {
-        $Gender = $currUserData->Gender;
+    if ($Gender == "" || ($Gender != 'M' && $Gender != 'F')) {
+        if ($currUserData->Gender = null)
+            $Gender = null;
+        else
+            $Gender = $currUserData->Gender;
     }
     if ($Username == "") {
         $Username = $currUserData->Username;
@@ -72,8 +86,7 @@ if (isset($_POST['savechangesbtn'])) {
     if ($Address == "") {
         $Address = mysqli_escape_string($currUserData->dbConnection, $currUserData->Address);
     }
-    if ($Phone_Number = "")
-    {
+    if ($Phone_Number == "") {
         $Phone_Number = $currUserData->Phone_Number;
     }
 
@@ -84,66 +97,45 @@ if (isset($_POST['savechangesbtn'])) {
     }
 
     //Checking all the Hide CheckBoxes
-    if (isset($_POST['FNameCB']))
-    {
+    if (isset($_POST['FNameCB'])) {
         $currUserData->Hide[0] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[0] = 1;
     }
-    
-    if (isset($_POST['LNameCB']))
-    {
+
+    if (isset($_POST['LNameCB'])) {
         $currUserData->Hide[1] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[1] = 1;
     }
 
-    if (isset($_POST['BDateCB']))
-    {
+    if (isset($_POST['BDateCB'])) {
         $currUserData->Hide[4] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[4] = 1;
     }
 
-    if (isset($_POST['GenderCB']))
-    {
+    if (isset($_POST['GenderCB'])) {
         $currUserData->Hide[5] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[5] = 1;
     }
 
-    if (isset($_POST['EmailCB']))
-    {
+    if (isset($_POST['EmailCB'])) {
         $currUserData->Hide[2] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[2] = 1;
     }
 
-    if (isset($_POST['AddressCB']))
-    {
+    if (isset($_POST['AddressCB'])) {
         $currUserData->Hide[3] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[3] = 1;
     }
 
-    if (isset($_POST['PhoneCB']))
-    {
+    if (isset($_POST['PhoneCB'])) {
         $currUserData->Hide[6] = 0;
-    }
-    else
-    {
+    } else {
         $currUserData->Hide[6] = 1;
     }
 
