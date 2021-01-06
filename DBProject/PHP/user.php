@@ -27,7 +27,7 @@ class user
         $this ->dbConnection = DBConnection::getInst()->getConnection();
         $result = $this->dbConnection->query("SELECT * FROM  users WHERE U_ID='$U_ID'");
         $row = $result->fetch_assoc();
-        $this->$U_ID = $row['U_ID'];
+        $this->U_ID = $row['U_ID'];
         $this->FName = $row['FName'];
         $this->LName = $row['LName'];
         $this->Username = $row['Username'];

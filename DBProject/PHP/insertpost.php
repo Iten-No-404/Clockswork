@@ -8,7 +8,7 @@ session_start();
   $TEXTpost=$_POST['TEXTpost'];
   $group_id=$_GET['id'];
   $U_ID=$_SESSION['U_ID'];
- 
+  $ImagePath = UploadFile('../IMAGES/','picture','../HTML/Groups_List.php');
 
     // $picture = $_FILES['picture']['name'];
     // if ($picture == "") {
@@ -25,17 +25,6 @@ session_start();
    $obj=new post();
    $Date_Written= date('Y-m-d', time());
    //null because give me error!
-   $obj->insertpost($TEXTpost,$Date_Written,NULL,$U_ID,$group_id);
-    
- 
-
-
-
-
-    
-   
+   $obj->insertpost($TEXTpost,$Date_Written,$ImagePath,$U_ID,$group_id); 
         //AlertJS('A group with the same name and owner already exists!');
         RedirectJS("../HTML/Group.php?id=$group_id");
-    
-
-?>

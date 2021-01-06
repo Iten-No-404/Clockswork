@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
         $fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         $_SESSION['username'] = $userName;
         $_SESSION['loggedin'] = true;
-        $_SESSION['userid'] = $fetchedresultID['U_ID'];
+        $_SESSION['U_ID'] = $fetchedresultID['U_ID'];
         RedirectJS("../HTML/Home.php");
     }
 }
