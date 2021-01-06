@@ -77,7 +77,7 @@ class group
             // output data of each row
             while ($row = $result->fetch_assoc()) {
 ?>
-                <img class="img-fluid" src="<?php echo $row["Group_picture"]; ?>" alt="">
+                <img class="img-fluid rounded-circle"  src="<?php echo $row["Group_picture"]; ?>" alt="">
             <?php
             }
         }

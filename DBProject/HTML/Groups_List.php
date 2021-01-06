@@ -48,8 +48,8 @@
                 <div class="applet">
                     <div class="row mt-2">
                         <div class="col-lg-1">
-                            <a href="../HTML/Group.html">
-                                <img class="img-fluid rounded-circle" src=<?php echo $currGroup->Group_picture ?> alt="">
+                            <a href="Group.php?id=<?php echo $currGID['Group_ID']?>">
+                               <?php $currGroup->getGroupPicture($currGID['Group_ID']);?>
                             </a>
                         </div>
                         <div class="col-lg-11">
@@ -57,17 +57,17 @@
                                 <H6 class="float-lg-right"> Members: <?php echo $currGroup->GetNumMembers($currGroup->GROUP_ID) ?>, Date Created: <?php echo $currGroup->Date_Created ?></H6>
                             </div>
                             <!-- TODO: REDIRECT THE USER TO THE PROPER GROUP PAGE -->
-                            <a class="catlinks" href="../HTML/Group.html">
+                            <a class="catlinks" href="Group.php?id=<?php echo $currGID['Group_ID']?>">
                                 <h5><?php echo $currGroup->GroupName ?></h5>
                             </a>
                             <div>
                                 <!-- TODO: REDIRECT THE USER TO THE PROPER USER PAGE -->
                                 <H6 class="float-lg-right"> <?php echo $currGroup->Group_Description ?></H6>
-                                <a href="../HTML/user.html">
+                                <a href="../HTML/user.php?id=<?php echo $currGroup->U_ID;?>">
                                     <h6 style="font-weight: bold;">
                                         <?php
                                         $groupOwner = new user($currGroup->U_ID);
-                                        echo "$groupOwner->FName '$groupOwner->Username' $groupOwner->LName";
+                                        echo "$groupOwner->Username";
                                         ?>
                                     </h6>
                                 </a>
