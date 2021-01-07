@@ -38,7 +38,7 @@ if (isset($_POST['create'])) {
         $GIDQueryResult = $dbConnection->query($GroupIDQuery);
         $groupID = mysqli_fetch_assoc($GIDQueryResult);
         var_dump($groupID);
-        $groupID = $groupID['GROUP_ID'];
+        $groupID = $groupID['Group_ID'];
 
         group::InsertMember_in($groupOwner, $groupID);
 
