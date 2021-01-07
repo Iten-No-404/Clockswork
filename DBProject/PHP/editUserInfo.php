@@ -1,7 +1,7 @@
 <?php
 // require 'connection.php'; // Since 'user.php. already includes 'connection.php'
 include 'user.php';
-// TODO: once the "Save changes" button has been presses
+// DONE: once the "Save changes" button has been presses
 // Grab the just uploaded image's path
 // Grab the first name
 // Grab the last name
@@ -75,10 +75,10 @@ if (isset($_POST['savechangesbtn'])) {
         $LName = $currUserData->LName;
     }
     if ($Gender == "" || ($Gender != 'M' && $Gender != 'F')) {
-        if ($currUserData->Gender = null)
+        if ($currUserData->Gender == null)
             $Gender = null;
         else
-            $Gender = $currUserData->Gender;
+            $Gender  = $currUserData->Gender;
     }
     if ($Username == "") {
         $Username = $currUserData->Username;

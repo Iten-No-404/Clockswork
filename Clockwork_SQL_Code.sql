@@ -22,6 +22,7 @@ CREATE TABLE  Users  (
      -- Hide or Not : FName LName Email Address Bdate Gender Phone_Number 
 	PRIMARY KEY ( U_ID )
 );
+ALTER TABLE `users` CHANGE `Ban_End` `Ban_End` DATE NULL DEFAULT NULL;
 
 CREATE TABLE Applications (
 App_ID INT NOT NULL AUTO_INCREMENT,

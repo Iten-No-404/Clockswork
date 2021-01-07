@@ -31,6 +31,7 @@
     <?php
     $shownUser = new user($_GET['id']);
     ?>
+
     <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
         <h1>Personal info</h1>
         <div class="container mt-3 cont1">
@@ -272,8 +273,8 @@
                     </div>
                     <div class="col-lg-9">
                         <?php
-                        if (isset($currUser->Balance)) {
-                            echo "$currUser->Balance";
+                        if (isset($shownUser->Balance)) {
+                            echo "$shownUser->Balance";
                         }
                         ?>
                     </div>
@@ -290,7 +291,7 @@
                 </div>
                 <div class="col-lg-9">
                     <?php
-                    if (isset($currUser->Developer)) {
+                    if (isset($shownUser->Developer)) {
                         if ($shownUser->Developer == USER_ACCOUNT) {
                             echo "User";
                         } else if ($shownUser->Developer == DEV_ACCOUNT) {

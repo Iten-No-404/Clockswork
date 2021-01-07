@@ -23,9 +23,17 @@ if (isset($_POST['submit'])) {
 
     $hashStored =  $fetchedResult['Password'];
     if (password_verify($pass1, $hashStored)) {
-        $_SESSION['U_ID'] = $fetchedResult['U_ID'];
-
-        RedirectJS('../HTML/Home.php');
+        $banEnd = $fetchedResult['Ban_End'];
+        $now = date('Y-m-d');
+        if ($banEnd <= $now) {
+            $_SESSION['U_ID'] = $fetchedResult['U_ID'];
+            $_SESSION['Developer'] = $fetchedResult['Developer'];
+            RedirectJS('../HTML/Home.php');
+        } else {
+            $banString = "You\'re banned until " . $banEnd;
+            AlertJS($banString);
+            RedirectJS("../HTML/signup.php");
+        }
     } else {
         AlertJS('Incorrect password!');
         RedirectJS('../HTML/login.php');

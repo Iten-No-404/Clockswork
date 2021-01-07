@@ -1,15 +1,29 @@
 <?php
 include_once '../PHP/functions.php';
+include_once '../PHP/user.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 $fileName = basename($_SERVER['PHP_SELF']);
 
 // THIS WILL BREAK IF FILENAMES ARE CHANGED
-if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signup.php") {
-    AlertJS("Please log in!");
-    RedirectJS("../HTML/login.php");
-} ?>
+// Place checks in the below blocks if you want them to execute when the user is not logged in
+if (!isset($_SESSION['U_ID'])) {
+    if ($fileName != "login.php" && $fileName != "signup.php") {
+        AlertJS("Please log in!");
+        RedirectJS("../HTML/login.php");
+    }
+} 
+// And here if you want them to execute each time a logged in user loads a page (that has the header)
+else {
+    $Ban_End = user::getBanEnd($_SESSION['U_ID']);
+    if ($Ban_End > date('Y-m-d')) {
+        AlertJS("You are banned until " . $Ban_End);
+        RedirectJS('../PHP/logout.php');
+    }
+}
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -45,7 +59,9 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
                 </li>
                 <?php if (isset($_SESSION['U_ID'])) : ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID'] ?>">Profile</a>
+                    <a class="nav-link" href="../HTML/user.php? id= <?php if (isset($_SESSION['U_ID'])) {
+                                                                        echo $_SESSION['U_ID'];
+                                                                    } ?>">Profile</a>
                 </li>
                 <?php endif; ?>
                 <li class="nav-item">

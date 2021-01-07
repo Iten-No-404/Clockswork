@@ -196,15 +196,18 @@ class user
     {
         $result = $this->dbConnection->query("UPDATE users  SET Balance=Balance-$wallet  WHERE U_ID='$id'");
     }
-    public function getBanEnd($id)
+    // Converted to static since if I already created a user object, I'd have initialized in it Ban_End 
+    // This doesn't require a user object to be created
+    public static function getBanEnd($id)
     {
-        $result = $this->dbConnection->query("SELECT Ban_End FROM  users WHERE U_ID='$id'");
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $result = $dbConnection->query("SELECT Ban_End FROM  users WHERE U_ID='$id'");
+        
         // If the query returns a result
         if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                echo $row["Ban_End"];
-            }
+            // Fetch the result and return it
+            $row = $result->fetch_assoc();
+            return $row["Ban_End"];
         }
     }
     public function getProfilePicture($id)
@@ -269,10 +272,20 @@ class user
         $Hide,
         $Phone_Number
     ) {
-        if ($Bdate != NULL)
+        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+        if ($Bdate != NULL) {
             $Bdate = "'" . $Bdate . "'";
-        $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = $Bdate, Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+            $updateQuery = "UPDATE users SET FName = '$FName', LName = '$LName', Username = '$Username', Password = '$Password', Email = '$Email', Address = '$Address', Bdate = $Bdate, Gender = '$Gender', Profile_Picture = '$Profile_Picture', Hide = '$Hide', Phone_Number = '$Phone_Number' WHERE U_ID = $U_ID";
+        }
         $this->dbConnection->query($updateQuery);
+    }
+
+    public static function Ban($U_ID, $Ban_End_Date)
+    {
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $BanQuery = "UPDATE users SET Ban_End='$Ban_End_Date' WHERE U_ID=$U_ID";
+        $result = $dbConnection->query($BanQuery);
+        return $result;
     }
 }
 ?>

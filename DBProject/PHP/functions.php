@@ -64,8 +64,13 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $nam
     return $ImagePath;
 }
 
-// https://www.codexworld.com/how-to/validate-date-input-string-in-php/#:~:text=The%20validateDate()%20function%20checks,string%20is%20valid%2C%20otherwise%20FALSE.
-function validateDate($date, $format = 'Y-m-d'){
-    $d = DateTime::createFromFormat($format, $date);
-    return $d && $d->format($format) === $date;
-}
+// // https://www.codexworld.com/how-to/validate-date-input-string-in-php/#:~:text=The%20validateDate()%20function%20checks,string%20is%20valid%2C%20otherwise%20FALSE.
+// function validateDate($date, $format = 'Y-m-d'){
+//     $d = DateTime::createFromFormat($format, $date);
+//     return $d && $d->format($format) === $date;
+// }
+
+define('USER_ACCOUNT','0');
+define('DEV_ACCOUNT','1');
+define('ADMIN_ACCOUNT','2');
+define('SUPPORT_ACCOUNT','3');
