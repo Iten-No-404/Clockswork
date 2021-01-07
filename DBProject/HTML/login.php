@@ -34,7 +34,8 @@
                     <br>
 
                     <button class="btn btn-primary" type="submit" id="submit" name="submit">Log In</button>
-                    <button class="btn btn-success"> <a href="../HTML/signup.php">Sign Up</a></button>
+                    <br><br>
+                     <a href="../HTML/signup.php">Create a new account!</a>
                 </div>
 
             </form>

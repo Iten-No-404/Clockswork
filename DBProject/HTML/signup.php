@@ -51,8 +51,8 @@
                 <br> -->
                     <br>
                     <button class="btn btn-primary" type="submit" id="submit" name="submit">Sign Up</button>
-
-                    <button class="btn btn-success"> <a href="../HTML/login.php">Log In</a></button>
+                       <br><br>
+                   <a href="../HTML/login.php">Do you have already acoount?</a>
 
                 </div>
 
