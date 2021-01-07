@@ -26,53 +26,99 @@
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
     <title>Document</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
-<body>
 
-    <div class="container mb-2 ">
-       <?php $id=$_GET['id'];
-          $obj=new GRoup($id);?>
-          <img class="img-fluid"  width="100%"src="<?php $obj->getGroupPicture2($id);?>" alt="">
-       <?php
-       ?>
-       
+<body>
+    <?php
+        $id=$_GET['id'];
+        $obj=new GRoup($id);
+        if ($_SESSION['U_ID'] == $obj->U_ID) : 
+    ?>
+    <div class="col-lg-9 mt-3">
+        <p class="alignright">
+            <button class="btn btn-dark" id="move"> <a href="../HTML/EditGroup.php? id= <?php echo $_GET['id'] ?>">Edit Group</a></button>
+            <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
+        </p>
+    </div>
+    <?php endif; ?>
+    <?php
+        $UID = $_SESSION['U_ID'];
+        $GID = $_GET['id'];
+        $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $result = $dbConnection->query($query);
+        if ($result->num_rows == 1)
+            if ($_SESSION['U_ID'] != $obj->U_ID) :
+    ?>
+    <div class="col-lg-9 mt-3">
+        <form action="../PHP/Join_Exit_Group.php? id= <?php echo $_GET['id']; ?>" method="POST" enctype="multipart/form-data">
+            <p class="alignright">
+                <button class="btn btn-dark" type="submit" id="ExitG" name="ExitG">Exit Group</button>
+                <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
+            </p>
+        </form>
+    </div>
+    </div>
+    <?php endif; ?>
+    <div class="container mb-2">
+            <style>
+                .aligncenter 
+                    {
+                        text-align: center;
+                    }
+                .alignright
+                    {
+                        text-align: right;
+                    }
+            </style>
+            <p class="aligncenter">
+                <img class="img-fluid"  width="35%" src="<?php $obj->getGroupPicture2($id);?>" alt="">
+            </p>
         <div class="grouptitleborder mt-3">
-          <?php $id=$_GET['id'];
+            <?php $id=$_GET['id'];
                 $obj=new GRoup($id);
-                  ?>  <H1><?php $obj->getGroupName($id);?></H1>
-                    <H6><?php $obj->GetNumMembers($id);?></H6>
-                    <h6><?php $obj->getGroupDescription($id);?></h6>
+            ?>    
+            <H1><?php $obj->getGroupName($id);?></H1>
+            <H6><?php $obj->GetNumMembers($id);?></H6>
+            <h6><?php $obj->getGroupDescription($id);?></h6>
            
         </div>
     </div>
 
-    <div class="line"></div>
+    <?php
+        $UID = $_SESSION['U_ID'];
+        $GID = $_GET['id'];
+        $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $result = $dbConnection->query($query);
+        if ($result->num_rows == 1) :
+    ?>
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-1">
-              <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
                         <?php   $user=new User($_SESSION['U_ID']);
                             $user->getProfilePicture($_SESSION['U_ID']);
                         ?>
-                    </a>
+                </a>
 
 
             </div>
             <div class="col-lg-11 posts" onclick="display()">
  
-                <h5 class="mt-3">What is on Your mind,<?php $user=new User($_SESSION['U_ID']);
+                <h5 class="mt-3">What is on Your mind, <?php $user=new User($_SESSION['U_ID']);
                     $user->getUserName($_SESSION['U_ID']); ?> ?</h5>
 
             </div>
         </div>
-
     </div>
 
-    <div class="line"></div>
+    <!-- <div class="line"></div> -->
     <div class="container my-5 cla10">
       <form action="../PHP/insertpost.php?id=<?php echo $_GET['id'];?>" method="post" enctype="multipart/form-data">
      
@@ -162,6 +208,10 @@
            }
           
                ?>    
+            <?php else : ?>
+                <H2 class="aligncenter">Not a group member, join this group to be able to chat with other members</H2>
+           
+            <?php endif; ?>
 
 
         

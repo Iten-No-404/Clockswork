@@ -128,7 +128,7 @@
                     </label>
                 </div>
                 <div class="col-lg-9">
-                    <input type="Gender" placeholder="'M' or 'F'" id="gender" name="gender">
+                    <input type="Gender" placeholder="M or F" id="gender" name="gender">
                 </div>
             </div>
 

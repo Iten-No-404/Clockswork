@@ -49,11 +49,23 @@
             }
             ?>
             <div class="container mt-3 cont1">
-                <div class="row">
-                    <div class="col-lg-9">
-                    </div>
-                </div>
             <?php endif; ?>
+            <?php
+            // If the currently viewing user is an administrator
+            if ($_SESSION['Developer'] == ADMIN_ACCOUNT && $_SESSION['U_ID'] != $_GET['id']) { ?>
+                <form action="../PHP/banuser.php?id=<?php echo $_GET['id'] ?>" method="POST">
+                    <!-- <div class="row"> -->
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Ban end date (YYYY-MM-DD)" name="ban_end_date" id="ban">
+                        <button class="btn btn-success" id="ban">Ban</button>
+                    </div>
+                    <!-- </div> -->
+                </form>
+            <?php } ?>
+            <div class="row">
+                <div class="col-lg-9">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
@@ -147,7 +159,7 @@
                 </div>
             <?php endif; ?>
             <!--<div class="line"> 
-        </div> -->
+            </div> -->
             <!-- Disabled for now as it serves no purpose -->
             <!-- <div class="row">
             <div class="col-lg-3">
@@ -162,7 +174,7 @@
                 <i class="fas fa-circle"></i>
             </div>
 
-        </div> -->
+            </div> -->
 
             <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field 
             ?>
@@ -181,33 +193,36 @@
                         echo $shownUser->Email;
                         ?>
                     </div>
-                <?php endif; ?>
                 </div>
+            <?php endif; ?>
 
-                <div class="line">
+            <div class="line">
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="">
+                        <h6> Username </h6>
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <label for="">
-                            <h6> Username</h6>
-                        </label>
-                    </div>
-                    <div class="col-lg-9">
-                        <?php
-                        echo $shownUser->Username;
-                        ?>
-                    </div>
-
-                    <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field 
+                <div class="col-lg-9">
+                    <?php
+                    echo $shownUser->Username;
+                    if ($shownUser->Ban_End > date('Y-m-d')) {
+                        echo " (banned until " . $shownUser->Ban_End . ")";
+                    }
                     ?>
-                    <?php else : ?>
                 </div>
+            </div>
+
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field 
+            ?>
+            <?php else : ?>
                 <div class="line">
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
                         <label for="">
-                            <h6>Address</h6>
+                            <h6> Address </h6>
                         </label>
                     </div>
                     <div class="col-lg-9">
@@ -246,6 +261,7 @@
             <?php if ($_SESSION['U_ID'] != $_GET['id']) : //Don't draw this entire field 
             ?>
             <?php else : ?>
+
                 <div class="line">
                 </div>
                 <div class="row">
@@ -269,16 +285,20 @@
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
-                        <h6>Type of User</h6>
+                        <h6>Account Type</h6>
                     </label>
                 </div>
                 <div class="col-lg-9">
                     <?php
                     if (isset($currUser->Developer)) {
-                        if ($currUser->Developer == '0') {
+                        if ($shownUser->Developer == USER_ACCOUNT) {
                             echo "User";
-                        } else {
+                        } else if ($shownUser->Developer == DEV_ACCOUNT) {
                             echo "Developer";
+                        } else if ($shownUser->Developer == ADMIN_ACCOUNT) {
+                            echo "Administrator";
+                        } else if ($shownUser->Developer == SUPPORT_ACCOUNT) {
+                            echo "Support";
                         }
                     }
                     ?>

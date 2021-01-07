@@ -43,15 +43,19 @@ if (!isset($_SESSION['U_ID']) && $fileName != "login.php" && $fileName != "signu
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/supportticket.php">Support</a>
                 </li>
+                <?php if (isset($_SESSION['U_ID'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID'] ?>">Profile</a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.php">About</a>
                 </li>
+                <?php if (isset($_SESSION['U_ID'])) :?>
                 <li class="nav-item">
                     <a class="nav-link" href="../PHP/logout.php">Log out</a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="https://music.youtube.com/watch?v=QkFJau6aK3w&feature=share">CLICK ME</a>
                 </li>
