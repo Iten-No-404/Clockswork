@@ -31,6 +31,7 @@
     <?php
     $shownUser = new user($_GET['id']);
     ?>
+
     <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
         <h1>Personal info</h1>
         <div class="container mt-3 cont1">
@@ -54,6 +55,19 @@
                     </div>
                 </div>
             <?php endif; ?>
+            <?php
+            // If the currently viewing user is an administrator
+            if ($_SESSION['Developer'] == ADMIN_ACCOUNT && $_SESSION['U_ID'] != $_GET['id']) { ?>
+                <form action="../PHP/banuser.php?id=<?php echo $_GET['id'] ?>" method="POST">
+                    <!-- <div class="row"> -->
+                    <div class="col-lg-9">
+                        <input type="text" placeholder="Ban end date (YYYY-MM-DD)" name="ban_end_date" id="ban">
+                        <button class="btn btn-success" id="ban">Ban</button>
+                    </div>
+                    <!-- </div> -->
+                </form>
+            <?php } ?>
+
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
@@ -195,6 +209,9 @@
                     <div class="col-lg-9">
                         <?php
                         echo $shownUser->Username;
+                        if ($shownUser->Ban_End > date('Y-m-d')) {
+                            echo " (banned until " . $shownUser->Ban_End . ")";
+                        }
                         ?>
                     </div>
 
@@ -274,11 +291,15 @@
                 </div>
                 <div class="col-lg-9">
                     <?php
-                    if (isset($currUser->Developer)) {
-                        if ($currUser->Developer == '0') {
+                    if (isset($shownUser->Developer)) {
+                        if ($shownUser->Developer == USER_ACCOUNT) {
                             echo "User";
-                        } else {
+                        } else if ($shownUser->Developer == DEV_ACCOUNT) {
                             echo "Developer";
+                        } else if ($shownUser->Developer == ADMIN_ACCOUNT) {
+                            echo "Administrator";
+                        } else if ($shownUser->Developer == SUPPORT_ACCOUNT) {
+                            echo "Support";
                         }
                     }
                     ?>

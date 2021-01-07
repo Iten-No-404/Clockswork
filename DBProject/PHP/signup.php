@@ -24,11 +24,13 @@ if (isset($_POST['submit'])) {
     $errors = 0;
     if (empty($userName) || empty($email) || empty($password1) || empty($password2)) {
         AlertJS("A required field is empty");
+        RedirectJS("../HTML/signup.php");
         $errors++;
     }
 
     if ($password1 != $password2) {
         AlertJS("Passwords do not match");
+        RedirectJS("../HTML/signup.php");
         $errors++;
     }
 
@@ -47,7 +49,7 @@ if (isset($_POST['submit'])) {
 
 
     // If there are no errors, can register
-    if ($errors == 0) {
+    if ($errors <= 0) {
         // PHP uses bcrypt for hashing?
         // Encrypting passwords so that DB access does not risk user data
         $passwordHash = password_hash($password1, PASSWORD_DEFAULT);
