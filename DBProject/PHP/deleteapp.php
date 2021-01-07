@@ -9,8 +9,8 @@ require_once 'functions.php';
 
 
  $obj-> deletefrompurchased_by($ApplicationID);
-  deletefromreviwed($ApplicationID);$result=$review->select($ApplicationID);
- $review->
+ $review->deletefromreviwed($ApplicationID);$result=$review->select($ApplicationID);
+ 
  if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {

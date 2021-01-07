@@ -126,6 +126,13 @@ class group
         return $result;
     }
 
+    public static function GetAllGroupMembers($id)
+    {
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $result = $dbConnection->query("SELECT U_ID FROM Member_In WHERE Group_ID = '$id'");
+        return $result;
+    }
+
     public function GetNumMembers($GROUP_ID)
     {
         $result = $this->dbConnection->query("SELECT COUNT(U_ID) FROM member_in WHERE Group_ID=$GROUP_ID");

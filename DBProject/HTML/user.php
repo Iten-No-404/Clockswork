@@ -50,10 +50,6 @@
             }
             ?>
             <div class="container mt-3 cont1">
-                <div class="row">
-                    <div class="col-lg-9">
-                    </div>
-                </div>
             <?php endif; ?>
             <?php
             // If the currently viewing user is an administrator
@@ -67,7 +63,10 @@
                     <!-- </div> -->
                 </form>
             <?php } ?>
-
+            <div class="row">
+                <div class="col-lg-9">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
@@ -161,7 +160,7 @@
                 </div>
             <?php endif; ?>
             <!--<div class="line"> 
-        </div> -->
+            </div> -->
             <!-- Disabled for now as it serves no purpose -->
             <!-- <div class="row">
             <div class="col-lg-3">
@@ -176,7 +175,7 @@
                 <i class="fas fa-circle"></i>
             </div>
 
-        </div> -->
+            </div> -->
 
             <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field 
             ?>
@@ -195,36 +194,36 @@
                         echo $shownUser->Email;
                         ?>
                     </div>
-                <?php endif; ?>
                 </div>
+            <?php endif; ?>
 
-                <div class="line">
+            <div class="line">
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="">
+                        <h6> Username </h6>
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <label for="">
-                            <h6> Username</h6>
-                        </label>
-                    </div>
-                    <div class="col-lg-9">
-                        <?php
-                        echo $shownUser->Username;
-                        if ($shownUser->Ban_End > date('Y-m-d')) {
-                            echo " (banned until " . $shownUser->Ban_End . ")";
-                        }
-                        ?>
-                    </div>
-
-                    <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field 
+                <div class="col-lg-9">
+                    <?php
+                    echo $shownUser->Username;
+                    if ($shownUser->Ban_End > date('Y-m-d')) {
+                        echo " (banned until " . $shownUser->Ban_End . ")";
+                    }
                     ?>
-                    <?php else : ?>
                 </div>
+            </div>
+
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field 
+            ?>
+            <?php else : ?>
                 <div class="line">
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
                         <label for="">
-                            <h6>Address</h6>
+                            <h6> Address </h6>
                         </label>
                     </div>
                     <div class="col-lg-9">
@@ -263,6 +262,7 @@
             <?php if ($_SESSION['U_ID'] != $_GET['id']) : //Don't draw this entire field 
             ?>
             <?php else : ?>
+
                 <div class="line">
                 </div>
                 <div class="row">
@@ -273,8 +273,8 @@
                     </div>
                     <div class="col-lg-9">
                         <?php
-                        if (isset($currUser->Balance)) {
-                            echo "$currUser->Balance";
+                        if (isset($shownUser->Balance)) {
+                            echo "$shownUser->Balance";
                         }
                         ?>
                     </div>
@@ -286,7 +286,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <label for="">
-                        <h6>Type of User</h6>
+                        <h6>Account Type</h6>
                     </label>
                 </div>
                 <div class="col-lg-9">

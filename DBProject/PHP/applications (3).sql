@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `applications`
 --
 
-CREATE TABLE `applications` (
+/*CREATE TABLE `applications` (
   `App_ID` int(11) NOT NULL,
   `Application_Name` varchar(100) NOT NULL,
   `NumOfUsers` int(11) NOT NULL DEFAULT 0,
@@ -44,7 +44,7 @@ CREATE TABLE `applications` (
   `Hide` varchar(1) DEFAULT NULL,
   `Release_Date` date DEFAULT NULL,
   `U_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;*/
 
 --
 -- Dumping data for table `applications`
@@ -79,7 +79,7 @@ INSERT INTO `applications` (`App_ID`, `Application_Name`, `NumOfUsers`, `Price`,
 --
 -- Indexes for table `applications`
 --
-ALTER TABLE `applications`
+/*ALTER TABLE `applications`
   ADD PRIMARY KEY (`App_ID`),
   ADD KEY `U_ID` (`U_ID`);
 
@@ -102,7 +102,7 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `applications`
   ADD CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`U_ID`) REFERENCES `users` (`U_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+COMMIT;*/
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

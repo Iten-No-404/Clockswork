@@ -62,7 +62,22 @@
                             </a>
                             <div>
                                 <!-- TODO: REDIRECT THE USER TO THE PROPER USER PAGE -->
-                                <H6 class="float-lg-right"> <?php echo $currGroup->Group_Description ?></H6>
+                                <?php
+                                    $UID = $_SESSION['U_ID'];
+                                    $GID = $currGID['Group_ID'];
+                                    $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
+                                    $dbConnection = DBConnection::getInst()->getConnection();
+                                    $result = $dbConnection->query($query);
+                                    if ($result->num_rows == 0) :                      
+                                ?>
+                                <H6 class="float-lg-right">
+                                <form action="../PHP/Join_Exit_Group.php? id= <?php echo $GID; ?>" method="POST" enctype="multipart/form-data">
+                                    <button class="btn btn-primary" type="submit" id="JoinG" name="JoinG">Join Group</button>
+                                </form>
+                                </H6>
+                                <?php else: ?>
+                                <H6 class="float-lg-right">Already a member!</H6>
+                                <?php endif; ?>
                                 <a href="../HTML/user.php?id=<?php echo $currGroup->U_ID;?>">
                                     <h6 style="font-weight: bold;">
                                         <?php
