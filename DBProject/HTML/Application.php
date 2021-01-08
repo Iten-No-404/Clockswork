@@ -243,10 +243,7 @@ session_start();
                     </a>
                  </div>
                  <div class="col-lg-11">
-                   <textarea name="Review_Description" id="" cols="40" rows="5">
-                      
-                    
-                    </textarea>
+                   <textarea name="Review_Description" id="" cols="40" rows="5"></textarea>
                     <br>
                     <label for="">Stars</label>
                     <select id="" name="Stars">

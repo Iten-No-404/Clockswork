@@ -49,6 +49,13 @@ class app
     $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0'");
     return $result;
   }
+
+  public function getallidsformain()
+  {
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0' ORDER BY NumOfUsers DESC");
+    return $result;
+  }
+
   public  function getNumOfUsers($id)
   {
     $result = $this->dbConnection->query("SELECT NumOfUsers  FROM   applications WHERE App_ID='$id'");
