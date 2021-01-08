@@ -134,9 +134,9 @@
             </div>
             <div class="col-lg-9">
             <?php
-                if ($shownEmp->Account_Type = ADMIN_ACCOUNT)
+                if ($shownEmp->Account_Type == ADMIN_ACCOUNT)
                     echo "Adminstrator";
-                else
+                else 
                     echo "Support";
             ?>
             </div>

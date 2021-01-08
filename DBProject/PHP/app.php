@@ -340,7 +340,7 @@ class app
 
   public function getIDfromName($Name)
   {
-    $result = $this->dbConnection->query("SELECT DISTINCT App_ID FROM applications WHERE Application_Name='$id'");
+    $result = $this->dbConnection->query("SELECT DISTINCT App_ID FROM applications WHERE Application_Name='$Name'");
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {

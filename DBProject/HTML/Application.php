@@ -146,7 +146,7 @@ session_start();
         </div>
         <div class="line"> </div>
         <div class="container mt-3">
-            <h1>System_Requirements</h1>
+            <h1>System Requirements</h1>
             <p>
                 <?php
                 $obj = new App();
@@ -160,6 +160,7 @@ session_start();
 
             </p>
         </div>
+        <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
         <div class="line"> </div>
         <div>
           <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
@@ -192,6 +193,7 @@ session_start();
                
           </form>
         </div>
+        <?php endif; ?>
         <div class="line"> </div>
         <div class="container">
             <h1>Reviews</h1>
@@ -233,7 +235,7 @@ session_start();
                             </p>
                             <?php    
                             
-                                   if($_SESSION['U_ID']==$row['UserID'])
+                                   if($_SESSION['U_ID']==$row['UserID'] ||  $_SESSION['Account_Type'])
                                     {?>
                                     
                                       <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
@@ -242,8 +244,10 @@ session_start();
                                    <?php }   
                             ?>
                             <br>
+                            <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
                             <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-up"></i></a>
                            <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-down"></i></a>
+                           <?php endif; ?>
                            <br>
                           <?php $review-> selectup($row["ReviewID"]);
                                

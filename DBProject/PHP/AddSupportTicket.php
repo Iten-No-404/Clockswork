@@ -14,7 +14,6 @@
         }
         if ($AdditionalInfo == '')
             $AdditionalInfo = NULL;
-        AlertJS($ReportDescription);
         $result = supportticket::insertsupportticket($ReportDescription,$Closed, $U_ID, $AdditionalInfo);
         if ($result == true)
             AlertJs("Ticket submitted");

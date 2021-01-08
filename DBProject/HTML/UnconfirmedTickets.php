@@ -37,17 +37,19 @@
     </div>
 
     <?php
-            $result = supportticket::getAllSupportTicketsForUser($_SESSION['U_ID']);
-            $currUser = new user($_SESSION['U_ID']);
+            $db = DBConnection::getInst()->getConnection();
+            $result = $db->query("SELECT * FROM SupportTicket WHERE Closed = 'W'");
             while ($row = $result->fetch_assoc())
             {
-                $currSupport = new supportticket($row['TicketID'])
+                $currSupport = new supportticket($row['TicketID']);
+                $currUser = new user($row['U_ID']);
+
         ?>
     <div class="line"></div>
     <div class="container my-3">
         <div class="row mt-2">
             <div class="col-lg-1">
-                <?php $currUser->getProfilePicture($_SESSION['U_ID']); ?>
+                <?php $currUser->getProfilePicture(($row['U_ID'])); ?>
             </div>
             <div class="col-lg-11">
                 <a href="../HTML/user.php?id=<?php echo $currUser->U_ID;?>">
@@ -57,20 +59,10 @@
                         ?>
                 </a>
                 <div class="float-lg-right">
-                    <H6 class= "float-lg-right"> Ticket Status :  
-                        <?php if ($currSupport->Closed == 'W')
-                        {
-                            echo "Awaiting Confirmation";
-                        }
-                        else if ($currSupport->Closed == 'B')
-                        {
-                            echo "Confirmed";
-                        }
-                        else
-                        {
-                            echo "Resolved";
-                        }
-                        ?>
+                    <H6 class= "float-lg-right">
+                        <form action="../PHP/ConfirmTicket.php? id= <?php echo $row['TicketID']; ?>" method="POST" enctype="multipart/form-data">
+                            <button class="btn btn-primary" type="submit" id="Confirm" name="Confirm">Confirm</button>
+                        </form>
                     </H6>
                 </div>
                 <p> <?php echo $currSupport->ReportDescription; ?></p>

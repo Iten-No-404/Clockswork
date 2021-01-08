@@ -85,7 +85,7 @@ class supportticket
      public static function getAllSupportTicketsForUser($uid)
      {
          $db = DBConnection::getInst()->getConnection();
-         $result = $db->query("SELECT TicketID FROM SupportTicket WHERE U_ID = '$uid'");
+         $result = $db->query("SELECT * FROM SupportTicket WHERE U_ID = '$uid'");
          return $result;
      }
   
