@@ -32,13 +32,14 @@
     <link rel="stylesheet" type="text/css" href="../src/bootstrap-duallistbox.css">
     <link rel="stylesheet" type="text/css" href="../CSS/bootstrap-duallistbox.css">
     <link rel="stylesheet" type="text/css" href="../CSS/bootstrap-duallistbox.min.css">
+    <link rel="stylesheet" href="../CSS/PublishApp.css">
     <title>Publish</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
 
 <body>
-    <h1>Publish an Application</h1>
+    <h1 class="mt-2">Publish an Application</h1>
     <H2 style="text-align: center;">Become a Developer!!</H2>
     <div style="text-align: center; margin-left: 5%; margin-right: 5%;">
         <form action="../PHP/PublishApp.php" method="POST" enctype="multipart/form-data">

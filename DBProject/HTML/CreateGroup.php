@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <link rel="stylesheet" href="../CSS/user.css">
     <title>Create a Group!</title>
 </head>
@@ -35,7 +36,7 @@
 
 
 <body>
-    <h1>Create a Group!</h1>
+    <h1 class="mt-2">Create a Group!</h1>
     <!-- <H2 style="text-align: center;">Become a Developer!!</H2> -->
     <div style="text-align: center; margin-left: 5%; margin-right: 5%;">
         <form action="../PHP/creategroup.php" method="POST" enctype="multipart/form-data">
