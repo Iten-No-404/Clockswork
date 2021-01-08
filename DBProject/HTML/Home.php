@@ -27,7 +27,7 @@ require '../PHP/app.php';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>Document</title>
+    <title>Clockwork Home</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
@@ -39,7 +39,7 @@ require '../PHP/app.php';
     $textarray = array(' Best Entertainment apps ',' Popular Apps & Games', 'Recommended For You', 'Take a look At These');
     $count = 0; 
     $obj = new App();
-    $result = $obj->getallids();
+    $result = $obj->getallidsformain();
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc() and $textcounter<4) {

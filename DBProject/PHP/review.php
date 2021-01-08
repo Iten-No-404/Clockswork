@@ -126,6 +126,19 @@ class review{
             }
           }
      }  
+
+     public function getStarscount($id)
+     {
+          $result= $this->dbConnection->query("SELECT Stars FROM  review WHERE ReviewID='$id'");
+          //different
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                return $row["Stars"];
+              }
+            }
+    } 
+
      public function getUpvotes($id)
      {
           $result= $this->dbConnection->query("SELECT COUNT(U_ID) FROM  up_down_voted_review WHERE Review_id='$id' AND Up_Down ='1'");
@@ -151,10 +164,19 @@ class review{
        
           $this->dbConnection->query("INSERT INTO reviewed (UserID,ApplicationID,ReviewID) VALUES($UserID,$ApplicationID,$ReviewID)");
      }
+     public function reviewedbefore($UserID,$ApplicationID)
+     {
+        $result= $this->dbConnection->query("SELECT * FROM  reviewed WHERE  ApplicationID=$ApplicationID AND UserID=$UserID");
+        if ($result->num_rows > 0) {
+            return true;
+         }
+         else
+           return false;
+     }
      public function deletefromreviwed($ApplicationID)
      {
        
-          $this->dbConnection->query("DELETE   FROM reviewed WHERE  ApplicationID=$ApplicationID");
+          $this->dbConnection->query("DELETE FROM reviewed WHERE  ApplicationID=$ApplicationID");
      }
      public function deletefromreviwedByid($ReviewID)
      {

@@ -190,11 +190,26 @@
                           <?php   $user=new User($row['U_ID']);
                             $user->getUserName($row['U_ID']);
                           ?>
-                    </a></h6>
+                    </a>
+                    <?php    
+                            if($_SESSION['U_ID']==$row['U_ID'])
+                             {?>
+                               <a href="editmypost.php?id=<?php echo $row['Post_id']; ?>"> <button class="btn btn-dark"  type="button">Edit</button></a>
+                               <a href="../PHP/deletepost.php?id=<?php echo $row['Post_id']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
 
-
+                            <?php }   
+                     ?>
+                    </h6>
+                    <!-- Modify and delete to be added here -->
                         <p> <?php $obj->getTEXTpost($row['Post_id']);?> </p>
                         <img class="img" src="<?php $obj->getpicture($row['Post_id']);?>" alt="">
+                        <br>
+                     <a href="../PHP/up_post.php?id=<?php echo $row["Post_id"];?>"><i class="far fa-thumbs-up"></i></a>
+                    <a href="../PHP/down_post.php?id=<?php echo $row["Post_id"];?>"><i class="far fa-thumbs-down"></i></a>
+                    <br>
+                   <?php $obj-> selectup($row["Post_id"]);
+                             $obj->selectdown($row["Post_id"]);
+                       ?>
 
                     </div>
                </div>
