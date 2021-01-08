@@ -47,12 +47,12 @@
             ?>
                 <div class="applet">
                     <div class="row mt-2">
-                        <div class="col-lg-1">
+                        <div class="col-lg-1  animate__animated  animate__backInLeft">
                             <a href="Group.php?id=<?php echo $currGID['Group_ID']?>">
                                <?php $currGroup->getGroupPicture($currGID['Group_ID']);?>
                             </a>
                         </div>
-                        <div class="col-lg-11">
+                        <div class="col-lg-11  animate__animated  animate__backInRight">
                             <div class="float-lg-right">
                                 <H6 class="float-lg-right"> Members: <?php echo $currGroup->GetNumMembers($currGroup->GROUP_ID) ?>, Date Created: <?php echo $currGroup->Date_Created ?></H6>
                             </div>

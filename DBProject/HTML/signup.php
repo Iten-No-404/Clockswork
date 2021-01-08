@@ -18,7 +18,7 @@
     <div class="container-fluid">
 
         <div class="row">
-            <form action="../PHP/signup.php" method="POST">
+            <form action="../PHP/signup.php" id="" method="POST">
 
                 <div class="form">
                     <label>Name:</label>

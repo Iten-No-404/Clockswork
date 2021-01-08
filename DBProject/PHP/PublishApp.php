@@ -5,17 +5,6 @@ require_once 'app.php';
 require_once '../PHP/Categories.php';
 session_start();
 
-// if (session_status() == PHP_SESSION_NONE) {
-//     AlertJS("You must be logged in first");
-//     RedirectJS("../HTML/login.html");
-//     //session_start();
-// }
-// else if($_SESSION['login'] ==false)
-// {
-//     AlertJS("You must be logged in first");
-//     RedirectJS("../HTML/login.html");
-// }
-
 if (isset($_POST['publish'])) {
     // Based on: https://www.youtube.com/watch?v=qjwc8ScTHnY&ab_channel=edureka%21
 
@@ -86,8 +75,25 @@ if (isset($_POST['publish'])) {
         if(!empty($_POST['categories_duallistbox']) )
         {
             foreach ($_POST['categories_duallistbox'] as $selectedOption)
-            {
-                $result = $catobj->insertappcategory($ApplicationID,(int)$selectedOption);
+            {   
+                //AlertJS($selectedOption);
+                $idpresent = $catobj->getCategoryid($selectedOption);
+                if($idpresent == 0)
+                {
+                    //This uses autoincrement:
+                    //$result2 = $catobj->addnewCategory($selectedOption);
+                    //if($result2)
+                    //AlertJS("New Category Inserted!");
+                    //$idpresent = $catobj->getCategoryid($selectedOption);
+//////////////////////////////////Above Works//////////////////////////////
+                    $idpresent = $catobj->getmaxidp1();
+                    $result2 = $catobj->addnewCategorywithid($idpresent,$selectedOption);
+                    //if($result2)
+                      //  AlertJS("New Category Inserted!");
+
+                }
+                //AlertJS($idpresent);
+                $result = $catobj->insertappcategory($ApplicationID,(int)$idpresent);
                 //if($result)
                     //AlertJS("Category Insertion Successful!");
             }
@@ -96,6 +102,20 @@ if (isset($_POST['publish'])) {
         {
             AlertJS("Category Insertion Failed :'(");
         }
+        //Without New Category logic
+        // if(!empty($_POST['categories_duallistbox']) )
+        // {
+        //     foreach ($_POST['categories_duallistbox'] as $selectedOption)
+        //     {
+        //         $result = $catobj->insertappcategory($ApplicationID,(int)$selectedOption);
+        //         //if($result)
+        //             //AlertJS("Category Insertion Successful!");
+        //     }
+        // }
+        // else
+        // {
+        //     AlertJS("Category Insertion Failed :'");
+        // }
         $catobj->deleteemptycategories();
         RedirectJS("../HTML/application.php?id=$ApplicationID");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)

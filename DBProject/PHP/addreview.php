@@ -15,12 +15,16 @@ if(isset($_POST['submit']))
   $ApplicationID=(int)$_GET['id'];
 
  $obj=new review();
- 
- $obj-> insertreview($Review_Description,$ReviewDate,$Stars);
- $ReviewID=(int)$obj->getids();
-
-
-  $obj->reviwed($UserID,$ApplicationID,$ReviewID);
+ $donebefore = $obj->reviewedbefore($UserID,$ApplicationID);
+ if($donebefore)
+ {
+  AlertJS("You can not review this application twice! Either modify your current review or delete it and write a new one");
+ }
+ else{
+  $obj-> insertreview($Review_Description,$ReviewDate,$Stars);
+  $ReviewID=(int)$obj->getids();
+   $obj->reviwed($UserID,$ApplicationID,$ReviewID);
+ }
   RedirectJS("../HTML/application.php?id=$ApplicationID");
 }
 ?>

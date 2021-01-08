@@ -44,7 +44,7 @@ session_start();
     <div class="container blockapp my-3">
         <div class="container my-5">
             <div class="row">
-                <div class="col col-lg-4 mt-3">
+                <div class="col col-lg-4 mt-3 animate__animated  animate__zoomIn">
 
                     <?php
                     $obj = new App();
@@ -92,7 +92,7 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="container my-3">
+        <div class="container my-3 animate__animated animate__zoomIn">
          <?php $obj = new App();
                $obj->getAppTrailer($_GET['id']);
             ?>
@@ -129,7 +129,7 @@ session_start();
         <!-- <a href=""></a> -->
         <div class="container mt-3">
             <h1>Description</h1>
-            <p>
+            <p class=" animate__animated animate__slideInDown">
                 <?php
                 $obj = new App();
                 $id = $_GET['id'];
@@ -243,10 +243,9 @@ session_start();
                     </a>
                  </div>
                  <div class="col-lg-11">
-                   <textarea name="Review_Description" id="" cols="40" rows="5">
-                      
-                    
-                    </textarea>
+                   <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
+                   <h6 id="Review"></h6>
+
                     <br>
                     <label for="">Stars</label>
                     <select id="" name="Stars">
@@ -273,5 +272,6 @@ session_start();
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>
 <script src="../bootstrap/bootstrap.js"></script>
+<script src="../js/Review.js"></script>
 
 </html>

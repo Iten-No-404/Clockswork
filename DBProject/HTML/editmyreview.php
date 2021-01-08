@@ -43,23 +43,53 @@ require_once '../PHP/user.php';
                 <form action="../PHP/editreview.php?id=<?php echo (int)$_GET['id'];?>" method="POST">
 
                 <div class="col-lg-12">
-                    <textarea name="Review_Description" id="" cols="40" rows="5">
-                        
-                        <?php  $review=new Review();
-                            $id=(int)$_GET['id'];
-                            $review->getReview_Description($id);
-                            ?>
-                        </textarea>
+                    <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"> <?php  $review=new Review(); $id=(int)$_GET['id']; $review->getReview_Description($id); ?></textarea>
+                    <h6 id="Review"></h6>
+
                    </div>
                    <div class="col-lg-12">
                     <label for="">Stars</label>
-                        <select id="" name="Stars">
-                                    <option value="1">1</option>
+                        <?php if($review->getStarscount($id)==1) { ?>
+                            <select id="" name="Stars">
+                                    <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                        </select> 
+                            </select> 
+                                    <?php } else if($review->getStarscount($id)==2) { ?>
+                                        <select id="" name="Stars">
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    </select> 
+                                    <?php } else if($review->getStarscount($id)==3) { ?>
+                                        <select id="" name="Stars">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    </select> 
+                                    <?php } else if($review->getStarscount($id)==4) { ?>
+                                        <select id="" name="Stars">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" selected>4</option>
+                                    <option value="5">5</option>
+                                    </select> 
+                                    <?php } else { ?>
+                                        <select id="" name="Stars">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5" selected>5</option>
+                                    </select> 
+                                    <?php } ?>
                         
                            <button class="btn btn-primary" id="review"  type="submit" name="submit">Edit</button></a>
        
@@ -72,6 +102,12 @@ require_once '../PHP/user.php';
  
 
     <?php include_once "../PHP/footer.php" ?>
+    
+<script src="../bootstrap/jquery.js"></script>
+<script src="../bootstrap/popper.main.js"></script>
+<script src="../bootstrap/bootstrap.js"></script>
+    <!-- <script src="../js/Review.js"></script> -->
+
 
 </body>
 
