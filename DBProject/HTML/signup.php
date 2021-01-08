@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/SignUp.css">
-    <title>sign Up</title>
+    <title>Sign Up</title>
 
 </head>
 <?php include_once '../PHP/header.php' ?>

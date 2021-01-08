@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
-    <title>Document</title>
+    <title><?php $id=$_GET['id']; $obj=new GRoup($id); $obj->getGroupName($id); echo " - Group" ?></title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
