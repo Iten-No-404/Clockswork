@@ -33,19 +33,7 @@
 
 <body>
     <div class="container my-3">
-        <form action="../PHP/AddSupportTicket.php? id= <?php echo $_SESSION['U_ID']; ?>" method="POST" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-lg-12">
-                    <textarea name="SupportTicketInfo" id="SupportTicketInfo" cols="80" rows="5"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div style="display: flex;">
-                    <button class="btn btn-primary" type="submit" id="Post" name="Post">Post</button>
-                    <input type="file"  class="form-control-file" id="AdditionalSupportTicket" name="AdditionalSupportTicket">
-                </div>
-            </div>
-        </form>
+        <button class="btn btn-dark" id="move"> <a href="../HTML/SupportTicketStaffView.php">My Tickets</a></button>
     </div>
 
     <?php
@@ -91,30 +79,6 @@
         </div>
     </div>
     <div class="line"></div>
-    <!--<div class="container my-3">
-
-        <div class="row mt-2">
-            <div class="col-lg-1">
-                <img class="img-fluid rounded-circle"
-                    src="../IMAGES/118111837_1032480850503383_8251734100101419473_n.jpg" alt="">
-
-
-            </div>
-
-            <div class="col-lg-11">
-                <h6>Radwa Ahmed</h6>
-
-
-                <p>I love the game, I have been playing for months now. But the direction it is taking could make me to
-                    stop playing. Since the start of season 12, performance has been disregarded and it has become more
-                    about features and looks. I cannot enjoy the beauty of the game if it cannot perform what it
-                    intend...</p>
-                <img class="img" src="../IMAGES/pp.webp" alt="">
-            </div>
-
-
-        </div>
-    </div> -->
     <?php include_once "../PHP/footer.php" ?>
 </body>
 <script src="../bootstrap/jquery.js"></script>

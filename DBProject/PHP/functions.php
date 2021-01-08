@@ -64,6 +64,51 @@ function UploadFile($ImagesDirectory, $uploadFieldName, $errorRedirectPage, $nam
     return $ImagePath;
 }
 
+function UploadSupportFile($SupportDirectory, $uploadFieldName, $errorRedirectPage, $U_ID, $T_ID, $required = false)
+{
+    $target_dir = $SupportDirectory;
+    $fileExt = explode('.', $_FILES[$uploadFieldName]['name']);
+    $fileRealExt = strtolower(end($fileExt));
+    $target_file = $target_dir . $U_ID . "_" . $T_ID . "." . $fileRealExt;
+    $uploadOk = 1;
+    $ImagePath = '';
+
+    // Check if image file is a actual image or fake image
+    if ($_FILES[$uploadFieldName]["tmp_name"] != "") {
+        $check = true;
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+    } else if ($required) {
+        AlertJS('Please upload a picture!');
+        RedirectJS($errorRedirectPage);
+        return $ImagePath;
+    }
+
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        AlertJS("File is not an image.");
+        RedirectJS($errorRedirectPage);
+        return $ImagePath;
+        // if everything is ok, try to upload file
+    } else {
+
+        // Check if file already exists
+        if (file_exists($target_file && $target_file != $target_dir)) {
+            $ImagePath = $target_file;
+        } else if (move_uploaded_file($_FILES[$uploadFieldName]["tmp_name"], $target_file)) {
+            $ImagePath = $target_file;
+            // echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+        } else if ($required) {
+            AlertJS("Sorry, there was an error uploading your file.");
+        }
+    }
+
+    return $ImagePath;
+}
+
 // // https://www.codexworld.com/how-to/validate-date-input-string-in-php/#:~:text=The%20validateDate()%20function%20checks,string%20is%20valid%2C%20otherwise%20FALSE.
 // function validateDate($date, $format = 'Y-m-d'){
 //     $d = DateTime::createFromFormat($format, $date);

@@ -84,14 +84,14 @@
                 </div>
             </div>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[0] == 0 && $shownUser->Hide[1] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[0] == 0 && $shownUser->Hide[1] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
                 <div class="line">
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         <label for="">
                             <h6>Name</h6>
                         </label>
@@ -99,12 +99,12 @@
                     <div class="col-lg-6">
                         <?php
                         if (isset($shownUser->FName)) {
-                            if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id']) {
+                            if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Developer'] == SUPPORT_ACCOUNT) {
                                 echo $shownUser->FName;
                             }
                         }
                         if (isset($shownUser->LName)) {
-                            if ($shownUser->Hide[1] == 1 || $_SESSION['U_ID'] == $_GET['id']) {
+                            if ($shownUser->Hide[1] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Developer'] == SUPPORT_ACCOUNT) {
                                 echo " " . $shownUser->LName;
                             }
                         }
@@ -113,7 +113,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[4] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[4] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -135,7 +135,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[5] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[5] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
                 <div class="line">
@@ -177,7 +177,7 @@
 
             </div> -->
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
                 <div class="line">
@@ -236,7 +236,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -259,7 +259,7 @@
 
 
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id']) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 

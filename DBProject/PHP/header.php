@@ -42,40 +42,40 @@ else {
         </button>
         <div id="my-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
+            <?php if (isset($_SESSION['U_ID'])) : ?>
                 <li class="nav-item active">
                     <a class="nav-link" href="../HTML/Browse.php">Browse</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/Groups_List.php">Groups</a>
-                </li>
+                </li>   
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/CreateGroup.php">Create a group!</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/PublishApp.php">Publish </a>
                 </li>
+                <?php if ($_SESSION['Developer'] != SUPPORT_ACCOUNT) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/supportticket.php">Support</a>
                 </li>
-                <?php if (isset($_SESSION['U_ID'])) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="../HTML/user.php? id= <?php if (isset($_SESSION['U_ID'])) {
-                                                                        echo $_SESSION['U_ID'];
-                                                                    } ?>">Profile</a>
+                <?php else : ?>
+                    <li class="nav-item">
+                    <a class="nav-link" href="../HTML/SupportTicketStaffView.php">Support</a>
                 </li>
-                <?php endif; ?>
+                <?php endif ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="../HTML/user.php? id= <?php  echo $_SESSION['U_ID']; ?>">Profile</a>
+                </li>
+            <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.php">About</a>
                 </li>
-                <?php if (isset($_SESSION['U_ID'])) :?>
+            <?php if (isset($_SESSION['U_ID'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../PHP/logout.php">Log out</a>
                 </li>
-                <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://music.youtube.com/watch?v=QkFJau6aK3w&feature=share">CLICK ME</a>
-                </li>
-
+            <?php endif; ?>
             </ul>
         </div>
     </nav>

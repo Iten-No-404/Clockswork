@@ -53,6 +53,7 @@ PRIMARY KEY (App_ID),
 FOREIGN KEY (U_ID) REFERENCES Users(U_ID) on update cascade on delete cascade -- Published_By relationship
 );
 
+
 CREATE TABLE Employee (
     Employee_ID INTEGER  AUTO_INCREMENT,
     Gender VARCHAR(1) NOT NULL,
@@ -68,8 +69,11 @@ CREATE TABLE Employee (
     -- So, I'll just use do Fname and Lname as two separate attributes, either this or a new table
     Fname VARCHAR(100) NOT NULL,
     Lname VARCHAR(100) NOT NULL,
+    Account_Type VARCHAR(1) NOT NULL, --Either S for Support staff or A for Adminstrator
     PRIMARY KEY(Employee_ID)
 );
+ALTER TABLE `Employee` ADD `Account_Type` VARCHAR(1) NOT NULL --?
+
 
 CREATE TABLE  Categories  (
 	 Category_ID  INT NOT NULL  AUTO_INCREMENT,
