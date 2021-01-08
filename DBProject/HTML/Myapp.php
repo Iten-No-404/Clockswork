@@ -62,8 +62,6 @@ require '../PHP/app.php'
             <h1>My Apps</h1>
         </div>
         <div class="container blockapp my-3">
-
-
             <div class="row mt-2">
                 <?php
                 $obj = new App();
@@ -94,32 +92,14 @@ require '../PHP/app.php'
                             </div>
                         </div>
                         <div class="line my-2">
-
                         </div>
-
-
-
                 <?php }
                 }
-
-
                 ?>
-
             </div>
-
-
-
-
-
-
-
-
         </div>
     </div>
-
-
     <?php include_once "../PHP/footer.php" ?>
-
 </body>
 
 </html>

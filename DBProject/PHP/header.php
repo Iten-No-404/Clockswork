@@ -67,15 +67,19 @@ else {
                         </li>
                     <?php endif ?>
                     <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID']; ?>">Profile</a>
-                    </li>
-                    <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../HTML/Employee.php? id= <?php echo $_SESSION['U_ID']; ?>">Profile</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID']; ?>">Profile</a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/Employee.php? id= <?php echo $_SESSION['U_ID']; ?>">Profile</a>
+                        </li>
                     <?php endif; ?>
-
+                    <?php if ($_SESSION['Account_Type'] == DEV_ACCOUNT) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/Myapp.php" >My applications</a>
+                        </li>
+                    <?php } ?>
                 <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.php">About</a>

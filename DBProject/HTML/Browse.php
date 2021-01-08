@@ -37,27 +37,28 @@ require_once '../PHP/user.php';
 <body>
 
     <div class="categories">
-    <?php
+        <?php
         include_once '../PHP/Categories.php'
-    ?>
-    <?php
-        $cobj=new categories();
+        ?>
+        <?php
+        $cobj = new categories();
         $cobj->deleteemptycategories();
-        $cresult= $cobj->getallids();
+        $cresult = $cobj->getallids();
         if ($cresult->num_rows > 0) {
-        // output data of each row
-        while($crow = $cresult->fetch_assoc()) {
-        $cvar = $crow["Category_ID"]; ?>
-        <a class="catlinks" href="../HTML/Category.php ?id=<?php echo $crow['Category_ID']; ?> ">
-            <div class="col-12">
-                <i class="icon far fa-fw fa-circle"></i>
-                <span class="txt-action idx-27">
-                <?php  echo $cobj-> getCategoryName($cvar) ?>  
-                <?php $cobj->getAppCount($cvar) ?>
-                </span>
-            </div>
-            </a>
-            <?php } } ?>
+            // output data of each row
+            while ($crow = $cresult->fetch_assoc()) {
+                $cvar = $crow["Category_ID"]; ?>
+                <a class="catlinks" href="../HTML/Category.php ?id=<?php echo $crow['Category_ID']; ?> ">
+                    <div class="col-12">
+                        <i class="icon far fa-fw fa-circle"></i>
+                        <span class="txt-action idx-27">
+                            <?php echo $cobj->getCategoryName($cvar) ?>
+                            <?php $cobj->getAppCount($cvar) ?>
+                        </span>
+                    </div>
+                </a>
+        <?php }
+        } ?>
     </div>
 
     <div class="appslist">
@@ -70,76 +71,84 @@ require_once '../PHP/user.php';
             <div class="row mt-2">
                 <?php
                 $obj = new App();
-                $result = $obj->getallids();
-                $x=0;
+                if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT)
+                    $result = $obj->GetAllAppIDs();
+                else
+                    $result = $obj->getallids();
+                $x = 0;
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
                         $var = $row["App_ID"];
                         $x++;
-                        if($x%2==0)
-                     {?>
+                        if ($x % 2 == 0) { ?>
 
-                        <div class="col-lg-1 animate__animated  animate__backInLeft">
-                            <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
-                                <?php $obj->getApplication_Picturecircle($var) ?>
-                            </a>
-                        </div>
-                        <div class="col-lg-11 animate__animated  animate__backInRight">
-                            <div class="float-lg-right">
-                                <?php $obj->getRating($var);
-                                ?>
-                            </div>
-                            <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
-                                <h5><?php $obj->getname($var) ?></h5>
-                            </a>
-                            <div>
-                                <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
-                                <a href="../HTML/user.php?id=<?php echo $obj-> getU_ID($var) ?>">
-                                    <h6 style="font-weight: bold;"><?php $x=$obj-> getU_ID($var);
-                                    $userobj=new user($x);
-                                    $userobj->getUserName($x);
-                                           ?></h6>
+                            <div class="col-lg-1 animate__animated  animate__backInLeft">
+                                <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                    <?php $obj->getApplication_Picturecircle($var) ?>
                                 </a>
                             </div>
-                        </div>
-                        <div class="line my-2">
+                            <div class="col-lg-11 animate__animated  animate__backInRight">
+                                <div class="float-lg-right">
+                                    <?php $obj->getRating($var);
+                                    ?>
+                                </div>
+                                <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                    <h5><?php $obj->getname($var);
+                                        if ($obj->getHide($var) == '1') {
+                                            echo " (hidden)";
+                                        }
+                                        ?></h5>
+                                </a>
+                                <div>
+                                    <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
+                                    <a href="../HTML/user.php?id=<?php echo $obj->getU_ID($var) ?>">
+                                        <h6 style="font-weight: bold;"><?php $x = $obj->getU_ID($var);
+                                                                        $userobj = new user($x);
+                                                                        $userobj->getUserName($x);
+                                                                        ?></h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="line my-2">
 
-                        </div>
+                            </div>
 
+
+
+                        <?php } else { ?>
+                            <div class="col-lg-1 animate__animated  animate__backInRight">
+                                <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                    <?php $obj->getApplication_Picturecircle($var) ?>
+                                </a>
+                            </div>
+                            <div class="col-lg-11 animate__animated  animate__backInLeft">
+                                <div class="float-lg-right">
+                                    <?php $obj->getRating($var);
+                                    ?>
+                                </div>
+                                <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                                    <h5><?php $obj->getname($var);
+                                        if ($obj->getHide($var) == '1') {
+                                            echo " (hidden)";
+                                        } ?></h5>
+                                </a>
+                                <div>
+                                    <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
+                                    <a href="../HTML/user.php?id=<?php echo $obj->getU_ID($var) ?>">
+                                        <h6 style="font-weight: bold;"><?php $x = $obj->getU_ID($var);
+                                                                        $userobj = new user($x);
+                                                                        $userobj->getUserName($x);
+                                                                        ?></h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="line my-2">
+
+                            </div>
 
 
                 <?php }
-                else {?>
-                        <div class="col-lg-1 animate__animated  animate__backInRight">
-                        <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
-                            <?php $obj->getApplication_Picturecircle($var) ?>
-                        </a>
-                    </div>
-                    <div class="col-lg-11 animate__animated  animate__backInLeft">
-                        <div class="float-lg-right">
-                            <?php $obj->getRating($var);
-                            ?>
-                        </div>
-                        <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
-                            <h5><?php $obj->getname($var) ?></h5>
-                        </a>
-                        <div>
-                            <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
-                            <a href="../HTML/user.php?id=<?php echo $obj-> getU_ID($var) ?>">
-                                <h6 style="font-weight: bold;"><?php $x=$obj-> getU_ID($var);
-                                $userobj=new user($x);
-                                $userobj->getUserName($x);
-                                    ?></h6>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="line my-2">
-
-                    </div>
-
-                    
-               <?php }
                     }
                 }
 
