@@ -22,13 +22,14 @@
     <title>Document</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
-
+<?php require '../PHP/Employee.php' ?>
 
 <body>
     <h1>Personal info</h1>
     <div class="container mt-3 cont1">
 
 
+        <?php $shownEmp = new Employee($_SESSION['U_ID']); ?>
 
         <div class="row">
             <div class="col-lg-3">
@@ -37,8 +38,8 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Radwa Ahmed
-            </div>
+                <?php echo "$shownEmp->Fname" . " $shownEmp->Lname"; ?>
+        </div>
 
         </div>
         <div class="line">
@@ -52,7 +53,7 @@
             </div>
             <div class="col-lg-9">
 
-                March,21,2000
+                <?php echo "$shownEmp->Bdate" ?>
 
             </div>
 
@@ -67,7 +68,12 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Female
+            <?php
+                if ($shownEmp->Gender == 'M')
+                    echo "Male";
+                else
+                    echo "Female";
+            ?>
             </div>
 
         </div>
@@ -84,7 +90,7 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                radwa.kaml00@eng-st.cu.edu.eg
+            <?php echo "$shownEmp->Email" ?>
             </div>
 
         </div>
@@ -99,7 +105,7 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Wady Hof,Cairo
+            <?php echo "$shownEmp->Employee_Address" ?>
             </div>
 
         </div>
@@ -113,7 +119,7 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                18000$
+            <?php echo "$shownEmp->Salary" ?>
             </div>
 
         </div>
@@ -127,7 +133,12 @@
                 </label>
             </div>
             <div class="col-lg-9">
-                Developer
+            <?php
+                if ($shownEmp->Account_Type = ADMIN_ACCOUNT)
+                    echo "Adminstrator";
+                else
+                    echo "Support";
+            ?>
             </div>
 
         </div>

@@ -29,10 +29,11 @@
 </head>
 
 <?php include_once '../PHP/header.php' ?>
+<?php require '../PHP/Employee.php' ?>
 
 <body>
     <?php
-    $shownUser = new user($_GET['id']);
+        #$shownUser = new user($_GET['id']);
     ?>
 
     <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
@@ -45,7 +46,7 @@
             </div>
         <?php else : ?>
             <?php
-            $shownUser = new user($_GET['id']);
+            #$shownUser = new user($_GET['id']);
             if ($shownUser->Username[strlen($shownUser->Username) - 1] != 's') {
                 echo '<h1 class="mt-3">' . $shownUser->Username . "'s info" . '</h1>';
             } else {
@@ -80,8 +81,8 @@
                     <?php
                     if (session_status() == PHP_SESSION_NONE) {
                         session_start();
-                    }
-                    $currUser = new user($_SESSION['U_ID']);
+                    }   
+                        #$currUser = new user($_SESSION['U_ID']);
                     ?>
                     <img class="img-fluid rounded-circle" sty src="<?php echo $shownUser->Profile_Picture ?>" alt="">
                 </div>

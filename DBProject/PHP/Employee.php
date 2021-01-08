@@ -20,7 +20,7 @@
             $result = $db->query($query);
             $row = $result->fetch_assoc();
             $this->Employee_ID = $row['Employee_ID'];
-            $this->Gender = $row['Employee_ID'];
+            $this->Gender = $row['Gender'];
             $this->Bdate = $row['Bdate'];
             $this->Salary = $row['Salary'];
             $this->Employee_Address = $row['Employee_Address'];
