@@ -81,7 +81,7 @@ class post
      }
      public function select($group_id)
      {
-        $result = $this->dbConnection->query("SELECT Post_id,U_ID FROM  post WHERE group_id=$group_id");
+        $result = $this->dbConnection->query("SELECT Post_id,U_ID FROM  post WHERE group_id=$group_id ORDER BY Post_id DESC");
         //If we want the posts to be sorted according to Date_Written. It's not the best option though since we only store the date not the time
         //$result = $this->dbConnection->query("SELECT Post_id,U_ID FROM  post WHERE group_id=$group_id ORDER BY Date_Written DESC");
             return $result;

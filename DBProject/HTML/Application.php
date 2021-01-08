@@ -13,7 +13,6 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../CSS/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -36,6 +35,7 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <title><?php $id=$_GET['id']; $obj=new App(); $obj->getname($id); echo " - App" ?></title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
@@ -161,7 +161,38 @@ session_start();
             </p>
         </div>
         <div class="line"> </div>
+        <div>
+          <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
+               <div class="row">
+                 <div class="col-lg-1">
+                   <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                        <?php   $user=new User($_SESSION['U_ID']);
+                            $user->getProfilePicture($_SESSION['U_ID']);
+                        ?>
+                    </a>
+                 </div>
+                 <div class="col-lg-11">
+                   <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
+                   <h6 id="Review"></h6>
 
+                    <br>
+                    <label for="">Stars</label>
+                    <select id="" name="Stars">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                     </select> 
+                     <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                    
+                  </div>
+               </div>
+                
+               
+          </form>
+        </div>
+        <div class="line"> </div>
         <div class="container">
             <h1>Reviews</h1>
             <div class="row mt-2">
@@ -232,37 +263,7 @@ session_start();
               
             </div>
         </div>
-        <div>
-          <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
-               <div class="row">
-                 <div class="col-lg-1">
-                   <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
-                        <?php   $user=new User($_SESSION['U_ID']);
-                            $user->getProfilePicture($_SESSION['U_ID']);
-                        ?>
-                    </a>
-                 </div>
-                 <div class="col-lg-11">
-                   <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
-                   <h6 id="Review"></h6>
 
-                    <br>
-                    <label for="">Stars</label>
-                    <select id="" name="Stars">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                     </select> 
-                     <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
-                    
-                  </div>
-               </div>
-                
-               
-          </form>
-        </div>
        <br>
     </div>
   

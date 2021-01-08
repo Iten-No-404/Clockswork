@@ -22,7 +22,10 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="../CSS/user.css">
-    <title>Document</title>
+    <title><?php $shownUser = new user($_GET['id']); if ($shownUser->Username[strlen($shownUser->Username) - 1] != 's') {
+                echo $shownUser->Username . "'s Profile";
+            } else {
+                echo $shownUser->Username . "' Profile"; } ?></title>
 </head>
 
 <?php include_once '../PHP/header.php' ?>

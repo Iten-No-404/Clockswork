@@ -194,7 +194,7 @@ class review{
      }
      public function getuseridsandreviewids($ApplicationID)
      {
-        $result= $this->dbConnection->query("SELECT UserID,ReviewID	FROM reviewed WHERE ApplicationID='$ApplicationID'");
+        $result= $this->dbConnection->query("SELECT UserID,ReviewID	FROM reviewed WHERE ApplicationID='$ApplicationID' ORDER BY ReviewID DESC");
         return $result;
      }
      public function getappidfromreviewed($ReviewID)
