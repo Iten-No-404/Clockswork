@@ -20,6 +20,10 @@ ul
    /*justify-content:space-between;*/
     
 }
+* { 
+   
+    font-family: Georgia, 'Times New Roman', Times, serif;             
+}
 
 .fab{
     width:30px;

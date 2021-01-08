@@ -33,7 +33,7 @@
     ?>
 
     <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
-        <h1>Personal info</h1>
+        <h1 class="mt-3">Personal info</h1>
         <div class="container mt-3 cont1">
             <div class="row">
                 <div class="col-lg-9">
@@ -44,7 +44,7 @@
             <?php
             $shownUser = new user($_GET['id']);
             if ($shownUser->Username[strlen($shownUser->Username) - 1] != 's') {
-                echo '<h1>' . $shownUser->Username . "'s info" . '</h1>';
+                echo '<h1 class="mt-3">' . $shownUser->Username . "'s info" . '</h1>';
             } else {
                 echo '<h1>' . $shownUser->Username . "' info" . '</h1>';
             }
@@ -91,12 +91,12 @@
                 <div class="line">
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-6">
                         <label for="">
                             <h6>Name</h6>
                         </label>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-6">
                         <?php
                         if (isset($shownUser->FName)) {
                             if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id']) {
