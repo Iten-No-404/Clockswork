@@ -243,7 +243,9 @@ session_start();
                     </a>
                  </div>
                  <div class="col-lg-11">
-                   <textarea name="Review_Description" id="" cols="40" rows="5"></textarea>
+                   <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
+                   <h6 id="Review"></h6>
+
                     <br>
                     <label for="">Stars</label>
                     <select id="" name="Stars">
@@ -270,5 +272,6 @@ session_start();
 <script src="../bootstrap/jquery.js"></script>
 <script src="../bootstrap/popper.main.js"></script>
 <script src="../bootstrap/bootstrap.js"></script>
+<script src="../js/Review.js"></script>
 
 </html>

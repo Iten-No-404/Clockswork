@@ -102,6 +102,7 @@ function sad() {
         console.log("ok");
     
         $("#submit").prop('disabled', false);
+        setTimeout(sad,1000);
 
 
     }
@@ -110,7 +111,7 @@ else
     console.log($name);
     $("#submit").prop('disabled', true);
     console.log("sad");
-   setTimeout(sad,10000);
+   setTimeout(sad,1000);
    
 
 }

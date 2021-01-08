@@ -2,11 +2,13 @@ $(document).ready(function () {
     
     $email=1;
     $pass1=1;
+    $validemail=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 
   function check()
    { $("#email").on("focusout",function () {
         
-        if($(this).val().length==0 &&  $("#h_email").empty())
+        if( ($(this).val().length==0 || !$(this).val().match($validemail) ) &&  $("#h_email").empty())
         {
             $(this).css("border-color","red");
            $("#h_email").append("This is empty");
@@ -42,6 +44,7 @@ $(document).ready(function () {
             console.log("ok");
         
             $("#submit").prop('disabled', false);
+            setTimeout(sad,1000);
 
 
         }

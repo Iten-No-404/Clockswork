@@ -43,7 +43,9 @@ require_once '../PHP/user.php';
                 <form action="../PHP/editreview.php?id=<?php echo (int)$_GET['id'];?>" method="POST">
 
                 <div class="col-lg-12">
-                    <textarea name="Review_Description" id="" cols="40" rows="5"> <?php  $review=new Review(); $id=(int)$_GET['id']; $review->getReview_Description($id); ?></textarea>
+                    <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"> <?php  $review=new Review(); $id=(int)$_GET['id']; $review->getReview_Description($id); ?></textarea>
+                    <h6 id="Review"></h6>
+
                    </div>
                    <div class="col-lg-12">
                     <label for="">Stars</label>
@@ -100,6 +102,12 @@ require_once '../PHP/user.php';
  
 
     <?php include_once "../PHP/footer.php" ?>
+    
+<script src="../bootstrap/jquery.js"></script>
+<script src="../bootstrap/popper.main.js"></script>
+<script src="../bootstrap/bootstrap.js"></script>
+    <!-- <script src="../js/Review.js"></script> -->
+
 
 </body>
 
