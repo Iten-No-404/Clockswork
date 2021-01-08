@@ -74,6 +74,7 @@ CREATE TABLE Employee (
     PRIMARY KEY(Employee_ID)
 );
 ALTER TABLE `Employee` ADD `Account_Type` VARCHAR(1) NOT NULL --?
+ALTER TABLE `Employee` ADD `Password` VARCHAR(256) NOT NULL --?
 
 
 CREATE TABLE  Categories  (

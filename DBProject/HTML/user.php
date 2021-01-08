@@ -56,7 +56,7 @@
             <?php endif; ?>
             <?php
             // If the currently viewing user is an administrator
-            if ($_SESSION['Developer'] == ADMIN_ACCOUNT && $_SESSION['U_ID'] != $_GET['id']) { ?>
+            if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT && $_SESSION['U_ID'] != $_GET['id']) { ?>
                 <form action="../PHP/banuser.php?id=<?php echo $_GET['id'] ?>" method="POST">
                     <!-- <div class="row"> -->
                     <div class="col-lg-9">

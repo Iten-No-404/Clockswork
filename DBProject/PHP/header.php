@@ -55,7 +55,7 @@ else {
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/PublishApp.php">Publish </a>
                 </li>
-                <?php if ($_SESSION['Developer'] != SUPPORT_ACCOUNT) : ?>
+                <?php if ($_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/supportticket.php">Support</a>
                 </li>
