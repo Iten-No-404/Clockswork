@@ -102,9 +102,9 @@
         $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
         $dbConnection = DBConnection::getInst()->getConnection();
         $result = $dbConnection->query($query);
-        if ($result->num_rows == 1) :
+        if ($result->num_rows == 1 || $_SESSION['Account_Type'] == SUPPORT_ACCOUNT || $_SESSION['Account_Type'] == ADMIN_ACCOUNT) :
     ?>
-    <?php if ($_SESSION['Account_Type'] == SUPPORT_ACCOUNT) : ?>
+    <?php if ($_SESSION['Account_Type'] != SUPPORT_ACCOUNT && $_SESSION['Account_Type'] != ADMIN_ACCOUNT) :?>
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-1">
@@ -117,7 +117,7 @@
 
             </div>
             <div class="col-lg-11 posts" onclick="display()">
-                
+
                 <h5 class="mt-3">What is on Your mind, <?php $user=new User($_SESSION['U_ID']);
                     $user->getUserName($_SESSION['U_ID']); ?> ?</h5>
 
@@ -200,7 +200,7 @@
                           ?>
                     </a>
                     <?php    
-                            if($_SESSION['U_ID']==$row['U_ID'])
+                            if($_SESSION['U_ID']==$row['U_ID'] || $_SESSION['Account_Type'] == ADMIN_ACCOUNT)
                              {?>
                                <a href="editmypost.php?id=<?php echo $row['Post_id']; ?>"> <button class="btn btn-dark"  type="button">Edit</button></a>
                                <a href="../PHP/deletepost.php?id=<?php echo $row['Post_id']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
@@ -212,11 +212,13 @@
                         <p> <?php $obj->getTEXTpost($row['Post_id']);?> </p>
                         <img class="img" src="<?php $obj->getpicture($row['Post_id']);?>" alt="">
                         <br>
+                    <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
                      <a href="../PHP/up_post.php?id=<?php echo $row["Post_id"];?>"><i class="far fa-thumbs-up"></i></a>
                     <a href="../PHP/down_post.php?id=<?php echo $row["Post_id"];?>"><i class="far fa-thumbs-down"></i></a>
+                    <?php endif; ?>
                     <br>
                    <?php $obj-> selectup($row["Post_id"]);
-                             $obj->selectdown($row["Post_id"]);
+                        $obj->selectdown($row["Post_id"]);
                        ?>
 
                     </div>
