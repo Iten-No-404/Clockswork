@@ -43,12 +43,20 @@ class app
       }
     }
   }
-
+  // Returns only apps with Hide = 0
   public function getallids()
   {
     $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE Hide='0'");
     return $result;
   }
+  // Returns hidden apps too
+  public function GetAllAppIDs()
+  {
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications");
+    return $result;
+  }
+
+  
 
   public function getallidsformain()
   {
@@ -85,13 +93,12 @@ class app
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {
-       
-         return  $row["Price"];
-    
+
+        return  $row["Price"];
       }
     }
   }
-  
+
   public function getSale($id)
   {
     $result = $this->dbConnection->query("SELECT Sale FROM   applications WHERE App_ID='$id'");
@@ -118,7 +125,7 @@ class app
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {
-       return  $row["AgeRating"];
+        return  $row["AgeRating"];
       }
     }
   }
@@ -177,7 +184,7 @@ class app
     $result = $this->dbConnection->query("SELECT Application_Link FROM   applications WHERE App_ID='$id'");
     if ($result->num_rows > 0) {
       // output data of each row
-      while ($row = $result->fetch_assoc()) { 
+      while ($row = $result->fetch_assoc()) {
         return $row["Application_Link"];
       }
     }
@@ -190,7 +197,7 @@ class app
       while ($row = $result->fetch_assoc()) { ?>
         <a href="<?php echo $row["Application_Link"]; ?>">Install</a>
 
-<?php  }
+        <?php  }
     }
   }
   public function getAppDescription($id)
@@ -206,26 +213,18 @@ class app
   public function getAppTrailer($id)
   {
     $result = $this->dbConnection->query("SELECT AppTrailer FROM  applications WHERE App_ID='$id'");
-    
-    if ($result->num_rows >0) {
+
+    if ($result->num_rows > 0) {
       // output data of each row
       // output data of each row
-      while ($row = $result->fetch_assoc()) { 
-       
-       if(! is_null($row["AppTrailer"])){?>
-        <iframe src="<?php echo $row["AppTrailer"]?>" width="100%" height="850px"></iframe>
+      while ($row = $result->fetch_assoc()) {
+
+        if (!is_null($row["AppTrailer"])) { ?>
+          <iframe src="<?php echo $row["AppTrailer"] ?>" width="100%" height="850px"></iframe>
 
         <?php }
-        
-
-
-     }
-         
-
-     }
-   
-    
-  
+      }
+    }
   }
   public function getHide($id)
   {
@@ -233,7 +232,7 @@ class app
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {
-        echo $row["Hide"];
+        return $row["Hide"];
       }
     }
   }
@@ -281,56 +280,52 @@ class app
 
     //mysqli_query($dbConnection, $insertquery);
   }
-  public function editapp($Application_Name, $Price, $AgeRating, $System_Requirements, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region,$Sale,$Hide,$App_ID)
+  public function editapp($Application_Name, $Price, $AgeRating, $System_Requirements, $Application_Picture, $Application_Link, $AppDescription, $AppTrailer, $Region, $Sale, $Hide, $App_ID)
   {
     $result  = $this->dbConnection->query("UPDATE applications SET Application_Name= '$Application_Name',Price='$Price',AgeRating='$AgeRating',System_Requirements='$System_Requirements',Application_Picture='$Application_Picture',Application_Link='$Application_Link',AppDescription='$AppDescription',AppTrailer='$AppTrailer',Region='$Region',Sale='$Sale',Hide='$Hide' WHERE App_ID='$App_ID' ");
   }
-  public function purchased_by($UserID,$ApplicationID,$Purchase_Date)
+  public function purchased_by($UserID, $ApplicationID, $Purchase_Date)
   {
     $result  = $this->dbConnection->query("INSERT INTO purchased_by (UserID,ApplicationID,Purchase_Date	)VALUES ($UserID,$ApplicationID,$Purchase_Date)");
   }
   public function getmyapps($UserID)
   {
     $result = $this->dbConnection->query("SELECT App_ID FROM  applications WHERE U_ID=$UserID");
-     return $result;
+    return $result;
   }
   public function getids()
   {
-    $result= $this->dbConnection->query("SELECT App_ID FROM  applications");
-   $x=-1;
-     if ($result->num_rows > 0) {
+    $result = $this->dbConnection->query("SELECT App_ID FROM  applications");
+    $x = -1;
+    if ($result->num_rows > 0) {
       // output data of each rowget
-      while($row = $result->fetch_assoc()) {
-              if($row["App_ID"]>$x)
-                { $x=$row["App_ID"];
-
-                }
-
-            }
+      while ($row = $result->fetch_assoc()) {
+        if ($row["App_ID"] > $x) {
+          $x = $row["App_ID"];
         }
-      return $x;
-      
+      }
+    }
+    return $x;
   }
-  public function selectpurchased_by($UserID,$ApplicationID)
+  public function selectpurchased_by($UserID, $ApplicationID)
   {
     $result  = $this->dbConnection->query("SELECT * FROM purchased_by WHERE UserID=$UserID AND ApplicationID=$ApplicationID ");
-    
+
     if ($result->num_rows > 0) {
-       return false;
+      return false;
     }
     return true;
   }
   public function updatenumofuser($ApplicationID)
   {
     $this->dbConnection->query("UPDATE applications SET NumOfUsers=NumOfUsers+1 WHERE  App_ID=$ApplicationID  ");
-
   }
- 
+
   public function deleteapp($id)
   {
     echo "done";
-    $result="DELETE FROM applications WHERE App_ID=$id";
-    var_dump($result);
+    $result = "DELETE FROM applications WHERE App_ID=$id";
+    // var_dump($result);
     mysqli_query($this->dbConnection, $result);
   }
   public function deletefrompurchased_by($id)
@@ -340,7 +335,7 @@ class app
 
   public function getIDfromName($Name)
   {
-    $result = $this->dbConnection->query("SELECT DISTINCT App_ID FROM applications WHERE Application_Name='$id'");
+    $result = $this->dbConnection->query("SELECT DISTINCT App_ID FROM applications WHERE Application_Name='$Name'");
     if ($result->num_rows > 0) {
       // output data of each row
       while ($row = $result->fetch_assoc()) {
@@ -363,8 +358,15 @@ class app
       // output data of each row
       while ($row = $result->fetch_assoc()) { ?>
         <img class="card-img-top" src="<?php echo $row["Application_Picture"]; ?>" alt="">
-      <?php }
+<?php }
     }
+  }
+
+  public static function HideApp($AppID)
+  {
+    $hideQuery = "UPDATE applications SET Hide='1' WHERE App_ID=$AppID";
+    $result = DBConnection::getInst()->getConnection()->query($hideQuery);
+    return $result;
   }
 }
 ?>

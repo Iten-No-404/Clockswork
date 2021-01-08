@@ -3,23 +3,25 @@ require_once 'app.php';
 require_once 'review.php';
 require_once 'functions.php';
 
- $obj=new App();
- $review=new Review();
- $ApplicationID=(int)$_GET['id'];
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
+$obj = new App();
+$review = new Review();
+$ApplicationID = (int)$_GET['id'];
+$obj->deletefrompurchased_by($ApplicationID);
+$review->deletefromreviwed($ApplicationID);
+$result = $review->select($ApplicationID);
 
- $obj-> deletefrompurchased_by($ApplicationID);
- $review->deletefromreviwed($ApplicationID);$result=$review->select($ApplicationID);
- 
- if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-          
-             
-                $review->deletefromreviw($row['ReviewID']);
-           
-          }
-      }
-  $obj->deleteapp($ApplicationID);
-RedirectJS("../HTML/Myapp.php");
-     ?>
+if ($result->num_rows > 0) {
+  // output data of each row
+  while ($row = $result->fetch_assoc()) {
+    $review->deletefromreviw($row['ReviewID']);
+  }
+}
+$obj->deleteapp($ApplicationID);
+if ($_SESSION['Account_Type'] == DEV_ACCOUNT)
+  RedirectJS("../HTML/Myapp.php");
+else
+  RedirectJS("../HTML/Home.php");

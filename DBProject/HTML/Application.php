@@ -35,25 +35,23 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title><?php $id=$_GET['id']; $obj=new App(); $obj->getname($id); echo " - App" ?></title>
+    <title><?php $id = $_GET['id'];
+            $obj = new App();
+            $obj->getname($id);
+            echo " - App" ?></title>
 </head>
 <?php include_once '../PHP/header.php' ?>
 
 <body>
-
     <div class="container blockapp my-3">
         <div class="container my-5">
             <div class="row">
                 <div class="col col-lg-4 mt-3 animate__animated  animate__zoomIn">
-
                     <?php
                     $obj = new App();
                     $id = $_GET['id'];
-
-                    $obj->getApplication_Picture($id); 
-
-                     ?>
-
+                    $obj->getApplication_Picture($id);
+                    ?>
                 </div>
                 <div class="col col-lg-8 mt-3">
                     <h1> <?php
@@ -76,25 +74,26 @@ session_start();
                         $obj->getPrice($id);
                         echo "<br>";
                         $obj->getRating($id);
-                     
                         ?>
-
-                        
                     </p>
-
-                 
-                  
-                    <a href="../PHP/installapp.php?id=<?php   $obj = new App();
-                        $id = $_GET['id']; echo$id; ?>">   <button class="btn btn-primary" type="button" name="install">Install
-                    </button></a>
-                 
-
+                    <a href="../PHP/installapp.php?id=<?php $obj = new App();
+                                                        $id = $_GET['id'];
+                                                        echo $id; ?>"> <button class="btn btn-primary" type="button" name="install">Install
+                        </button></a>
+                    <?php if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT) { ?>
+                        <a href="../PHP/deleteapp.php?id=<?php $obj = new App();
+                                                            $id = $_GET['id'];
+                                                            echo $id; ?>"> <button class="btn btn-primary" type="button" id="destroy" name="destroy">Delete</button></a>
+                        <a href="../PHP/hideAppAdmin.php?id=<?php $obj = new App();
+                                                            $id = $_GET['id'];
+                                                            echo $id; ?>"> <button class="btn btn-primary" type="button" id="destroy" name="destroy">Hide</button></a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
         <div class="container my-3 animate__animated animate__zoomIn">
-         <?php $obj = new App();
-               $obj->getAppTrailer($_GET['id']);
+            <?php $obj = new App();
+            $obj->getAppTrailer($_GET['id']);
             ?>
             <!-- <div id="my-carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -139,9 +138,6 @@ session_start();
                 <?php
                 $obj->getRelease_Date($id);
                 ?>
-
-
-
             </p>
         </div>
         <div class="line"> </div>
@@ -154,119 +150,98 @@ session_start();
 
                 $obj->getSystem_Requirements($id); ?>
                 <br>
-
-
-
-
             </p>
         </div>
         <div class="line"> </div>
         <div>
-          <form action="../PHP/addreview.php?id=<?php echo $_GET['id'];?>" method="post">
-               <div class="row">
-                 <div class="col-lg-1">
-                   <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
-                        <?php   $user=new User($_SESSION['U_ID']);
+            <form action="../PHP/addreview.php?id=<?php echo $_GET['id']; ?>" method="post">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                            <?php $user = new User($_SESSION['U_ID']);
                             $user->getProfilePicture($_SESSION['U_ID']);
-                        ?>
-                    </a>
-                 </div>
-                 <div class="col-lg-11">
-                   <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
-                   <h6 id="Review"></h6>
+                            ?>
+                        </a>
+                    </div>
+                    <div class="col-lg-11">
+                        <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
+                        <h6 id="Review"></h6>
 
-                    <br>
-                    <label for="">Stars</label>
-                    <select id="" name="Stars">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                     </select> 
-                     <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
-                    
-                  </div>
-               </div>
-                
-               
-          </form>
+                        <br>
+                        <label for="">Stars</label>
+                        <select id="" name="Stars">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="line"> </div>
         <div class="container">
             <h1>Reviews</h1>
             <div class="row mt-2">
-              <?php
-                    $review=new review();
-                   
-                    $id = $_GET['id'];
-                   $result= $review->getuseridsandreviewids($id);    
-                   if ($result->num_rows > 0) {
+                <?php
+                $review = new review();
+
+                $id = $_GET['id'];
+                $result = $review->getuseridsandreviewids($id);
+                if ($result->num_rows > 0) {
                     // output data of each row
-                    while ($row = $result->fetch_assoc()) {?>
-                              <div class="col-lg-1">
-                                  <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
-                                        <?php 
-                                           $user=new user($row['UserID']);
-                                                $user->getProfilePicture($row['UserID']);
-                                                    ?>
-                                  </a>
-
-                               </div>
-                             <div class="col-lg-11">
-                              <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
-                                <h6><?php   $user=new user($row['UserID']);
-                                      $user->getUserName($row['UserID']);
-                                      
-                                
-                                      ?></h6>
-                                 </a>
-
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <div class="col-lg-1">
+                            <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
                                 <?php
-                                      $review-> getStars($row["ReviewID"]);
-                                    ?>
-                            <p> <?php    $review-> getReview_Description($row["ReviewID"]); 
-                                      echo "<br>";
-                                         $review->getReviewDate($row["ReviewID"]); 
+                                $user = new user($row['UserID']);
+                                $user->getProfilePicture($row['UserID']);
                                 ?>
-                          
-                            </p>
-                            <?php    
-                            
-                                   if($_SESSION['U_ID']==$row['UserID'])
-                                    {?>
-                                    
-                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
-                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit</button></a>
+                            </a>
+                        </div>
+                        <div class="col-lg-11">
+                            <a href="../HTML/user.php?id=<?php echo $row['UserID']; ?>">
+                                <h6><?php $user = new user($row['UserID']);
+                                    $user->getUserName($row['UserID']);
+                                    ?></h6>
+                            </a>
 
-                                   <?php }   
+                            <?php
+                            $review->getStars($row["ReviewID"]);
+                            ?>
+                            <p> <?php $review->getReview_Description($row["ReviewID"]);
+                                echo "<br>";
+                                $review->getReviewDate($row["ReviewID"]);
+                                ?>
+                            </p>
+                            <?php
+
+                            if ($_SESSION['U_ID'] == $row['UserID']) { ?>
+
+                                <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger" type="button">Delete</button></a>
+                                <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark" type="button">Edit</button></a>
+                            <?php }
                             ?>
                             <br>
-                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-up"></i></a>
-                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-down"></i></a>
-                           <br>
-                          <?php $review-> selectup($row["ReviewID"]);
-                               
-                                    $review->selectdown($row["ReviewID"]);
-                              ?>
+                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"]; ?>"><i class="far fa-thumbs-up"></i></a>
+                            <a href="../PHP/down.php?id=<?php echo $row["ReviewID"]; ?>"><i class="far fa-thumbs-down"></i></a>
+                            <br>
+                            <?php $review->selectup($row["ReviewID"]);
 
+                            $review->selectdown($row["ReviewID"]);
+                            ?>
                         </div>
                         <div class="line"></div>
-              
-
-
                 <?php }
-                  }
-                         
-                         
-                 ?>
-              
+                }
+                ?>
             </div>
         </div>
-
-       <br>
+        <br>
     </div>
-  
+
     <?php include_once "../PHP/footer.php" ?>
 </body>
 
