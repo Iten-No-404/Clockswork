@@ -13,7 +13,7 @@ class user
     public $Address;
     public $Bdate;
     public $Gender;
-    public $Developer;
+    public $Account_Type;
     public $Phone_Number;
     public $Balance;
     public $Billing_Info;
@@ -36,7 +36,7 @@ class user
         $this->Address = $row['Address'];
         $this->Bdate = $row['Bdate'];
         $this->Gender = $row['Gender'];
-        $this->Developer = $row['Developer'];
+        $this->Account_Type = $row['Account_Type'];
         $this->Phone_Number = $row['Phone_Number'];
         $this->Balance = $row['Balance'];
         $this->Billing_Info = $row['Billing_Info'];

@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         $now = date('Y-m-d');
         if ($banEnd <= $now) {
             $_SESSION['U_ID'] = $fetchedResult['U_ID'];
-            $_SESSION['Developer'] = $fetchedResult['Developer'];
+            $_SESSION['Account_Type'] = $fetchedResult['Account_Type'];
             RedirectJS('../HTML/Home.php');
         } else {
             $banString = "You\'re banned until " . $banEnd;
