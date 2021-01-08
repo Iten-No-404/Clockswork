@@ -68,7 +68,8 @@
                                     $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
                                     $dbConnection = DBConnection::getInst()->getConnection();
                                     $result = $dbConnection->query($query);
-                                    if ($result->num_rows == 0) :                      
+                                    if ($_SESSION['Account_Type'] == '0' || $_SESSION['Account_Type'] == '1')
+                                        if ($result->num_rows == 0) :                      
                                 ?>
                                 <H6 class="float-lg-right">
                                 <form action="../PHP/Join_Exit_Group.php? id= <?php echo $GID; ?>" method="POST" enctype="multipart/form-data">

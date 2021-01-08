@@ -37,11 +37,17 @@
     <?php
         $id=$_GET['id'];
         $obj=new GRoup($id);
-        if ($_SESSION['U_ID'] == $obj->U_ID) : 
+        if ($_SESSION['U_ID'] == $obj->U_ID || $_SESSION['Account_Type'] == ADMIN_ACCOUNT) : 
     ?>
     <div class="col-lg-9 mt-3">
         <p class="alignright">
             <button class="btn btn-dark" id="move"> <a href="../HTML/EditGroup.php? id= <?php echo $_GET['id'] ?>">Edit Group</a></button>
+            <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
+        </p>
+    </div>
+    <?php elseif ($_SESSION['Account_Type'] = SUPPORT_ACCOUNT) : ?>
+        <div class="col-lg-9 mt-3">
+        <p class="alignright">
             <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
         </p>
     </div>
@@ -98,6 +104,7 @@
         $result = $dbConnection->query($query);
         if ($result->num_rows == 1) :
     ?>
+    <?php if ($_SESSION['Account_Type'] == SUPPORT_ACCOUNT) : ?>
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-1">
@@ -110,13 +117,14 @@
 
             </div>
             <div class="col-lg-11 posts" onclick="display()">
- 
+                
                 <h5 class="mt-3">What is on Your mind, <?php $user=new User($_SESSION['U_ID']);
                     $user->getUserName($_SESSION['U_ID']); ?> ?</h5>
 
             </div>
         </div>
     </div>
+    <?php endif; ?>
 
     <!-- <div class="line"></div> -->
     <div class="container my-5 cla10">
