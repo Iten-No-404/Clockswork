@@ -194,24 +194,28 @@ session_start();
                                 <?php
                                       $review-> getStars($row["ReviewID"]);
                                     ?>
-                            <p> <?php    $review-> getReview_Description($row["ReviewID"]);  ?>
+                            <p> <?php    $review-> getReview_Description($row["ReviewID"]); 
+                                      echo "<br>";
+                                         $review->getReviewDate($row["ReviewID"]); 
+                                ?>
                           
                             </p>
-                            <?php    $review->getReviewDate($row["ReviewID"]);   
+                            <?php    
                             
                                    if($_SESSION['U_ID']==$row['UserID'])
                                     {?>
-                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete Review</button></a>
-                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit Review</button></a>
+                                    
+                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
+                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit</button></a>
 
                                    <?php }   
                             ?>
                             <br>
-                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><button class="btn btn-dark" type="button"> <i class="fas fa-plus"></i></button></a>
-                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"> <button class="btn btn-dark" type="button"> <i class="fas fa-minus"></i></button></a>
+                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-up"></i></a>
+                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-down"></i></a>
                            <br>
                           <?php $review-> selectup($row["ReviewID"]);
-                                 
+                               
                                     $review->selectdown($row["ReviewID"]);
                               ?>
 

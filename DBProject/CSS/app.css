@@ -2,6 +2,10 @@
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+}
+body{
+  background-image: url(../IMAGES/appback.jpg);
 }
 .blockapp
 {
@@ -89,10 +93,16 @@ background-color: #007bff;
   
   box-shadow: 5px 5px 5px 5px #888888;
 }
+select
+{
+    border: none;
+    outline: none;
+    border-radius: 2px;
+}
 textarea
 {
-  border: solid ;
-
+    border: none;
+ 
   border-radius: 5px ;
   outline: none;
 }
