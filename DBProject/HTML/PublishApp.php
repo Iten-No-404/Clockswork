@@ -414,9 +414,9 @@
                 $cvar = $crow["Category_ID"]; ?>
      var str1 = "<option id= 'cat-";
      var str2 = "<?php echo $cobj-> getCategoryName($cvar) ?>";//cat name from php
-     var str3 = "' value=";
-     var str4 = "<?php echo $crow['Category_ID']; ?>";//id value from php
-     var str5 = '>';
+     var str3 = "' value='";
+     var str4 = "<?php echo $cobj-> getCategoryName($cvar) ?>";//cat name from php
+     var str5 = "'>";
      var str6 = "<?php echo $cobj-> getCategoryName($cvar) ?>";//cat name from php
      var str7 = "</option>";
      var res = str1.concat(str2.toLowerCase(), str3, str4, str5, str6, str7);
@@ -469,22 +469,22 @@
     {
         //Add it to the database, then add it to the selected list
         var str1 = "<option id= 'cat-";
-        var str2 = catname;//cat name from php
-        var str3 = "' value=";
-        var str4 = "<?php $newid = $cobj->getmaxidp1(); echo $newid; ?>";//id value from php
-        var str5 = ' selected>';
+        var str2 = catname.toLowerCase();//id value from php
+        var str3 = "' value='";
+        var str4 = catname;//cat name from php
+        var str5 = "' selected>";
         var str6 = catname;//cat name from php
         var str7 = "</option>";
-        var res = str1.concat(str2.toLowerCase(), str3, str4, str5, str6, str7);
+        var res = str1.concat(str2, str3, str4, str5, str6, str7);
      categories.append(res);
      categories.bootstrapDualListbox('refresh');
         
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "../PHP/PublishApp.php");
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        var temp = "name=";
-        temp = temp.concat(catname);
-        xhr.send(temp);
+        // const xhr = new XMLHttpRequest();
+        // xhr.open("POST", "../PHP/PublishApp.php");
+        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // var temp = "name=";
+        // temp = temp.concat(catname);
+        // xhr.send(temp);
      //Last step, add it into the database, may also leave that to after the submition, the code works without the following line
 
     }

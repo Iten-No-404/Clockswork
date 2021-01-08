@@ -15,7 +15,7 @@ class categories{
           if ($CategoryName->num_rows > 0) {
                // output data of each row
                while ($row = $CategoryName->fetch_assoc()) {
-                 echo $row["Category_Name"];
+                 return $row["Category_Name"];
                }
              }
      }  
@@ -63,17 +63,17 @@ class categories{
           if ($CategoryID->num_rows > 0) {
                // output data of each row
                while ($row = $CategoryID->fetch_assoc()) {
-                 echo $row["Category_ID"];
+                 return $row["Category_ID"];
                }
              }
           else
-          echo 0;
+          return 0;
      }  
 
      public function addnewCategory($Name)
      {
-        $insertquery = $this->dbConnection->query("INSERT INTO categories (Category_Name) VALUES ('$Name') ");
-        //return $insertquery;
+        $insertquery = $this->dbConnection->query("INSERT INTO categories (Category_Name) VALUE ('$Name') ");
+        return $insertquery;
     }
 
     public function addnewCategorywithid($id,$Name)
@@ -88,11 +88,11 @@ class categories{
       if ($query->num_rows > 0) {
         // output data of each row
         while ($row = $query->fetch_assoc()) {
-          echo ((int)($row["Category_ID"]) +1);
+          return ((int)($row["Category_ID"]) +1);
         }
       }
       else
-        echo 1;
+        return 1;
   }
 
   public  function insertappcategory($appid, $categoryid)

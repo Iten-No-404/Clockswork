@@ -52,7 +52,7 @@ require_once '../PHP/user.php';
             <div class="col-12">
                 <i class="icon far fa-fw fa-circle"></i>
                 <span class="txt-action idx-27">
-                <?php  $cobj-> getCategoryName($cvar) ?>  
+                <?php  echo $cobj-> getCategoryName($cvar) ?>  
                 <?php $cobj->getAppCount($cvar) ?>
                 </span>
             </div>
