@@ -29,10 +29,11 @@
 </head>
 
 <?php include_once '../PHP/header.php' ?>
+<?php require '../PHP/Employee.php' ?>
 
 <body>
     <?php
-    $shownUser = new user($_GET['id']);
+        #$shownUser = new user($_GET['id']);
     ?>
 
     <?php if ($_SESSION['U_ID'] == $_GET['id']) : ?>
@@ -45,7 +46,7 @@
             </div>
         <?php else : ?>
             <?php
-            $shownUser = new user($_GET['id']);
+            #$shownUser = new user($_GET['id']);
             if ($shownUser->Username[strlen($shownUser->Username) - 1] != 's') {
                 echo '<h1 class="mt-3">' . $shownUser->Username . "'s info" . '</h1>';
             } else {
@@ -80,14 +81,14 @@
                     <?php
                     if (session_status() == PHP_SESSION_NONE) {
                         session_start();
-                    }
-                    $currUser = new user($_SESSION['U_ID']);
+                    }   
+                        #$currUser = new user($_SESSION['U_ID']);
                     ?>
                     <img class="img-fluid rounded-circle" sty src="<?php echo $shownUser->Profile_Picture ?>" alt="">
                 </div>
             </div>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[0] == 0 && $shownUser->Hide[1] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[0] == 0 && $shownUser->Hide[1] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -102,12 +103,12 @@
                     <div class="col-lg-6">
                         <?php
                         if (isset($shownUser->FName)) {
-                            if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Developer'] == SUPPORT_ACCOUNT) {
+                            if ($shownUser->Hide[0] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Account_Type'] == SUPPORT_ACCOUNT) {
                                 echo $shownUser->FName;
                             }
                         }
                         if (isset($shownUser->LName)) {
-                            if ($shownUser->Hide[1] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Developer'] == SUPPORT_ACCOUNT) {
+                            if ($shownUser->Hide[1] == 1 || $_SESSION['U_ID'] == $_GET['id'] || $_SESSION['Account_Type'] == SUPPORT_ACCOUNT) {
                                 echo " " . $shownUser->LName;
                             }
                         }
@@ -116,7 +117,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[4] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[4] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -138,7 +139,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[5] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[5] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
                 <div class="line">
@@ -180,7 +181,7 @@
 
             </div> -->
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -218,7 +219,7 @@
                 </div>
             </div>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[3] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
                 <div class="line">
@@ -239,7 +240,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $shownUser->Hide[2] == 0 && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -262,7 +263,7 @@
 
 
 
-            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $_SESSION['Developer'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
+            <?php if ($_SESSION['U_ID'] != $_GET['id'] && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : //Don't draw this entire field 
             ?>
             <?php else : ?>
 
@@ -294,14 +295,14 @@
                 </div>
                 <div class="col-lg-9">
                     <?php
-                    if (isset($shownUser->Developer)) {
-                        if ($shownUser->Developer == USER_ACCOUNT) {
+                    if (isset($shownUser->Account_Type)) {
+                        if ($shownUser->Account_Type == USER_ACCOUNT) {
                             echo "User";
-                        } else if ($shownUser->Developer == DEV_ACCOUNT) {
+                        } else if ($shownUser->Account_Type == DEV_ACCOUNT) {
                             echo "Developer";
-                        } else if ($shownUser->Developer == ADMIN_ACCOUNT) {
+                        } else if ($shownUser->Account_Type == ADMIN_ACCOUNT) {
                             echo "Administrator";
-                        } else if ($shownUser->Developer == SUPPORT_ACCOUNT) {
+                        } else if ($shownUser->Account_Type == SUPPORT_ACCOUNT) {
                             echo "Support";
                         }
                     }
