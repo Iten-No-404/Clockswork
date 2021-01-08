@@ -7,9 +7,16 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
+
 $obj = new App();
 $review = new Review();
 $ApplicationID = (int)$_GET['id'];
+if ($_SESSION['U_ID'] != $obj->getU_ID($_GET['id']) || $_SESSION['Account_Type'] != ADMIN_ACCOUNT) {
+  AlertJS('Go delete your own applications !');
+  RedirectJS("../HTML/Application.php?id=$_GET[id]");
+  exit();
+}
+
 $obj->deletefrompurchased_by($ApplicationID);
 $review->deletefromreviwed($ApplicationID);
 $result = $review->select($ApplicationID);

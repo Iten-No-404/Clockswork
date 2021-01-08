@@ -362,7 +362,7 @@ class app
     }
   }
 
-  public static function HideApp($AppID)
+  public function HideApp($AppID)
   {
     $hideQuery = "UPDATE applications SET Hide='1' WHERE App_ID=$AppID";
     $result = DBConnection::getInst()->getConnection()->query($hideQuery);
