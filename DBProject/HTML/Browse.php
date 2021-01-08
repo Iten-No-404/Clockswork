@@ -71,16 +71,21 @@ require_once '../PHP/user.php';
                 <?php
                 $obj = new App();
                 $result = $obj->getallids();
+                $x=0;
                 if ($result->num_rows > 0) {
                     // output data of each row
                     while ($row = $result->fetch_assoc()) {
-                        $var = $row["App_ID"]; ?>
-                        <div class="col-lg-1">
+                        $var = $row["App_ID"];
+                        $x++;
+                        if($x%2==0)
+                     {?>
+
+                        <div class="col-lg-1 animate__animated  animate__backInLeft">
                             <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
                                 <?php $obj->getApplication_Picturecircle($var) ?>
                             </a>
                         </div>
-                        <div class="col-lg-11">
+                        <div class="col-lg-11 animate__animated  animate__backInRight">
                             <div class="float-lg-right">
                                 <?php $obj->getRating($var);
                                 ?>
@@ -105,6 +110,37 @@ require_once '../PHP/user.php';
 
 
                 <?php }
+                else {?>
+                        <div class="col-lg-1 animate__animated  animate__backInRight">
+                        <a href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                            <?php $obj->getApplication_Picturecircle($var) ?>
+                        </a>
+                    </div>
+                    <div class="col-lg-11 animate__animated  animate__backInLeft">
+                        <div class="float-lg-right">
+                            <?php $obj->getRating($var);
+                            ?>
+                        </div>
+                        <a class="catlinks" href="../HTML/Application.php ?id=<?php echo $row['App_ID']; ?>">
+                            <h5><?php $obj->getname($var) ?></h5>
+                        </a>
+                        <div>
+                            <H6 class="float-lg-right"> Users: <?php $obj->getNumOfUsers($var)  ?>, Age Rating: <?php $obj->getAgeRating($var)  ?>, Price: <?php $obj->getPrice($var)  ?></H6>
+                            <a href="../HTML/user.php?id=<?php echo $obj-> getU_ID($var) ?>">
+                                <h6 style="font-weight: bold;"><?php $x=$obj-> getU_ID($var);
+                                $userobj=new user($x);
+                                $userobj->getUserName($x);
+                                    ?></h6>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="line my-2">
+
+                    </div>
+
+                    
+               <?php }
+                    }
                 }
 
 
