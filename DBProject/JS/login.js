@@ -1,16 +1,21 @@
 $(document).ready(function () {
     
-  
-    $("#email").on("focusout",function () {
+    $email=1;
+    $pass1=1;
+
+  function check()
+   { $("#email").on("focusout",function () {
         
         if($(this).val().length==0 &&  $("#h_email").empty())
         {
             $(this).css("border-color","red");
            $("#h_email").append("This is empty");
+           $email++;
         }
         else{
             $(this).css("border-color","white");
             $("#h_email").remove();
+            $email=0;
         }
     })
   
@@ -20,12 +25,39 @@ $(document).ready(function () {
         {
             $(this).css("border-color","red");
            $("#h_pass1").append("This is empty");
+           $pass1++;
         }
         else{
             $(this).css("border-color","white");
             $("#h_pass1").remove();
+            $pass1=0;
         }
     })
-   
+  }
+  check();
+  function sad() {
+     
+    if($email==0 && $pass1==0 )
+        {
+            console.log("ok");
+        
+            $("#submit").prop('disabled', false);
+
+
+        }
+    else
+    { 
+
+        $("#submit").prop('disabled', true);
+        console.log("sad");
+       setTimeout(sad,1000);
+    
+
+    }
+      
+  }
+  $("#submit").prop('disabled', true);
+  sad();
+  $("#submit").prop('disabled', false);
     
 })
