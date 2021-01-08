@@ -30,43 +30,26 @@
 <?php include_once '../PHP/header.php' ?>
 <?php require '../PHP/supportticket.php' ?>
 
-<style> 
-    .alignright
-        {
-            text-align: right;
-        }
-    .aligncenter 
-        {
-            text-align: center;
-        }
-    .alignleft
-        {
-            text-align: left;
-        }
-</style>
 
 <body>
-    <!-- Show Tickets currently being resolved by this Employee -->
     <div class="container my-3">
-            <button class="btn btn-dark" id="move"> <a href="../HTML/UnconfirmedTickets.php">Unconfirmed Tickets</a></button>
-            <button class="btn btn-dark" id="move"> <a href="../HTML/Resolvedtickets.php">Resolved Tickets</a></button>   
+        <button class="btn btn-dark" id="move"> <a href="../HTML/SupportTicketStaffView.php">My Tickets</a></button>
     </div>
-    <div class="line"></div>
+
     <?php
-        $EID = $_SESSION['U_ID'];
-        $query = "SELECT * FROM ReviewedBy, SupportTicket WHERE EmployeeID = $EID AND ReviewedBy.TicketID = SupportTicket.TicketID AND Closed = 'B'";
-        $db = DBConnection::getInst()->getConnection();
-        $result = $db->query($query);
-        while ($row = $result->fetch_assoc())
-        {
-            $currSupport = new supportticket($row['TicketID']);
-            $currUser = new user($currSupport->U_ID);
-    ?>
+            $db = DBConnection::getInst()->getConnection();
+            $result = $db->query("SELECT * FROM SupportTicket WHERE Closed = 'R'");
+            while ($row = $result->fetch_assoc())
+            {
+                $currSupport = new supportticket($row['TicketID']);
+                $currUser = new user($row['U_ID']);
+
+        ?>
     <div class="line"></div>
     <div class="container my-3">
         <div class="row mt-2">
             <div class="col-lg-1">
-                <?php $currUser->getProfilePicture($currUser->U_ID); ?>
+                <?php $currUser->getProfilePicture(($row['U_ID'])); ?>
             </div>
             <div class="col-lg-11">
                 <a href="../HTML/user.php?id=<?php echo $currUser->U_ID;?>">
@@ -77,9 +60,6 @@
                 </a>
                 <div class="float-lg-right">
                     <H6 class= "float-lg-right">
-                    <form action="../PHP/ResolveTicket.php? id= <?php echo $row['TicketID']; ?>" method="POST" enctype="multipart/form-data">
-                            <button class="btn btn-primary" type="submit" id="Resolve" name="Resolve">Resolve</button>
-                    </form> 
                     </H6>
                 </div>
                 <p> <?php echo $currSupport->ReportDescription; ?></p>
