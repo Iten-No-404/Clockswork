@@ -53,7 +53,7 @@
     </div>
     <div class="line"></div>
     <?php
-        $query = "";
+        $query = "SELECT ";
     ?>
     <?php
             $result = supportticket::getAllSupportTicketsForUser($_SESSION['U_ID']);
