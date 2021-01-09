@@ -1,6 +1,7 @@
 <?php
 include_once '../PHP/functions.php';
 include_once '../PHP/user.php';
+include_once '../PHP/Employee.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -65,7 +66,19 @@ else {
                         <li class="nav-item">
                             <a class="nav-link" href="../HTML/SupportTicketStaffView.php">Support</a>
                         </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/NewEmployee.php">New Employee</a>
+                        </li>
                     <?php endif ?>
+                    <?php
+                        $row =Employee::getManager();
+                        if ($row != null && $_SESSION['U_ID'] == $row['MIN(Employee_ID)']) :
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/EmployeeList.php">Employee List</a>
+                        </li>
+                    <?php endif; ?>
                     <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="../HTML/user.php? id= <?php echo $_SESSION['U_ID']; ?>">Profile</a>
