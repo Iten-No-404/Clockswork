@@ -1,7 +1,8 @@
 <?php
 
-require '../PHP/app.php';
+require_once '../PHP/app.php';
 require_once '../PHP/user.php';
+
 
 ?>
 

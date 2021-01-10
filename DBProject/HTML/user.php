@@ -28,8 +28,8 @@
                 echo $shownUser->Username . "' Profile"; } ?></title>
 </head>
 
-<?php include_once '../PHP/header.php' ?>
-<?php require '../PHP/Employee.php' ?>
+<?php require_once '../PHP/header.php' ?>
+<?php require_once '../PHP/Employee.php' ?>
 
 <body>
     <?php
@@ -300,6 +300,7 @@
                             echo "User";
                         } else if ($shownUser->Account_Type == DEV_ACCOUNT) {
                             echo "Developer";
+                           
                         } else if ($shownUser->Account_Type == ADMIN_ACCOUNT) {
                             echo "Administrator";
                         } else if ($shownUser->Account_Type == SUPPORT_ACCOUNT) {

@@ -1,7 +1,7 @@
 <?php
-include_once '../PHP/functions.php';
-include_once '../PHP/user.php';
-include_once '../PHP/Employee.php';
+require_once '../PHP/functions.php';
+require_once '../PHP/user.php';
+require_once '../PHP/Employee.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
