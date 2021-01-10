@@ -58,7 +58,11 @@ session_start();
                             $obj = new App();
                             $id = $_GET['id'];
 
-                            $obj->getname($id);  ?></h1>
+                            $obj->getname($id);
+                            if ($obj->getHide($id) == '1') {
+                                echo " (hidden)";
+                            }
+                            ?></h1>
                     <h6><?php
                         $obj = new App();
                         $id = $_GET['id'];
@@ -86,7 +90,14 @@ session_start();
                                                             echo $id; ?>"> <button class="btn btn-primary" type="button" id="destroy" name="destroy">Delete</button></a>
                         <a href="../PHP/hideAppAdmin.php?id=<?php $obj = new App();
                                                             $id = $_GET['id'];
-                                                            echo $id; ?>"> <button class="btn btn-primary" type="button" id="destroy" name="destroy">Hide</button></a>
+                                                            echo $id; ?>"> <button class="btn btn-primary" type="button" id="destroy" name="destroy">
+                                <?php
+                                if ($obj->getHide($id) == '1')
+                                    echo "Unhide";
+                                else
+                                    echo "Hide";
+                                ?>
+                            </button></a>
                     <?php } ?>
                 </div>
             </div>
@@ -221,7 +232,7 @@ session_start();
                             <?php
 
                             if ($_SESSION['U_ID'] == $row['UserID'] ||  $_SESSION['Account_Type']) { ?>
-<!-- 
+                                <!-- 
                                 <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger" type="button">Delete</button></a>
                                 <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark" type="button">Edit</button></a> -->
 

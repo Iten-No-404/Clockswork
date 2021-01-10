@@ -26,8 +26,8 @@
 </head>
 
 <?php include_once '../PHP/header.php' ?>
-<?php require '../PHP/Employee.php' ?>
-<?php require '../PHP/statistics.php' ?>
+<?php require_once '../PHP/Employee.php' ?>
+<?php require_once '../PHP/statistics.php' ?>
 
 <body>
     <div class="container mt-3 cont1">
