@@ -362,9 +362,9 @@ class app
     }
   }
 
-  public function HideApp($AppID)
+  public function HideApp($AppID, $Hidden)
   {
-    $hideQuery = "UPDATE applications SET Hide='1' WHERE App_ID=$AppID";
+    $hideQuery = "UPDATE applications SET Hide=$Hidden WHERE App_ID=$AppID";
     $result = DBConnection::getInst()->getConnection()->query($hideQuery);
     return $result;
   }
