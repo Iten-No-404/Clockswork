@@ -22,15 +22,17 @@
     <title>Document</title>
 </head>
 <?php include_once '../PHP/header.php' ?>
-<?php require '../PHP/Employee.php' ?>
+<?php include_once '../PHP/Employee.php' ?>
 
 <body>
     <h1>Personal info</h1>
     <div class="container mt-3 cont1">
 
 
-        <?php $shownEmp = new Employee($_SESSION['U_ID']); ?>
-
+        <?php $shownEmp = new Employee($_GET['id']); ?>
+        <div class="col-lg-9">
+                    <button class="btn btn-dark" id="move"> <a href="../HTML/EditEmployeeInfo.php? id= <?php echo $_GET['id'] ?>">Edit Info</a></button>
+                </div>
         <div class="row">
             <div class="col-lg-3">
                 <label for="">
@@ -77,6 +79,24 @@
             </div>
 
         </div>
+        
+        <div class="line">
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label for="">
+                    <h6>Phone Number</h6>
+                </label>
+            </div>
+            <div class="col-lg-9">
+            <?php
+                echo $shownEmp->Phone;
+            ?>
+            </div>
+
+        </div>
+
         <div class="line">
 
         </div>

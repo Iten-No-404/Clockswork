@@ -1,0 +1,75 @@
+*{
+    margin:0%;
+    padding: 0%;
+    box-sizing: border-box;
+
+
+}
+body
+{
+    background-image: url(../IMAGES/fading-blue-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-position: center -3vh;
+   
+}
+ul
+{
+   width:80%;
+    display: flex;
+  
+  
+   justify-content:space-between;
+    
+}
+.form
+{
+    border-radius: 15px;
+    border:solid white;
+    position: absolute;
+    left:50%;
+    top: 55%;
+    /* z-index: -510;  */
+    padding:15px 15px;
+    transform: translate(-50%,-50%); 
+}
+input{
+    padding: 5px 5px;
+    outline: none;
+    border:none;
+    outline-style: none;
+    background-color:transparent;
+     display:block;
+     border-bottom:white solid;
+   
+}
+label
+{
+    display:block;
+}
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: #007bff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+#submit
+{
+    width:100%;
+    border:none;
+    border-radius:18px;
+    
+
+  
+}
+.container
+{
+    position: relative;
+}

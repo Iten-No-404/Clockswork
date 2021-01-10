@@ -13,6 +13,7 @@
         public $Fname;
         public $Lname;
         public $Account_Type;
+        public $Password;
         public function __construct($EID)
         {
             $db = DBConnection::getInst()->getConnection();
@@ -30,7 +31,26 @@
             $this->Fname = $row['Fname'];
             $this->Lname = $row['Lname'];
             $this->Account_Type = $row['Account_Type'];
+            $this->Password = $row['Password'];
+        }
+
+        public static function getManager()
+        {
+            $db = DBConnection::getInst()->getConnection();
+            $query = "SELECT MIN(Employee_ID) FROM Employee";
+            $result = $db->query($query);
+            $result = $result->fetch_assoc();
+            return $result;
+        }
+
+        public static function getAllEmployees()
+        {
+            $db = DBConnection::getInst()->getConnection();
+            $query = "SELECT * FROM Employee";
+            $result = $db->query($query);
+            return $result;
         }
     }
+
 
 ?>

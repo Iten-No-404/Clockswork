@@ -66,6 +66,26 @@ if (isset($_POST['savechangesbtn'])) {
         if ($Email != "")   // Gives an error only if the data is invalid
             $errorCounter++;
     }
+    else
+    {
+        $db = DBConnection::getInst()->getConnection();
+        $query1 = "SELECT * FROM Users WHERE Email = '$Email' LIMIT 1";
+        $res1 = $db->query($query1);
+        if ($res1->num_rows != 0)
+        {
+            AlertJS("This email is already in use");
+            RedirectJS("../HTML/EditUserInfo");
+            return;
+        }
+        $query2 = "SELECT * FROM Employee WHERE Email = $Email LIMIT 1";
+        $res2 = $db->query($query1);
+        if ($res2->num_rows != 0)
+        {
+            AlertJS("This email is already in use");
+            RedirectJS("../HTML/EditUserInfo");
+            return;
+        }
+    }
 
     // Checking if the other fields are empty
     if ($FName == "") {
@@ -139,6 +159,7 @@ if (isset($_POST['savechangesbtn'])) {
         $currUserData->Hide[6] = 1;
     }
 
+   
 
     // Updating the user's data in the DB
     $currUserData->UpdateUserInfo(

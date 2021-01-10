@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $userQueryResult = mysqli_query($dbConnection, $userQuery);
     $userResult = mysqli_fetch_assoc($userQueryResult);
 
-    $employeeQuery = "SELECT * FROM employee WHERE Email = '$email' LIMIT 1";
+    $employeeQuery = "SELECT * FROM Employee WHERE Email = '$email' LIMIT 1";
     $employeeQueryResult = mysqli_query($dbConnection, $employeeQuery);
     $employeeResult = mysqli_fetch_assoc($employeeQueryResult);
 
