@@ -9,7 +9,7 @@ $fileName = basename($_SERVER['PHP_SELF']);
 // THIS WILL BREAK IF FILENAMES ARE CHANGED
 // Place checks in the below blocks if you want them to execute when the user is not logged in
 if (!isset($_SESSION['U_ID'])) {
-    if ($fileName != "login.php" && $fileName != "signup.php") {
+    if ($fileName != "login.php" && $fileName != "signup.php" && $fileName != "About.php") {
         AlertJS("Please log in!");
         RedirectJS("../HTML/login.php");
     }
@@ -34,7 +34,6 @@ else {
 
 </head>
 <header>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
         <a class="navbar-brand" href="../HTML/Home.php">Clockwork</a>
         <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +41,7 @@ else {
         </button>
         <div id="my-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <?php if (isset($_SESSION['U_ID'])) : ?>
+                <?php if (isset($_SESSION['U_ID'])) { ?>
                     <li class="nav-item active">
                         <a class="nav-link" href="../HTML/Browse.php">Browse</a>
                     </li>
@@ -77,18 +76,33 @@ else {
                     <?php endif; ?>
                     <?php if ($_SESSION['Account_Type'] == DEV_ACCOUNT) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../HTML/Myapp.php" >My applications</a>
+                            <a class="nav-link" href="../HTML/Myapp.php">My applications</a>
                         </li>
                     <?php } ?>
-                <?php endif; ?>
+                <?php } ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="../HTML/statistics.php">Statistics</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../HTML/About.php">About</a>
                 </li>
-                <?php if (isset($_SESSION['U_ID'])) : ?>
+
+                <?php if (isset($_SESSION['U_ID'])) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="../PHP/logout.php">Log out</a>
                     </li>
-                <?php endif; ?>
+                    <?php } else {
+                    if ($fileName == "signup.php") : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/login.php">Log in</a>
+                        </li>
+                    <?php elseif ($fileName == "login.php") : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../HTML/signup.php">Sign up</a>
+                        </li>
+                    <?php endif; ?>
+                <?php } ?>
             </ul>
         </div>
     </nav>

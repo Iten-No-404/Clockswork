@@ -153,35 +153,35 @@ session_start();
             </p>
         </div>
         <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
-        <div class="line"> </div>
-        <div>
-            <form action="../PHP/addreview.php?id=<?php echo $_GET['id']; ?>" method="post">
-                <div class="row">
-                    <div class="col-lg-1">
-                        <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
-                            <?php $user = new User($_SESSION['U_ID']);
-                            $user->getProfilePicture($_SESSION['U_ID']);
-                            ?>
-                        </a>
-                    </div>
-                    <div class="col-lg-11">
-                        <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
-                        <h6 id="Review"></h6>
+            <div class="line"> </div>
+            <div>
+                <form action="../PHP/addreview.php?id=<?php echo $_GET['id']; ?>" method="post">
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
+                                <?php $user = new User($_SESSION['U_ID']);
+                                $user->getProfilePicture($_SESSION['U_ID']);
+                                ?>
+                            </a>
+                        </div>
+                        <div class="col-lg-11">
+                            <textarea name="Review_Description" id="Review_Description" cols="40" rows="5"></textarea>
+                            <h6 id="Review"></h6>
 
-                        <br>
-                        <label for="">Stars</label>
-                        <select id="" name="Stars">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                            <br>
+                            <label for="">Stars</label>
+                            <select id="" name="Stars">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <button class="btn btn-primary" id="review" type="submit" name="submit">Review</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
         <?php endif; ?>
         <div class="line"> </div>
         <div class="container">
@@ -218,13 +218,12 @@ session_start();
                                 $review->getReviewDate($row["ReviewID"]);
                                 ?>
                             </p>
-                            <?php    
-                            
-                                   if($_SESSION['U_ID']==$row['UserID'] ||  $_SESSION['Account_Type'])
-                                    {?>
-                                    
-                                      <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger"  type="button">Delete</button></a>
-                                      <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark"  type="button">Edit</button></a>
+                            <?php
+
+                            if ($_SESSION['U_ID'] == $row['UserID'] ||  $_SESSION['Account_Type']) { ?>
+<!-- 
+                                <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger" type="button">Delete</button></a>
+                                <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark" type="button">Edit</button></a> -->
 
                                 <a href="../PHP/deletereview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-danger" type="button">Delete</button></a>
                                 <a href="editmyreview.php?id=<?php echo $row['ReviewID']; ?>"> <button class="btn btn-dark" type="button">Edit</button></a>
@@ -232,14 +231,11 @@ session_start();
                             ?>
                             <br>
                             <?php if ($_SESSION['Account_Type'] != ADMIN_ACCOUNT && $_SESSION['Account_Type'] != SUPPORT_ACCOUNT) : ?>
-                            <a href="../PHP/up.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-up"></i></a>
-                           <a href="../PHP/down.php?id=<?php echo $row["ReviewID"];?>"><i class="far fa-thumbs-down"></i></a>
-                           <?php endif; ?>
-                           <br>
-                          <?php $review-> selectup($row["ReviewID"]);
-                               
-                                    $review->selectdown($row["ReviewID"]);
-                              ?>
+                                <a href="../PHP/up.php?id=<?php echo $row["ReviewID"]; ?>"><i class="far fa-thumbs-up"></i></a>
+                                <a href="../PHP/down.php?id=<?php echo $row["ReviewID"]; ?>"><i class="far fa-thumbs-down"></i></a>
+                            <?php endif; ?>
+                            <br>
+                            <?php echo $review->selectup($row["ReviewID"]);
 
                             $review->selectdown($row["ReviewID"]);
                             ?>

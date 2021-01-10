@@ -286,7 +286,7 @@ class app
   }
   public function purchased_by($UserID, $ApplicationID, $Purchase_Date)
   {
-    $result  = $this->dbConnection->query("INSERT INTO purchased_by (UserID,ApplicationID,Purchase_Date	)VALUES ($UserID,$ApplicationID,$Purchase_Date)");
+    $result  = $this->dbConnection->query("INSERT INTO purchased_by (UserID,ApplicationID,Purchase_Date	)VALUES ($UserID,$ApplicationID,'$Purchase_Date')");
   }
   public function getmyapps($UserID)
   {
