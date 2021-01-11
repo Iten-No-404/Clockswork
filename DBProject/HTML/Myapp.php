@@ -35,34 +35,12 @@ require '../PHP/app.php'
 
 <body>
 
-    <div class="categories">
-    <?php
-        include_once '../PHP/Categories.php'
-    ?>
-    <?php
-        $cobj=new categories();
-        $cresult= $cobj->getallids();
-        if ($cresult->num_rows > 0) {
-        // output data of each row
-        while($crow = $cresult->fetch_assoc()) {
-        $cvar = $crow["Category_ID"]; ?>
-        <a class="catlinks" href="../HTML/Category.php ?id=<?php echo $crow['Category_ID']; ?> ">
-            <div class="col-12">
-                <i class="icon far fa-fw fa-circle"></i>
-                <span class="txt-action idx-27">
-                <?php  $cobj-> getCategoryName($cvar) ?>
-                </span>
-            </div>
-            </a>
-            <?php } } ?>
-    </div>
-
     <div class="appslist">
         <div class="subtitle">
             <h1>My Apps</h1>
         </div>
         <div class="container blockapp my-3">
-            <div class="row mt-2">
+            <div class="row mt-1">
                 <?php
                 $obj = new App();
                 $UserID=(int)$_SESSION['U_ID'];

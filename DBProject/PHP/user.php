@@ -287,5 +287,13 @@ class user
         $result = $dbConnection->query($BanQuery);
         return $result;
     }
+
+    public static function changeType($id, $type)
+    {
+        $dbConnection = DBConnection::getInst()->getConnection();
+        $query = "UPDATE users SET Account_Type = $type WHERE U_ID = $id";
+        $result = $dbConnection->query($query);
+        return $result; 
+    }
 }
 ?>

@@ -3,6 +3,7 @@
 require_once 'connection.php';
 require_once 'app.php';
 require_once '../PHP/Categories.php';
+require_once '../PHP/user.php';
 session_start();
 
 if (isset($_POST['publish'])) {
@@ -46,6 +47,7 @@ if (isset($_POST['publish'])) {
     if (empty($appname) || empty($applink)) {
         AlertJS("A required field is empty");
         $errors++;
+        RedirectJS('../HTML/PublishApp.php');
     }
 
     //Checks if the app name or app download link have already been used
@@ -60,46 +62,41 @@ if (isset($_POST['publish'])) {
     // If there are no errors, can register
     if ($errors == 0) {
         $obj = new APP();
-        $UserID=(int)$_SESSION['U_ID'];
-       $random=rand(1,5);
+        $UserID = (int)$_SESSION['U_ID'];
+        $random = rand(1, 5);
         //$obj->InsertApp($appname,0,$appprice,0,$agerating,$appreq,0,$apppic,$appdescr,$apptrailer,$appregion,'1',$appdate,$devID );
         $insertq = $obj->InsertApp($appname, 0, $appprice, 0, $agerating, $appreq, $random, $apppic, $applink, $appdescr, $apptrailer, $appregion, '0', $appdate, $UserID);
         mysqli_query($dbConnection, $insertq);
-       $appid= $obj->getids();
-  
-       $ApplicationID= $obj->getids();
+        $appid = $obj->getids();
+
+        $ApplicationID = $obj->getids();
         //$fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
         AlertJS("Application Added Successfully!");
         //Categories Insertion in with the App
         $catobj = new categories();
-        if(!empty($_POST['categories_duallistbox']) )
-        {
-            foreach ($_POST['categories_duallistbox'] as $selectedOption)
-            {   
+        if (!empty($_POST['categories_duallistbox'])) {
+            foreach ($_POST['categories_duallistbox'] as $selectedOption) {
                 //AlertJS($selectedOption);
                 $idpresent = $catobj->getCategoryid($selectedOption);
-                if($idpresent == 0)
-                {
+                if ($idpresent == 0) {
                     //This uses autoincrement:
                     //$result2 = $catobj->addnewCategory($selectedOption);
                     //if($result2)
                     //AlertJS("New Category Inserted!");
                     //$idpresent = $catobj->getCategoryid($selectedOption);
-//////////////////////////////////Above Works//////////////////////////////
+                    //////////////////////////////////Above Works//////////////////////////////
                     $idpresent = $catobj->getmaxidp1();
-                    $result2 = $catobj->addnewCategorywithid($idpresent,$selectedOption);
+                    $result2 = $catobj->addnewCategorywithid($idpresent, $selectedOption);
                     //if($result2)
-                      //  AlertJS("New Category Inserted!");
+                    //  AlertJS("New Category Inserted!");
 
                 }
                 //AlertJS($idpresent);
-                $result = $catobj->insertappcategory($ApplicationID,(int)$idpresent);
+                $result = $catobj->insertappcategory($ApplicationID, (int)$idpresent);
                 //if($result)
-                    //AlertJS("Category Insertion Successful!");
+                //AlertJS("Category Insertion Successful!");
             }
-        }
-        else
-        {
+        } else {
             AlertJS("Category Insertion Failed :'(");
         }
         //Without New Category logic
@@ -117,6 +114,8 @@ if (isset($_POST['publish'])) {
         //     AlertJS("Category Insertion Failed :'");
         // }
         $catobj->deleteemptycategories();
+
+        user::changeType($UserID, DEV_ACCOUNT);
         RedirectJS("../HTML/application.php?id=$ApplicationID");
         //It should redirect the user to the application page!(using the App_ID & its currently hidden, so only its developer can see it)
         //RedirectJS("../HTML/app.html");
