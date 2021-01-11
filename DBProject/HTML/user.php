@@ -60,9 +60,10 @@
             if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT && $_SESSION['U_ID'] != $_GET['id']) { ?>
                 <form action="../PHP/banuser.php?id=<?php echo $_GET['id'] ?>" method="POST">
                     <!-- <div class="row"> -->
-                    <div class="col-lg-9">
+                    <div class="col-lg-7">
                         <input type="text" placeholder="Ban end date (YYYY-MM-DD)" name="ban_end_date" id="ban">
                         <button class="btn btn-success" id="ban">Ban</button>
+                        <button class="btn btn-success" id="move"> <a href="../HTML/EditUserInfo.php? id= <?php echo $_GET['id']; ?>">Edit Info</a></button>
                     </div>
                     <!-- </div> -->
                 </form>

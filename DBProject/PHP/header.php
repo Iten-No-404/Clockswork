@@ -1,10 +1,11 @@
 <?php
-require_once '../PHP/functions.php';
-require_once '../PHP/user.php';
-require_once '../PHP/Employee.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+require_once '../PHP/functions.php';
+require_once '../PHP/user.php';
+require_once '../PHP/Employee.php';
+
 $fileName = basename($_SERVER['PHP_SELF']);
 
 // THIS WILL BREAK IF FILENAMES ARE CHANGED

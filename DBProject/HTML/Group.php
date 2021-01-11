@@ -26,7 +26,7 @@ require_once '../PHP/post.php';
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="../CSS/Footer.css">
     <title><?php $id = $_GET['id'];
-            $obj = new GRoup($id);
+            $obj = new group($id);
             $obj->getGroupName($id);
             echo " - Group" ?></title>
 </head>
@@ -36,7 +36,7 @@ require_once '../PHP/post.php';
 <body>
     <?php
     $id = $_GET['id'];
-    $obj = new GRoup($id);
+    $obj = new group($id);
     if ($_SESSION['U_ID'] == $obj->U_ID || $_SESSION['Account_Type'] == ADMIN_ACCOUNT) :
     ?>
         <div class="col-lg-9 mt-3">
@@ -45,7 +45,7 @@ require_once '../PHP/post.php';
                 <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
             </p>
         </div>
-    <?php elseif ($_SESSION['Account_Type'] = SUPPORT_ACCOUNT) : ?>
+    <?php elseif ($_SESSION['Account_Type'] == SUPPORT_ACCOUNT) : ?>
         <div class="col-lg-9 mt-3">
             <p class="alignright">
                 <button class="btn btn-dark" id="move"> <a href="../HTML/Group_Member_List.php? id= <?php echo $_GET['id'] ?>">Member List</a></button>
@@ -55,7 +55,7 @@ require_once '../PHP/post.php';
     <?php
     $UID = $_SESSION['U_ID'];
     $GID = $_GET['id'];
-    $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
+    $query = "SELECT * FROM Member_In WHERE U_ID = $UID  AND GROUP_ID = $GID";
     $dbConnection = DBConnection::getInst()->getConnection();
     $result = $dbConnection->query($query);
     if ($result->num_rows == 1)
@@ -84,9 +84,9 @@ require_once '../PHP/post.php';
         <p class="aligncenter">
             <img class="img-fluid" width="35%" src="<?php $obj->getGroupPicture2($id); ?>" alt="">
         </p>
-        <div class="grouptitleborder mt-3">
+        <div class="Grouptitleborder mt-3">
             <?php $id = $_GET['id'];
-            $obj = new GRoup($id);
+            $obj = new group($id);
             ?>
             <H1><?php $obj->getGroupName($id); ?></H1>
             <H6><?php $obj->GetNumMembers($id); ?></H6>
@@ -98,18 +98,20 @@ require_once '../PHP/post.php';
     <?php
     $UID = $_SESSION['U_ID'];
     $GID = $_GET['id'];
-    $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND Group_ID = '$GID'";
+    $query = "SELECT * FROM Member_In WHERE U_ID = '$UID' AND GROUP_ID = '$GID'";
     $dbConnection = DBConnection::getInst()->getConnection();
     $result = $dbConnection->query($query);
     if ($result->num_rows == 1 || $_SESSION['Account_Type'] == SUPPORT_ACCOUNT || $_SESSION['Account_Type'] == ADMIN_ACCOUNT) :
-    ?>
-        <?php if ($_SESSION['Account_Type'] != SUPPORT_ACCOUNT && $_SESSION['Account_Type'] != ADMIN_ACCOUNT) : ?>
+    ?>  
+        <?php                            
+ if ($_SESSION['Account_Type'] != SUPPORT_ACCOUNT && $_SESSION['Account_Type'] != ADMIN_ACCOUNT) : ?>
             <div class="container my-3">
                 <div class="row">
                     <div class="col-lg-1">
                         <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
                             <?php $user = new User($_SESSION['U_ID']);
                             $user->getProfilePicture($_SESSION['U_ID']);
+
                             ?>
                         </a>
 
@@ -117,7 +119,7 @@ require_once '../PHP/post.php';
                     </div>
                     <div class="col-lg-11 posts" onclick="display()">
 
-                        <h5 class="mt-3">What is on Your mind, <?php $user = new User($_SESSION['U_ID']);
+                        <h5 class="mt-3">What is on Your mind, <?php $user = new user($_SESSION['U_ID']);
                                                                 $user->getUserName($_SESSION['U_ID']); ?> ?</h5>
 
                     </div>
@@ -132,7 +134,7 @@ require_once '../PHP/post.php';
                 <div class="row">
                     <div class="col-lg-1">
                         <a href="../HTML/user.php?id=<?php echo $_SESSION['U_ID'] ?>">
-                            <?php $user = new User($_SESSION['U_ID']);
+                            <?php $user = new user($_SESSION['U_ID']);
                             $user->getProfilePicture($_SESSION['U_ID']);
                             ?>
                         </a>
@@ -181,7 +183,7 @@ require_once '../PHP/post.php';
 
                         <div class="col-lg-1">
                             <a href="../HTML/user.php?id=<?php echo $row['U_ID'] ?>">
-                                <?php $user = new User($row['U_ID']);
+                                <?php $user = new user($row['U_ID']);
                                 $user->getProfilePicture($row['U_ID']);
                                 ?>
                             </a>
@@ -192,7 +194,7 @@ require_once '../PHP/post.php';
 
                         <div class="col-lg-11">
                             <h6> <a href="../HTML/user.php?id=<?php echo $row['U_ID'] ?>">
-                                    <?php $user = new User($row['U_ID']);
+                                    <?php $user = new user($row['U_ID']);
                                     $user->getUserName($row['U_ID']);
                                     ?>
                                 </a>

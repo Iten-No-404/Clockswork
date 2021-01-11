@@ -62,6 +62,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $userName;
         $_SESSION['loggedin'] = true;
         $_SESSION['U_ID'] = $fetchedresultID['U_ID'];
+        $_SESSION['Account_Type'] = $fetchedresultID['Account_Type'];
         RedirectJS("../HTML/Home.php");
     }
 }

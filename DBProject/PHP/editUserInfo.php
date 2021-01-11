@@ -26,7 +26,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (isset($_POST['savechangesbtn'])) {
     // Getting the current user's data (before editing)
-    $currUserData = new user($_SESSION['U_ID']);
+    $currUserData = new user($_GET['id']);
 
     $ImagePath = UploadFile('../IMAGES/', 'userpicture', '../HTML/EditUserInfo.php', $currUserData->U_ID, date('Y-m-d'));
 
@@ -77,7 +77,7 @@ if (isset($_POST['savechangesbtn'])) {
             RedirectJS("../HTML/EditUserInfo");
             return;
         }
-        $query2 = "SELECT * FROM Employee WHERE Email = $Email LIMIT 1";
+        $query2 = "SELECT * FROM Employee WHERE Email = '$Email' LIMIT 1";
         $res2 = $db->query($query1);
         if ($res2->num_rows != 0)
         {
@@ -163,7 +163,7 @@ if (isset($_POST['savechangesbtn'])) {
 
     // Updating the user's data in the DB
     $currUserData->UpdateUserInfo(
-        $_SESSION['U_ID'],
+        $_GET['id'],
         $FName,
         $LName,
         $Username,
@@ -176,5 +176,23 @@ if (isset($_POST['savechangesbtn'])) {
         $currUserData->Hide,
         $Phone_Number
     );
-    RedirectJS("../HTML/user.php? id=" . $_SESSION['U_ID']);
+    RedirectJS("../HTML/user.php? id=" . $_GET['id']);
 }
+
+if (isset($_POST['deleteaccountbtn']))
+{
+    $ID = $_GET['id'];
+    $query = "DELETE FROM Users WHERE U_ID = $ID";
+    $result = DBConnection::getInst()->getConnection()->query($query);
+    if ($result == true)
+    {
+        AlertJS("Account Deleted!");
+        if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT)
+            RedirectJS("../HTML/Home.php");
+        else
+            RedirectJS("../HTML/login.php");
+    }
+}
+
+
+?>

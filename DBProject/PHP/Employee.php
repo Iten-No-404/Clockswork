@@ -17,7 +17,7 @@
         public function __construct($EID)
         {
             $db = DBConnection::getInst()->getConnection();
-            $query = "SELECT * FROM Employee WHERE Employee_ID = '$EID'";
+            $query = "SELECT * FROM Employee WHERE Employee_ID = $EID";
             $result = $db->query($query);
             $row = $result->fetch_assoc();
             $this->Employee_ID = $row['Employee_ID'];

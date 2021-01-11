@@ -31,12 +31,15 @@
 
 <body>
     <h1>Editing personal info</h1>
-    <form id="savechanges" action="../PHP/editUserInfo.php" method="post" enctype="multipart/form-data">
+    <form action="../PHP/editUserInfo.php? id= <?php echo (int)$_GET['id']; ?>" method="POST" enctype="multipart/form-data">
         <div class="container mt-3 cont1">
             <!-- <form id="uploadfile" method="post" enctype="multipart/form-data"></form> -->
 
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-7">
+                    <?php if ($_SESSION['Account_Type'] == ADMIN_ACCOUNT || $_SESSION['U_ID'] == $_GET['id']) : ?>
+                    <button class="btn btn-danger" type="submit" id="move" name="deleteaccountbtn">Delete Account</button>
+                    <?php endif; ?>
                     <button class="btn btn-primary" type="submit" id="move" name="savechangesbtn">Save changes</button>
                 </div>
             </div>
