@@ -56,11 +56,9 @@ if (isset($_POST['submit'])) {
 
         $regUserQuery = "INSERT INTO users (Username, Email, Phone_Number, Password) VALUES ('$userName', '$email', '$phoneNumber', '$passwordHash')";
         mysqli_query($dbConnection, $regUserQuery);
-        $regUserIDQuery = "SELECT U_ID FROM users WHERE Username = '$userName' LIMIT 1";
+        $regUserIDQuery = "SELECT U_ID, Account_Type FROM users WHERE Username = '$userName' LIMIT 1";
         $IDqueryResult = mysqli_query($dbConnection, $regUserIDQuery);
         $fetchedresultID = mysqli_fetch_assoc($IDqueryResult);
-        $_SESSION['username'] = $userName;
-        $_SESSION['loggedin'] = true;
         $_SESSION['U_ID'] = $fetchedresultID['U_ID'];
         $_SESSION['Account_Type'] = $fetchedresultID['Account_Type'];
         RedirectJS("../HTML/Home.php");
