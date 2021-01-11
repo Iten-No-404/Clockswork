@@ -31,15 +31,15 @@ if (isset($_POST['savechangesbtn'])) {
         }
         if ($salary == '')
             $salary= $currUserData->Salary;
-        if ($dep != "Adminstrator" && $dep != "Support" && $dep != '')
+        if ($dep != "Administrator" && $dep != "Support" && $dep != '')
         {
             AlertJS("Invalid Department");
-            AlertJS("Departments: Adminstrator, Support ");
+            AlertJS("Departments: Administrator, Support ");
             RedirectJS("../HTML/EditEmployeeInfo? id = " . $currUserData->Employee_ID);
         }
         else if ($dep != '')
         {
-            if ($dep == "Adminstrator")
+            if ($dep == "Administrator")
                 $dep = ADMIN_ACCOUNT;
             else
                 $dep = SUPPORT_ACCOUNT;

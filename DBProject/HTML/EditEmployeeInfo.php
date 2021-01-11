@@ -167,7 +167,7 @@
                     </label>
                 </div>
                 <div class="col-lg-9">
-                    <input type="text" placeholder="Adminstrator or Support" id="dep" name="dep">
+                    <input type="text" placeholder="Administrator or Support" id="dep" name="dep">
                 </div>
             </div>
 
