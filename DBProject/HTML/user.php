@@ -282,6 +282,9 @@
                             echo "$shownUser->Balance";
                         }
                         ?>
+                     <form action="../PHP/AddBalance.php? id=<?php echo $_GET['id'] ?>" method="POST">  
+                     <button class="btn btn-primary" type="submit" id="move1" name="AddBalance">Add Balance</button>
+                    </form>
                     </div>
                 </div>
             <?php endif; ?>
