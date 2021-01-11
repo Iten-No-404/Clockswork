@@ -315,13 +315,47 @@
                     </div>
                 </div>
 
-                <div class="line"></div>
-
+                  <div class="line"></div>
+                  <div class="row">
+                  </div>
+                    
+              
 
             </div>
         <?php } ?>
     </div>
-
+    <div class="line"></div>
+                
+                      <div class="class" style="position:relative; left:20%;">
+                        <img  src="../IMAGES/cir1.jpg" width="100%" height="100%" alt="">
+                             
+    
+                             <img class="img-fluid" src="../IMAGES/cir2.jpg" alt="">
+                                  
+            
+                             <img class="img-fluid" src="../IMAGES/cir3.jpg" alt="">
+                                  
+             
+                             <img class="img-fluid" src="../IMAGES/cir4.jpg" alt="">
+                                  
+                     
+        
+                             <img class="img-fluid" src="../IMAGES/cir5.jpg" alt="">
+                                  
+            
+                             <img class="img-fluid" src="../IMAGES/cir6.jpg" alt="">
+                                  
+                   
+              
+            
+                             <img class="img-fluid" src="../IMAGES/cir7.jpg" alt="">
+                      </div>
+                
+                            
+                 
+                       
+           
+   </div>
     <?php include_once "../PHP/footer.php" ?>
 </body>
 <script src="../bootstrap/jquery.js"></script>
